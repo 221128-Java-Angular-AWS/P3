@@ -4,10 +4,9 @@
     max-width: 200px;
     height: fit-content;
     transition: .2s ease-out;
-  
   }
   
-  img
+  /* img
   {
     justify-content: center;
     height: auto;
@@ -15,7 +14,7 @@
     max-height: 200px;
     max-width: 307px;
     left:0;
-  }
+  } */
   
   div {
     position: relative;

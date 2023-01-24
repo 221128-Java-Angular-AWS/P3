@@ -1,22 +1,13 @@
-<div class="card" style="width: 18rem;">
-    <img class="card-img-top" [src]="productInfo.image" alt="Card image cap">
-    <div class="card-body">
-      <h5 class="card-title">{{productInfo.name}}</h5>
-      <p class="card-text">{{productInfo.description}}</p>
-    </div>
-    <div class="input-group input-group-sm mb-3">
-      <div class="input-group-prepend">
-        <span class="input-group-text" id="inputGroup-sizing-sm">$</span>
-      </div>
-      <input type="number" class="form-control" aria-label="Sizing example input" [value]="productInfo.price" aria-describedby="inputGroup-sizing-sm" disabled>
-    </div>
-    <div class="input-group input-group-sm mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text" id="inputGroup-sizing-sm">Quantity in Stock</span>
-        </div>
-        <input type="number" class="form-control" aria-label="Sizing example input" [value]="productInfo.quantity" aria-describedby="inputGroup-sizing-sm" disabled>
-      </div>
-    <div class="card-body">
-        <button class="btn btn-outline-success" (click)="addToCart(productInfo)">Add to Cart</button>
-    </div>
+<div class="col-3 mx-1 my-1 p-3 card">
+  <div class="card-body justify-content-center">
+    <figure class="figure mx-auto d-block">
+      <a routerLink="/product/{{productInfo.id}}"><img [src]="productInfo.image" height="200px" width="100%" class="p-1 mx-auto d-block"></a>
+      <figcaption class="figure-caption text-center">
+        <h6>{{productInfo.name}}</h6>
+        {{productInfo.price | currency}}
+        <br>
+        <span class="fw-bold">{{productInfo.quantity}}</span> In Stock
+      </figcaption>
+    </figure>
   </div>
+</div>
