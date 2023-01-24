@@ -22,4 +22,33 @@ public class UserService {
     public User save(User user) {
         return userRepository.save(user);
     }
+
+    public User save(int userId, User user){
+        user.setId(userId);
+        User currentUser = this.findById(userId).get();
+        // ensure the request is not nulling fields
+        if (user.getEmail() == null) {
+            user.setEmail(currentUser.getEmail());
+        }
+        if (user.getPassword() == null) {
+            user.setPassword(currentUser.getPassword());
+        }
+        if (user.getFirstName() == null) {
+            user.setFirstName(currentUser.getFirstName());
+        }
+        if (user.getLastName() == null) {
+            user.setLastName(currentUser.getLastName());
+        }
+        return userRepository.save(user); // TODO: maybe change this so that password changes are their own entity
+    }
+
+    public Optional<User> findById(int userId) {
+        Optional<User> optional = userRepository.findById(userId);
+        if (optional.isPresent()) {
+            User user = optional.get();
+            user.setPassword("");
+            return Optional.of(user);
+        }
+        return optional;
+    }
 }
