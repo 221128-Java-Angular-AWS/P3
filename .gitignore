@@ -58,11 +58,11 @@ chrome-profiler-events*.json
 *.ipr
 
 # misc
-/.angular/cache
-/.sass-cache
-/connect.lock
-/coverage
-/libpeerconnection.log
+*/.angular/cache
+*/.sass-cache
+*/connect.lock
+*/coverage
+*/libpeerconnection.log
 npm-debug.log
 yarn-error.log
 testem.log
