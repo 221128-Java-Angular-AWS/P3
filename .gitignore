@@ -58,7 +58,7 @@ chrome-profiler-events*.json
 *.ipr
 
 # misc
-/.angular/cache
+*/.angular/cache
 /.sass-cache
 /connect.lock
 /coverage
@@ -100,11 +100,3 @@ build/
 # Secrets
 *.properties
 *.yml
-
-/.angular/cache
-.sass-cache/
-/connect.lock
-/coverage
-/libpeerconnection.log
-testem.log
-/typings
