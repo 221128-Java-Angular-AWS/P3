@@ -1,5 +1,6 @@
 package com.revature.controllers;
 
+import com.revature.advice.AuthAspect;
 import com.revature.annotations.Authorized;
 import com.revature.models.User;
 import com.revature.services.OrderService;
@@ -9,14 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/profiles")
+@RequestMapping("/profile")
 @CrossOrigin(origins = {"http://localhost:4200", "http://localhost:3000"}, allowCredentials = "true")
 public class ProfileController {
 
-    //test
     private final UserService userService;
     private final ReviewService reviewService;
     private final OrderService orderService;
@@ -30,9 +31,13 @@ public class ProfileController {
     }
 
     @Authorized
-    @GetMapping("/{userId}")
-    public ResponseEntity<User> getUserInfo(@PathVariable("userId") int userId) {
+    @GetMapping
+    public ResponseEntity<User> getUserInfo(HttpSession session) {
+        // does this just work? Yes, yes it does
+        User loggedInUser = (User) session.getAttribute("user");
+        int userId = loggedInUser.getId();
         Optional<User> optional = userService.findById(userId);
+
 
         if (!optional.isPresent()) {
             return ResponseEntity.notFound().build();
@@ -42,8 +47,11 @@ public class ProfileController {
     }
 
     @Authorized
-    @PostMapping("{userId}")
-    public ResponseEntity<User> postUserInfo(@PathVariable("userId") int userId, @RequestBody User user) {
+    @PostMapping()
+    public ResponseEntity<User> postUserInfo(HttpSession session, @RequestBody User user) {
+        User loggedInUser = (User) session.getAttribute("user");
+        int userId = loggedInUser.getId();
+        Optional<User> optional = userService.findById(userId);
         return ResponseEntity.ok(userService.save(userId, user));
     }
 
