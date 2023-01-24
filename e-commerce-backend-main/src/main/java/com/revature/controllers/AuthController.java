@@ -27,11 +27,12 @@ public class AuthController {
         Optional<User> optional = authService.findByCredentials(loginRequest.getEmail(), loginRequest.getPassword());
 
         if(!optional.isPresent()) {
+            System.out.println("empty optional");
             return ResponseEntity.badRequest().build();
         }
 
         session.setAttribute("user", optional.get());
-
+        System.out.println("set up");
         return ResponseEntity.ok(optional.get());
     }
 
