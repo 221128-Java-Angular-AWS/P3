@@ -1,18 +1,16 @@
-import { Order } from "./order";
 
 export class User {
-    userId?: number;
+    id?: number | null;
     email?: string;
-    password?: string;
+    password?: string | null;
     firstName?: string;
     lastName?: string;
-    orders?: Order[];
 
-    constructor(userId?: number, email?: string, password?: string, firstName?: string, lastName?: string, orders?: Order[]){
-        this.userId = userId;
-        this.email = email;
+    constructor (id?: number | null, email?: string, password?: string | null, firstName?: string, lastName?: string) {
+        this.id = id;
+        this.email = email; 
         this.password = password;
         this.firstName = firstName;
-        this.orders = orders;
+        this.lastName = lastName;
     }
 }
