@@ -1,0 +1,12 @@
+<p>wishlist works!</p>
+<div class="container">
+  <div class="row align-items-start">
+     <div class="col" *ngFor="let product of products">
+          <app-product-card
+              class="cardListItem"
+              [productInfo]="product"
+          ></app-product-card>
+      </div>
+  </div>
+</div>
+<p>end of wishlist</p>
