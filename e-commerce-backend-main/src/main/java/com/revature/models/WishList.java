@@ -17,7 +17,7 @@ public class WishList {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "user_id")
     @JsonBackReference(value = "wish_user")
     private User user;

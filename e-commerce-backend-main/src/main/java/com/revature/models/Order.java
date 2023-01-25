@@ -15,6 +15,7 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "orders")
 public class Order {
 
     @Id
@@ -30,6 +31,6 @@ public class Order {
 
     @OneToMany(mappedBy = "order")
     @JsonManagedReference(value = "order_order_product")
-    private List<OrderProduct> orderProducts;
+    List<OrderProduct> orderProducts;
 
 }

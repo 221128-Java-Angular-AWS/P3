@@ -35,9 +35,9 @@ public class User {
     @JsonManagedReference(value = "cart_user")
     private List<Cart> cart;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     @JsonManagedReference(value = "wish_user")
-    private List<WishList> wishList;
+    List<WishList> wishList;
 
     public User(int id, String email, String password, String firstName, String lastName) {
         this.id = id;
