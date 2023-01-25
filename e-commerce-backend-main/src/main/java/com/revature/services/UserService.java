@@ -30,7 +30,7 @@ public class UserService {
         if (user.getEmail() == null) {
             user.setEmail(currentUser.getEmail());
         }
-        if (user.getPassword() == null) {
+        if (user.getPassword() == null || user.getPassword() == "") {
             user.setPassword(currentUser.getPassword());
         }
         if (user.getFirstName() == null) {
@@ -39,6 +39,7 @@ public class UserService {
         if (user.getLastName() == null) {
             user.setLastName(currentUser.getLastName());
         }
+        // TODO: remove password before return for security reasons or do below
         return userRepository.save(user); // TODO: maybe change this so that password changes are their own entity
     }
 
@@ -46,9 +47,9 @@ public class UserService {
         Optional<User> optional = userRepository.findById(userId);
         if (optional.isPresent()) {
             User user = optional.get();
-            user.setPassword("");
             return Optional.of(user);
         }
         return optional;
     }
+
 }

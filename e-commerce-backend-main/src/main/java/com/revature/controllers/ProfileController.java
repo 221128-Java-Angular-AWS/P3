@@ -51,7 +51,6 @@ public class ProfileController {
     public ResponseEntity<User> postUserInfo(HttpSession session, @RequestBody User user) {
         User loggedInUser = (User) session.getAttribute("user");
         int userId = loggedInUser.getId();
-        Optional<User> optional = userService.findById(userId);
         return ResponseEntity.ok(userService.save(userId, user));
     }
 
