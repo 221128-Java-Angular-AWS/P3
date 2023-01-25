@@ -1,0 +1,28 @@
+<app-navbar></app-navbar>
+
+<button class="btn" routerLink="/orders"  style="border: solid 1px var(--bs-border-color-translucent);">&lt; Go Back</button>
+
+<div class="row" *ngIf="order != null">
+    <div class="col-12 mx-1 my-1 p-3 card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-3 fw-bold">Order ID</div>
+                <div class="col-3 fw-bold">Date Purchased</div>
+                <div class="col-3 fw-bold">Total Items</div>
+                <div class="col-3 fw-bold">Total Price</div>
+                <div class="col-3">{{order.orderId}}</div>
+                <div class="col-3">{{order.dateOrdered | date:'MMM d, y'}}</div>
+                <div class="col-3">{{getItemTotal(order)}}</div>
+                <div class="col-3">{{getTotalCost(order) | currency:"USD"}}</div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row justify-content-center" *ngFor="let product of order.products">
+                <div class="col-3"><img [src]="product.product.image" class="productImage"></div>
+                <div class="col-3">{{product.product.name}}</div>
+                <div class="col-3">{{product.quantity}}</div>
+                <div class="col-3">{{product.product.price*product.quantity | currency:"USD"}}</div>
+            </div>
+        </div>
+    </div>
+</div>
