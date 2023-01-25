@@ -2,6 +2,8 @@ package com.revature.services;
 
 import com.revature.models.User;
 import com.revature.repositories.UserRepository;
+
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -21,5 +23,9 @@ public class UserService {
 
     public User save(User user) {
         return userRepository.save(user);
+    }
+
+    public User getUser(Integer userId){
+        return userRepository.findByUserId(userId);
     }
 }

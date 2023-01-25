@@ -34,8 +34,10 @@ export class ProductCardComponent implements OnInit{
 
   addToCart(product: Product): void {
 
+    let userId = Number(localStorage.getItem('user'));
+    this.productService.addCart(userId, product.id);
+    /*
     let inCart = false;
-
     this.products.forEach(
       (element) => {
         if(element.product == product){
@@ -65,7 +67,7 @@ export class ProductCardComponent implements OnInit{
       }
       this.productService.setCart(cart);
     }
-      
+      */
   }
 
   ngOnDestroy() {
