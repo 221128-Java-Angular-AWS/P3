@@ -31,20 +31,6 @@ public class AuthController {
             return ResponseEntity.badRequest().build();
         }
         session.setAttribute("user", optional.get());
-
-        Enumeration<String> values = session.getAttributeNames();
-
-        System.out.println("Printing attributes:");
-        while (values.hasMoreElements()) {
-            System.out.println(values.nextElement());
-        }
-        System.out.println("Printing complete");
-        System.out.println("Printing user:");
-        System.out.println(session.getAttribute("user"));
-        if (session.getAttribute("user") == null) {
-            System.out.println("user attribute is null");
-        }
-        System.out.println("Printing complete");
         return ResponseEntity.ok(optional.get());
     }
 
