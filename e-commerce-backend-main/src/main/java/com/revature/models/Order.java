@@ -15,11 +15,13 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "orders")
 public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int orderId;
+
     private LocalDateTime dateOrdered;
 
     @ManyToOne(cascade = CascadeType.MERGE)
@@ -30,6 +32,6 @@ public class Order {
 
     @OneToMany(mappedBy = "order")
     @JsonManagedReference(value = "order_order_product")
-    private List<OrderProduct> orderProducts;
+    List<OrderProduct> orderProducts;
 
 }
