@@ -2,12 +2,14 @@ package com.revature.controllers;
 
 import com.revature.annotations.Authorized;
 import com.revature.dtos.OrderDto;
+import com.revature.exceptions.InvalidOrderException;
 import com.revature.models.Order;
 import com.revature.models.User;
 import com.revature.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -29,8 +31,13 @@ public class OrderController {
 
     @PostMapping
     @ResponseStatus(value = HttpStatus.ACCEPTED)
+    @Authorized
     public void createOrder(@RequestBody OrderDto order){
-        orderService.createOrder(order);
+        try {
+            orderService.createOrder(order);
+        }catch(InvalidOrderException e){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
     }
 
     @GetMapping

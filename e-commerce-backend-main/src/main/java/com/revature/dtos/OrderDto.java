@@ -8,6 +8,7 @@ import com.revature.models.User;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class OrderDto {
 
@@ -86,5 +87,18 @@ public class OrderDto {
         order.setOrderProducts(orderProducts);
 
         return order;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        OrderDto orderDto = (OrderDto) o;
+        return Objects.equals(orderId, orderDto.orderId) && Objects.equals(dateOrdered, orderDto.dateOrdered) && Objects.equals(user, orderDto.user) && Objects.equals(products, orderDto.products);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(orderId, dateOrdered, user, products);
     }
 }

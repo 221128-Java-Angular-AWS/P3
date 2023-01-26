@@ -29,6 +29,4 @@ export class OrdersService {
       return of(result as T);
     }
   }
-
-
 }

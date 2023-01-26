@@ -1,6 +1,7 @@
 package com.revature.services;
 
 import com.revature.dtos.OrderDto;
+import com.revature.exceptions.InvalidOrderException;
 import com.revature.models.Order;
 import com.revature.repositories.OrderRepository;
 import org.aspectj.weaver.ast.Or;
@@ -19,8 +20,12 @@ public class OrderService {
         this.orderRepo = orderRepo;
     }
 
-    public void createOrder(OrderDto order){
-        orderRepo.save(order.toOrder());
+    public void createOrder(OrderDto order) throws InvalidOrderException{
+        if(order.getProducts().size() > 0)
+            orderRepo.save(order.toOrder());
+        else {
+            throw new InvalidOrderException("Invalid Order: no products");
+        }
     }
 
     public List<OrderDto> getOrders(Integer userId){
