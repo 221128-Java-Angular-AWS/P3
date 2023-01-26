@@ -28,7 +28,7 @@ public class ProductController {
         return ResponseEntity.ok(productService.findAll());
     }
 
-//    @Authorized
+    @Authorized
     @GetMapping("/{id}")
     public ResponseEntity<Product> getProductById(@PathVariable("id") int id) {
         Optional<Product> optional = productService.findById(id);
