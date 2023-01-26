@@ -37,6 +37,7 @@ public class UserServiceTest {
     @Mock
     private User mockUser;
 
+    // Strings are final and cannot be mocked
     private String email = "mock@email.com";
 
     private String password = "password";
@@ -56,7 +57,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void testFindByCredentials() {
+    public void testFindByCredentialsCorrectCredentialsProvided() {
         sut = new UserService(mockUserRepository);
         Mockito.when(mockUserRepository.findByEmailAndPassword(email, password)).thenReturn(Optional.of(mockUser));
         Optional<User> user = sut.findByCredentials(email, password);
@@ -64,8 +65,57 @@ public class UserServiceTest {
         Assertions.assertEquals(Optional.of(mockUser), user);
     }
 
+    @Test
+    public void testFindByCredentialsIncorrectCredentialsProvided() {
+        sut = new UserService(mockUserRepository);
+        Mockito.when(mockUserRepository.findByEmailAndPassword(email, password)).thenReturn(Optional.empty());
+        Optional<User> user = sut.findByCredentials(email, password);
+
+        Assertions.assertEquals(Optional.empty(), user);
+    }
 
 
+    @Test
+    public void testSaveUserUserObjectArgument() {
+        sut = new UserService(mockUserRepository);
+        Mockito.when(mockUserRepository.save(mockUser)).thenReturn(mockUser);
+        User user = sut.save(mockUser);
+
+        Assertions.assertEquals(mockUser, user, "testSaveUserUserObjectArgument complete");
+    }
+    // TODO test for negative make it fail the way expected
+
+    @Test
+    public void testSaveUserIntAndUserObjectOverride() {
+        sut = new UserService(mockUserRepository);
+        Mockito.when(mockUserRepository.save(mockUser)).thenReturn(mockUser);
+        Mockito.when(sut.findById(1)).thenReturn(Optional.of(mockUser));
+        Mockito.when(mockUserRepository.save(mockUser)).thenReturn(mockUser);
+
+        User user = sut.save(1, mockUser);
+
+        Assertions.assertEquals(mockUser, user, "testSaveUserIntAndUserObjectOverride complete");
+    }
+    // TODO test for negative make it fail the way expected
+
+    @Test
+    public void testFindByIntWhereUserIdInPersistence() {
+        sut = new UserService(mockUserRepository);
+        Mockito.when(mockUserRepository.findById(1)).thenReturn(Optional.of(mockUser));
+        Optional<User> user = sut.findById(1);
+
+        Assertions.assertEquals(Optional.of(mockUser), user);
+    }
+
+    @Test
+    public void testFindByIntWhereUserIdNotInPersistence() {
+        sut = new UserService(mockUserRepository);
+        Optional<User> userNotFound = Optional.empty();
+        Mockito.when(mockUserRepository.findById(1)).thenReturn(Optional.empty());
+        Optional<User> user = sut.findById(1);
+
+        Assertions.assertEquals(Optional.empty(), user);
+    }
 
 
 
