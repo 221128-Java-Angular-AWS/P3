@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/models/product';
-import { ProductService } from 'src/app/services/product.service';
+import { WishListService } from 'src/app/services/wishList.service';
 
 @Component({
   selector: 'app-wishlist',
@@ -9,16 +9,16 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class WishlistComponent implements OnInit {
 
-  constructor(private productService: ProductService) { }
+  constructor(private wishListService: WishListService) { }
 
   products: Product[] = [];
 
   ngOnInit(): void {
     console.log('getting products for wishlist');
-    this.productService.getProducts().subscribe(
+    this.wishListService.getWishListProducts().subscribe(
       (resp) => this.products = resp,
       (err) => console.log(err),
-      () => console.log("Products Retrieved")
+      () => console.log("WishList Products Retrieved")
     );
   }
 

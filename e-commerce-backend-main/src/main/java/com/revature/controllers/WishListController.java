@@ -2,8 +2,10 @@ package com.revature.controllers;
 
 import com.revature.annotations.Authorized;
 import com.revature.dtos.LoginRequest;
+import com.revature.models.WishList;
 import com.revature.services.ProductService;
 import com.revature.models.Product;
+import com.revature.services.WishListService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
@@ -18,21 +20,17 @@ import java.util.List;
 @CrossOrigin(origins = {"http://localhost:4200", "http://localhost:3000"}, allowCredentials = "true")
 public class WishListController {
 
+    private final WishListService wishListService;
     private final ProductService productService;
 
-    public WishListController(ProductService productService) {
+    public WishListController(WishListService wishListService, ProductService productService) {
+        this.wishListService = wishListService;
         this.productService = productService;
     }
 
 //    @Authorized
     @GetMapping
     public ResponseEntity<List<Product>> getWishList(HttpSession session) {
-        Enumeration<String> values = session.getAttributeNames();
-        System.out.println("Printing enum:");
-        while (values.hasMoreElements()) {
-            System.out.println(values.nextElement());
-        }
-        System.out.println("Printing complete");
-        return ResponseEntity.ok(productService.findAll());
+        return ResponseEntity.ok(wishListService.getWishList());
     }
 }
