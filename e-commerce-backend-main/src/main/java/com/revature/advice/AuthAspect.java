@@ -54,8 +54,6 @@ public class AuthAspect {
             throw new NotLoggedInException("Must be logged in to perform this action");
         }
 
-        System.out.println("logged in check: " + session.getAttribute("user"));
-
         return pjp.proceed(pjp.getArgs()); // Call the originally intended method
     }
 }

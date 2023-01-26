@@ -21,7 +21,6 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int orderId;
-
     private LocalDateTime dateOrdered;
 
     @ManyToOne(cascade = CascadeType.MERGE)
