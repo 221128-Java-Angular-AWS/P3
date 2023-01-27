@@ -99,4 +99,4 @@ build/
 
 # Secrets
 *.properties
-*.yml
+application.yml
