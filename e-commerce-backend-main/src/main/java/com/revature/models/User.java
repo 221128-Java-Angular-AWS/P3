@@ -38,13 +38,10 @@ public class User {
     @OneToMany(mappedBy = "user")
     @JsonManagedReference(value = "wish_user")
     List<WishList> wishList;
-<<<<<<< HEAD
-=======
 
     public User(int id) {
         this.id = id;
     }
->>>>>>> 9f1ef9f901aae225ecb95ac62d6a252782060e68
 
     public User(int id, String email, String password, String firstName, String lastName) {
         this.id = id;
@@ -100,8 +97,6 @@ public class User {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-<<<<<<< HEAD
-=======
 
     @Override
     public String toString() {
@@ -113,5 +108,4 @@ public class User {
                 ", lastName='" + lastName + '\'' +
                 '}';
     }
->>>>>>> 9f1ef9f901aae225ecb95ac62d6a252782060e68
 }
