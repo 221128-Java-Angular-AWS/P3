@@ -26,17 +26,30 @@ public class Product {
 
     @OneToMany(mappedBy = "product")
     @JsonManagedReference(value = "cart_product")
-    private List<Cart> carts;
+    List<Cart> carts;
 
     @OneToMany(mappedBy = "product")
     @JsonManagedReference(value = "wish_product")
-    private List<WishList> wishLists;
+    List<WishList> wishLists;
 
     @OneToMany(mappedBy = "product")
     @JsonManagedReference(value = "order_product")
-    private List<OrderProduct> orders;
+    List<OrderProduct> orders;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
     @JsonManagedReference(value = "review_product")
-    private List<Review> reviews;
+    List<Review> reviews;
+
+    public Product(int id) {
+        this.id = id;
+    }
+    public Product(int id, int quantity, double price, String description, String image, String name, String genre) {
+        this.id = id;
+        this.quantity = quantity;
+        this.price = price;
+        this.description = description;
+        this.image = image;
+        this.name = name;
+        this.genre = genre;
+    }
 }

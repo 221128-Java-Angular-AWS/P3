@@ -15,6 +15,7 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "orders")
 public class Order {
 
     @Id
@@ -28,8 +29,16 @@ public class Order {
     @JsonProperty
     private User user;
 
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     @JsonManagedReference(value = "order_order_product")
-    private List<OrderProduct> orderProducts;
+    List<OrderProduct> orderProducts;
 
+    @Override
+    public String toString() {
+        return "Order{" +
+                "orderId=" + orderId +
+                ", dateOrdered=" + dateOrdered +
+                ", user=" + user +
+                '}';
+    }
 }
