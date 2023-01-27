@@ -44,12 +44,24 @@ public class OrderController {
     @ResponseStatus(value = HttpStatus.ACCEPTED)
     @Authorized
     public @ResponseBody List<OrderDto> getOrders(HttpSession session){
-        System.out.println("get orders: " + session.getAttribute("user"));
-        System.out.println("alt: " + req.getSession().getAttribute("user"));
         if(session.getAttribute("user") != null) {
             return orderService.getOrders(((User)session.getAttribute("user")).getId());
         }
         return new ArrayList<OrderDto>();
+    }
+
+    @GetMapping("/{id}")
+    @ResponseStatus(value = HttpStatus.ACCEPTED)
+    @Authorized
+    public @ResponseBody OrderDto getOrder(HttpSession session, @PathVariable("id") Integer orderId){
+        if(session.getAttribute("user") != null) {
+            try {
+                return orderService.getOrder(orderId, ((User) session.getAttribute("user")).getId());
+            }catch(InvalidOrderException ex){
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, ex.getMessage());
+            }
+        }
+        return new OrderDto();
     }
 
 //    @GetMapping

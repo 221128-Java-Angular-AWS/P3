@@ -35,4 +35,12 @@ public class OrderService {
         }
         return orders;
     }
+
+    public OrderDto getOrder(Integer orderId, Integer userId){
+        Order order = orderRepo.findByOrderIdAndUserId(orderId, userId);
+        if(order == null){
+            throw new InvalidOrderException("No order with that ID found for current user");
+        }
+        return new OrderDto(order);
+    }
 }

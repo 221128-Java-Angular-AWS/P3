@@ -101,7 +101,7 @@ public class OrderServiceTest {
         Mockito.when(repoMock.findByUserId(1)).thenReturn(repoOrders);
 
         //make sure the service converts the order into an OrderDto
-        OrderDto order = new OrderDto(1, now, new User(1), new ArrayList<OrderProductDto>());
+        OrderDto order = new OrderDto(1, now, 1, new ArrayList<OrderProductDto>());
         List<OrderDto> expectedOrders = new ArrayList<>();
         expectedOrders.add(order);
 
@@ -109,6 +109,34 @@ public class OrderServiceTest {
 
         //ensure the converted order is equal to the expected order
         Assertions.assertEquals(expectedOrders, result);
+    }
+
+    @Test
+    public void testGetUserValidOrderId(){
+        //mock response from the repo
+        LocalDateTime now = LocalDateTime.now();
+        Order repoOrder = new Order(3, now, new User(1), new ArrayList<OrderProduct>());
+
+        Mockito.when(repoMock.findByOrderIdAndUserId(3, 1)).thenReturn(repoOrder);
+
+        //expect to return an Order converted into OrderDto
+        OrderDto expectedOrder = new OrderDto(3, now, 1, new ArrayList<OrderProductDto>());
+
+        //test
+        OrderDto result = sut.getOrder(3, 1);
+
+        //assert
+        Assertions.assertEquals(expectedOrder, result);
+    }
+
+    @Test
+    public void testGetUserInvalidOrder(){
+        //mock response from the repo, no order found
+        Mockito.when(repoMock.findByOrderIdAndUserId(5, 1)).thenReturn(null);
+
+        InvalidOrderException ex = Assertions.assertThrows(InvalidOrderException.class, ()->{sut.getOrder(5, 1);});
+
+        Assertions.assertEquals("No order with that ID found for current user", ex.getMessage());
     }
 
 }
