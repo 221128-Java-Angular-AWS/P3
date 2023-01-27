@@ -18,8 +18,8 @@
         </div>
         <div class="card-body">
             <div class="row justify-content-center" *ngFor="let product of order.products">
-                <div class="col-3"><img [src]="product.product.image" class="productImage"></div>
-                <div class="col-3">{{product.product.name}}</div>
+                <div class="col-3"><img [src]="product.product.image" routerLink="/product/{{product.product.id}}" class="productImage"></div>
+                <div class="col-3"><span style="text-decoration: underline; cursor: pointer;" routerLink="/product/{{product.product.id}}">{{product.product.name}}</span></div>
                 <div class="col-3">{{product.quantity}}</div>
                 <div class="col-3">{{product.product.price*product.quantity | currency:"USD"}}</div>
             </div>
