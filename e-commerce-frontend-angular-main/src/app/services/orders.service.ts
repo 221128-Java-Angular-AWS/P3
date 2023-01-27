@@ -9,7 +9,6 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class OrdersService {
-  currentOrder: Order = new Order();
   constructor(private http: HttpClient) {}
 
   getOrders(): Observable<Order[]>{
