@@ -18,10 +18,6 @@ export class OrdersComponent implements OnInit {
     this.ordersService.getOrders().subscribe((orders) => {this.orders = orders;});
   }
 
-  showOrderDetails(order: Order){
-    this.router.navigate(['orders/details/']);
-  }
-
   getItemTotal = function(order: Order): number{
     if(order.products == null){return 0}
     let count: number = 0;
