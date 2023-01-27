@@ -50,6 +50,17 @@ public class OrderController {
         return new ArrayList<OrderDto>();
     }
 
+    // controller to get the order history for user profile
+    @GetMapping("/profile")
+    @ResponseStatus(value = HttpStatus.ACCEPTED)
+    @Authorized
+    public @ResponseBody List<OrderDto> getOrdersForProfile(HttpSession session) {
+        if(session.getAttribute("user") != null) {
+            return orderService.getOrdersForProfile(((User)session.getAttribute("user")).getId());
+        }
+        return new ArrayList<OrderDto>();
+    }
+
     @GetMapping("/{id}")
     @ResponseStatus(value = HttpStatus.ACCEPTED)
     @Authorized

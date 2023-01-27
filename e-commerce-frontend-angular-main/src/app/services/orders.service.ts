@@ -26,6 +26,14 @@ export class OrdersService {
     );
   }
 
+  // added by Will to call down the stack for a limit of 5 most recent orders
+  getOrdersForProfile() {
+    return this.http.get<Order[]>(environment.baseUrl + "/order/profile", {headers: environment.headers, withCredentials: environment.withCredentials})
+    .pipe(
+      catchError(this.handleError<Order[]>('getOrders', []))
+    );
+  }
+
   createOrder(order: Order){
     
   }
