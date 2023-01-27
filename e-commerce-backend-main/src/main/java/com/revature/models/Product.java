@@ -40,6 +40,9 @@ public class Product {
     @JsonManagedReference(value = "review_product")
     List<Review> reviews;
 
+    public Product(int id) {
+        this.id = id;
+    }
     public Product(int id, int quantity, double price, String description, String image, String name, String genre) {
         this.id = id;
         this.quantity = quantity;
