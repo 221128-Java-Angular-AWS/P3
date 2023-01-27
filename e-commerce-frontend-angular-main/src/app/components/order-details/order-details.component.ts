@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Order } from 'src/app/models/order';
 import { OrdersService } from 'src/app/services/orders.service';
 
@@ -10,11 +11,19 @@ import { OrdersService } from 'src/app/services/orders.service';
 export class OrderDetailsComponent implements OnInit {
 
   order?: Order;
+  errorMessage: string ='';
 
-  constructor(private ordersService: OrdersService) { }
+  constructor(private ordersService: OrdersService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.order = this.ordersService.currentOrder;
+    const orderId = Number(this.route.snapshot.paramMap.get('id'));
+    this.ordersService.getOrder(orderId).subscribe((order) => {
+      if(order){
+        this.order = order;
+      }else{
+        this.errorMessage = "No order with ID " + orderId + " found for current user";
+      }
+    })
   }
 
   getItemTotal = function(order: Order): number{
