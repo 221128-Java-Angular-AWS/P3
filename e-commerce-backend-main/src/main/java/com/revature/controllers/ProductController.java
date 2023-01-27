@@ -84,4 +84,11 @@ public class ProductController {
 
         return ResponseEntity.ok(optional.get());
     }
+
+    @Authorized
+    @GetMapping(value = "/genre")
+    public ResponseEntity<List<Product>> getProductByGenre(@RequestParam String genre) {
+
+        return ResponseEntity.ok(productService.findByGenre(genre));
+    }
 }
