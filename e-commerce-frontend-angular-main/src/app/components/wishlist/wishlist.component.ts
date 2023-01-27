@@ -22,15 +22,16 @@ export class WishlistComponent implements OnInit {
   ngOnInit(): void {
     console.log('Initializing wishlist');
     this.profileService.getUser().subscribe(
-      (resp) => this.user = resp,
+      (resp) => {
+        this.user = resp;
+        this.wishListService.getWishListProducts(resp.id!).subscribe(
+          (resp) => this.products = resp,
+          (err) => console.log(err),
+          () => console.log("WishList products retrieved")
+        );
+      },
       (err) => console.log(err),
-      () => console.log("User retrieved: " + this.user?.firstName + ' ' + this.user?.lastName)
-    );
-    console.log(`User: ${this.user}`);
-    this.wishListService.getWishListProducts().subscribe(
-      (resp) => this.products = resp,
-      (err) => console.log(err),
-      () => console.log("WishList Products Retrieved")
+      () => console.log("User retrieved")
     );
   }
 

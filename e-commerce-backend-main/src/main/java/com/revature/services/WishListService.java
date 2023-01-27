@@ -20,8 +20,8 @@ public class WishListService {
         this.wishListRepository = wishListRepository;
     }
 
-    public List<Product> getWishList() {
-        List<WishList> wishList = wishListRepository.findUserWishList(1);
+    public List<Product> getWishList(Integer userId) {
+        List<WishList> wishList = wishListRepository.findUserWishList(userId);
         List<Product> wishProducts = new ArrayList<>();
         for(WishList product: wishList) {
             wishProducts.add(product.getProduct());

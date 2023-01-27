@@ -30,15 +30,14 @@ public class WishListController {
     }
 
 //    @Authorized
-    @GetMapping
-    public ResponseEntity<List<Product>> getWishList(HttpSession session) {
-        return ResponseEntity.ok(wishListService.getWishList());
+    @GetMapping("/{user_id}")
+    public ResponseEntity<List<Product>> getWishList(@PathVariable("user_id") int userId, HttpSession session) {
+        return ResponseEntity.ok(wishListService.getWishList(userId));
     }
 
 //    @Authorized
     @DeleteMapping("/{user_id}/{product_id}")
     public ResponseEntity<WishList> deleteWishListItem(@PathVariable("user_id") int userID, @PathVariable("product_id") int productID) {
-        System.out.println("Wishlist delete controller hit");
         Optional<WishList> optional = wishListService.findByUserAndProduct(userID, productID);
 
         if(!optional.isPresent()) {

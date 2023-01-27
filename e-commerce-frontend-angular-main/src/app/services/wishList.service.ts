@@ -15,8 +15,9 @@ export class WishListService {
 
   private wishListUrl: string = "/wishlist";
 
-  public getWishListProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(environment.baseUrl+this.wishListUrl, {headers: environment.headers, withCredentials: environment.withCredentials});
+  public getWishListProducts(userId: Number): Observable<Product[]> {
+    let userIdUrl = `/${userId}`;
+    return this.http.get<Product[]>(environment.baseUrl+this.wishListUrl + userIdUrl, {headers: environment.headers, withCredentials: environment.withCredentials});
   }
 
   public removeFromWishList(productId: Number, userId: Number): Observable<Object> {
