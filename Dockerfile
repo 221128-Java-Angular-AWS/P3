@@ -1,5 +1,5 @@
 FROM amazoncorretto:17
 
-COPY e-commerce*.jar e-commerce.jar
+COPY target/e-commerce*.jar e-commerce.jar
 
 ENTRYPOINT ["java", "-jar", "/e-commerce.jar"]
