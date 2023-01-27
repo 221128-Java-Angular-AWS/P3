@@ -14,20 +14,21 @@ public class OrderDto {
 
     private Integer orderId;
     private LocalDateTime dateOrdered;
-    private User user;
+    //Just use the user's userId here, there's a lot of unneeded info in the user class
+    private Integer user;
     private List<OrderProductDto> products;
 
     public OrderDto() {
     }
 
-    public OrderDto(Integer orderId, LocalDateTime dateOrdered, User user, List<OrderProductDto> products) {
+    public OrderDto(Integer orderId, LocalDateTime dateOrdered, Integer user, List<OrderProductDto> products) {
         this.orderId = orderId;
         this.dateOrdered = dateOrdered;
         this.user = user;
         this.products = products;
     }
 
-    public OrderDto(LocalDateTime dateOrdered, User user, List<OrderProductDto> products) {
+    public OrderDto(LocalDateTime dateOrdered, Integer user, List<OrderProductDto> products) {
         this.dateOrdered = dateOrdered;
         this.user = user;
         this.products = products;
@@ -36,7 +37,7 @@ public class OrderDto {
     public OrderDto(Order order){
         this.orderId = order.getOrderId();
         this.dateOrdered = order.getDateOrdered();
-        this.user = order.getUser();
+        this.user = order.getUser().getId();
         this.products = new ArrayList<>();
         for(OrderProduct orderProduct : order.getOrderProducts()){
             products.add(new OrderProductDto(orderProduct.getProduct(), orderProduct.getQuantity()));
@@ -59,11 +60,11 @@ public class OrderDto {
         this.dateOrdered = dateOrdered;
     }
 
-    public User getUser() {
+    public Integer getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(Integer user) {
         this.user = user;
     }
 
@@ -79,7 +80,7 @@ public class OrderDto {
         Order order = new Order();
         if(orderId != null) order.setOrderId(orderId);
         order.setDateOrdered(dateOrdered);
-        order.setUser(user);
+        order.setUser(new User(getUser()));
         List<OrderProduct> orderProducts = new ArrayList<>();
         for (OrderProductDto product : products) {
             orderProducts.add(new OrderProduct(order, product.getProduct(), product.getQuantity()));

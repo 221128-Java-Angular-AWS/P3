@@ -19,6 +19,13 @@ export class OrdersService {
     );
   }
 
+  getOrder(orderId: number): Observable<Order>{
+    return this.http.get<Order>(environment.baseUrl + "/order/" + orderId, {headers: environment.headers, withCredentials: environment.withCredentials})
+    .pipe(
+      catchError(this.handleError<Order>('getOrders'))
+    );
+  }
+
   createOrder(order: Order){
     
   }
