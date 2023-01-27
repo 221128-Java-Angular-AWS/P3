@@ -28,4 +28,17 @@ public class WishListService {
         }
         return wishProducts;
     }
+
+    public void deleteWishListItem(int id) {
+        wishListRepository.deleteById(id);
+    }
+
+    public Optional<WishList> findById(int id) {
+        return wishListRepository.findById(id);
+    }
+
+    public Optional<WishList> findByUserAndProduct(int userId, int productId) {
+        return wishListRepository.findByUserAndProduct(userId, productId);
+    }
+
 }

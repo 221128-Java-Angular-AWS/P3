@@ -7,9 +7,13 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface WishListRepository extends JpaRepository<WishList, Integer> {
 
     @Query(value = "SELECT * FROM wish_list WHERE user_id = :userId", nativeQuery = true)
     List<WishList> findUserWishList(@Param("userId") Integer userId);
+
+    @Query(value = "SELECT * FROM wish_list WHERE user_id = :userId AND product_id = :productId", nativeQuery = true)
+    Optional<WishList> findByUserAndProduct(@Param("userId") Integer userId, @Param("productId") Integer productId);
 }

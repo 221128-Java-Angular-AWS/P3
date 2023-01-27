@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import javax.servlet.http.HttpSession;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/wishlist")
@@ -32,5 +33,19 @@ public class WishListController {
     @GetMapping
     public ResponseEntity<List<Product>> getWishList(HttpSession session) {
         return ResponseEntity.ok(wishListService.getWishList());
+    }
+
+//    @Authorized
+    @DeleteMapping("/{user_id}/{product_id}")
+    public ResponseEntity<WishList> deleteWishListItem(@PathVariable("user_id") int userID, @PathVariable("product_id") int productID) {
+        System.out.println("Wishlist delete controller hit");
+        Optional<WishList> optional = wishListService.findByUserAndProduct(userID, productID);
+
+        if(!optional.isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+        wishListService.deleteWishListItem(optional.get().getId());
+
+        return ResponseEntity.ok(optional.get());
     }
 }
