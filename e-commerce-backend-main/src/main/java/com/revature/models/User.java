@@ -39,6 +39,10 @@ public class User {
     @JsonManagedReference(value = "wish_user")
     List<WishList> wishList;
 
+    public User(int id) {
+        this.id = id;
+    }
+
     public User(int id, String email, String password, String firstName, String lastName) {
         this.id = id;
         this.email = email;
@@ -92,5 +96,16 @@ public class User {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                '}';
     }
 }

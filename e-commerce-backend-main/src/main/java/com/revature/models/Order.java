@@ -21,7 +21,6 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int orderId;
-
     private LocalDateTime dateOrdered;
 
     @ManyToOne(cascade = CascadeType.MERGE)
@@ -30,8 +29,16 @@ public class Order {
     @JsonProperty
     private User user;
 
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     @JsonManagedReference(value = "order_order_product")
     List<OrderProduct> orderProducts;
 
+    @Override
+    public String toString() {
+        return "Order{" +
+                "orderId=" + orderId +
+                ", dateOrdered=" + dateOrdered +
+                ", user=" + user +
+                '}';
+    }
 }
