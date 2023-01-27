@@ -10,7 +10,7 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class RelatedProductsComponent implements OnInit {
 
-  @Input() currentProduct = new Product(0,"nothing","Test Object",10,"This is a test object",10.99,"Picture String");
+  @Input() currentProduct = new Product(0,"Test Object",10,"This is a test object",10.99,"Picture String", "nothing");
 
   relatedProduct: Product[] = [];
 

@@ -4,7 +4,7 @@
         <tr class="objects">
             <div class ="products" *ngFor="let product of relatedProduct; let i = index;">
                 <td class="singleProduct" *ngIf="product.genre == currentProduct.genre && product.id != currentProduct.id">
-                    <app-product-card class="cardListItem" [productInfo]="product">{{count + 1}}</app-product-card>
+                    <app-product-card class="cardListItem" [productInfo]="product"></app-product-card>
                 </td>
             </div>
         </tr>
