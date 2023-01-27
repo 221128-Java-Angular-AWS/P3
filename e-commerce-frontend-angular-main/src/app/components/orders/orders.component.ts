@@ -19,9 +19,7 @@ export class OrdersComponent implements OnInit {
   }
 
   showOrderDetails(order: Order){
-    console.log("order details");
-    this.ordersService.currentOrder = order;
-    this.router.navigate(['orders/details']);
+    this.router.navigate(['orders/details/']);
   }
 
   getItemTotal = function(order: Order): number{
