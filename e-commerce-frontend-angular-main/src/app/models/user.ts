@@ -1,3 +1,4 @@
+
 export class User {
     id?: number | null;
     email?: string;
@@ -12,6 +13,4 @@ export class User {
         this.firstName = firstName;
         this.lastName = lastName;
     }
-
-
 }
