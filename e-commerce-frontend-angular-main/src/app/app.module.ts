@@ -30,7 +30,7 @@ import { ProductDetailComponent } from './components/product-detail/product-deta
     CheckoutComponent,
     DisplayProductsComponent,
     WishlistComponent,
-    ProfileComponent
+    ProfileComponent,
     OrdersComponent,
     OrderDetailsComponent,
     ProfileComponent,
