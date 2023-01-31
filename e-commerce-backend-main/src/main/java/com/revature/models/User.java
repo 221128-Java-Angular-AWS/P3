@@ -35,9 +35,16 @@ public class User {
     @JsonManagedReference(value = "cart_user")
     List<Cart> cart;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     @JsonManagedReference(value = "wish_user")
     List<WishList> wishList;
+<<<<<<< HEAD
+=======
+
+    public User(int id) {
+        this.id = id;
+    }
+>>>>>>> d2fed4bb4e0be4f51f5be8d4961c8b77d31a4c89
 
     public User(int id, String email, String password, String firstName, String lastName) {
         this.id = id;
@@ -93,4 +100,18 @@ public class User {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+<<<<<<< HEAD
+=======
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                '}';
+    }
+>>>>>>> d2fed4bb4e0be4f51f5be8d4961c8b77d31a4c89
 }
