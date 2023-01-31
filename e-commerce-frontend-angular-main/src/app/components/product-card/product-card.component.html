@@ -6,7 +6,9 @@
         <h6>{{productInfo.name}}</h6>
         {{productInfo.price | currency}}
         <br>
-        <span class="fw-bold">{{productInfo.quantity}}</span> In Stock
+        <span class="fw-bold">{{productInfo.quantity}}</span> In Stock <br>
+        <!-- Delete the line below to get rid of the genre on Card -->
+        Genre: <span class="fw-bold">{{productInfo.genre}}</span>
       </figcaption>
     </figure>
   </div>

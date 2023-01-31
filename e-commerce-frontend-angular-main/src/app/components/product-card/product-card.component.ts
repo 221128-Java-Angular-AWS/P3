@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Product } from 'src/app/models/product';
 import { ProductService } from 'src/app/services/product.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-card',
@@ -20,8 +21,14 @@ export class ProductCardComponent implements OnInit{
 
   @Input() productInfo!: Product;
 
-  constructor(private productService: ProductService) { }
-  
+  constructor(
+    private productService: ProductService,
+    private router: Router) {
+      //this allows the related items to change page
+      this.router.routeReuseStrategy.shouldReuseRoute = function () {
+        return false;
+    }
+  }
   ngOnInit(): void {
     this.subscription = this.productService.getCart().subscribe(
       (cart) => {
