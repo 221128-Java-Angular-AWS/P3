@@ -15,11 +15,6 @@ export class CartComponent implements OnInit {
     product: Product,
     quantity: number
   }[] = [];
-  /*
-  products: {
-    product: Product
-  }[] = [];
-  */
   totalPrice: number = 0;
   cartProducts: Product[] = [];
   subscription!: Subscription;
@@ -28,9 +23,6 @@ export class CartComponent implements OnInit {
 
   ngOnInit(): void {
     let id: number = Number(localStorage.getItem('user'));
-    /*this.productService.getCart2(id).subscribe((data)=>{
-      console.log(data);
-    });*/
     this.productService.getCart2(id).subscribe((data: any)=>{
       data.forEach(
         (element: any)=> {
@@ -42,17 +34,6 @@ export class CartComponent implements OnInit {
       )
     });
     
-    /*
-    this.productService.getCart().subscribe(
-      (cart) => {
-        this.products = cart.products;
-        this.products.forEach(
-          (element) => this.cartProducts.push(element.product)
-        );
-        this.totalPrice = cart.totalPrice;
-      }
-    );*/
-    
   }
   delete(product_id: number): void{
     console.log(product_id)
@@ -62,14 +43,6 @@ export class CartComponent implements OnInit {
     window.location.reload();
   }
   emptyCart(): void {
-    /*
-    let cart = {
-      cartCount: 0,
-      products: [],
-      totalPrice: 0.00
-    };
-    this.productService.setCart(cart);
-    this.router.navigate(['/home']);*/
     let id: number = Number(localStorage.getItem('user'));
     this.productService.emptyCart(id).subscribe(()=>{});
     this.router.navigate(['/home']);

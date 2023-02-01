@@ -35,16 +35,6 @@ export class CheckoutComponent implements OnInit {
   constructor(private productService: ProductService, private router: Router) { }
 
   ngOnInit(): void {
-    /*
-    this.productService.getCart().subscribe(
-      (cart) => {
-        this.products = cart.products;
-        this.products.forEach(
-          (element) => this.cartProducts.push(element.product)
-        );
-        this.totalPrice = cart.totalPrice;
-      }
-    );*/
     let id: number = Number(localStorage.getItem('user'));
     this.productService.getCart2(id).subscribe((data: any)=>{
       data.forEach(
@@ -72,12 +62,6 @@ export class CheckoutComponent implements OnInit {
         (resp) => console.log(resp),
         (err) => console.log(err),
         () => {
-          let cart = {
-            cartCount: 0,
-            products: [],
-            totalPrice: 0.00
-          };
-          // this.productService.setCart(cart);
           let id: number = Number(localStorage.getItem('user'));
           this.productService.emptyCart(id);
           this.router.navigate(['/home']);

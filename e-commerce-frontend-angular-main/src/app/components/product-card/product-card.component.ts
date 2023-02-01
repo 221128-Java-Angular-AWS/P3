@@ -10,13 +10,13 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class ProductCardComponent implements OnInit{
 
-  // cartCount!: number;
+  cartCount!: number;
   products: {
     product: Product,
     quantity: number
   }[] = [];
-  // subscription!: Subscription;
-  // totalPrice: number = 0;
+  subscription!: Subscription;
+  totalPrice: number = 0;
 
   @Input() productInfo!: Product;
 
@@ -32,6 +32,21 @@ export class ProductCardComponent implements OnInit{
         this.totalPrice = cart.totalPrice;
       }
     );*/
+    let id: number = Number(localStorage.getItem('user'));
+    this.subscription = this.productService.getCart2(id).subscribe(
+      (data: any)=>{
+        data.forEach(
+          (element: any)=> {
+            console.log(element)
+            this.productService.getSingleCartProduct(element.productId).subscribe((data2: any) =>{
+              this.products.push({product: data2, quantity: element.quantity});
+              this.totalPrice += data2.price *element.quantity;
+              this.cartCount += element.quantity;
+            });
+          }
+        )
+      }
+    )
   }
 
   addToCart(product: Product): void {
@@ -40,44 +55,11 @@ export class ProductCardComponent implements OnInit{
     this.productService.addCart(userId, product.id).subscribe((cart)=>{
       console.log(cart);
     });
-    
-    /*
-    let inCart = false;
-    this.products.forEach(
-      (element) => {
-        if(element.product == product){
-          ++element.quantity;
-          let cart = {
-            cartCount: this.cartCount + 1,
-            products: this.products,
-            totalPrice: this.totalPrice + product.price
-          };
-          this.productService.setCart(cart);
-          inCart=true;
-          return;
-        };
-      }
-    );
-
-    if(inCart == false){
-      let newProduct = {
-        product: product,
-        quantity: 1
-      };
-      this.products.push(newProduct);
-      let cart = {
-        cartCount: this.cartCount + 1,
-        products: this.products,
-        totalPrice: this.totalPrice + product.price
-      }
-      this.productService.setCart(cart);
-    }
-      */
   }
 
-  /*
+  
   ngOnDestroy() {
     this.subscription.unsubscribe();
-  }*/
+  }
 
 }
