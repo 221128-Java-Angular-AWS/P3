@@ -10,32 +10,37 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class ProductCardComponent implements OnInit{
 
-  cartCount!: number;
+  // cartCount!: number;
   products: {
     product: Product,
     quantity: number
   }[] = [];
-  subscription!: Subscription;
-  totalPrice: number = 0;
+  // subscription!: Subscription;
+  // totalPrice: number = 0;
 
   @Input() productInfo!: Product;
 
   constructor(private productService: ProductService) { }
   
+  
   ngOnInit(): void {
+    /*
     this.subscription = this.productService.getCart().subscribe(
       (cart) => {
         this.cartCount = cart.cartCount;
         this.products = cart.products;
         this.totalPrice = cart.totalPrice;
       }
-    );
+    );*/
   }
 
   addToCart(product: Product): void {
 
     let userId = Number(localStorage.getItem('user'));
-    this.productService.addCart(userId, product.id);
+    this.productService.addCart(userId, product.id).subscribe((cart)=>{
+      console.log(cart);
+    });
+    
     /*
     let inCart = false;
     this.products.forEach(
@@ -70,8 +75,9 @@ export class ProductCardComponent implements OnInit{
       */
   }
 
+  /*
   ngOnDestroy() {
     this.subscription.unsubscribe();
-  }
+  }*/
 
 }

@@ -12,11 +12,13 @@ public class CartDto {
     private Integer product_id;
     private UserService userService;
     private ProductService productService;
+    private Integer quantity;
 
-    public CartDto(Integer userid, Integer productid, UserService userService, ProductService productService){
+    public CartDto(Integer userid, Integer productid, Integer quantity, UserService userService, ProductService productService){
         this.user_id = userid;
         this.product_id = productid;
         this.userService = userService;
+        this.quantity = quantity;
         this.productService = productService;
     }
 

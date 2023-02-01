@@ -15,7 +15,7 @@ export class CheckoutComponent implements OnInit {
     product: Product,
     quantity: number
   }[] = [];
-  totalPrice!: number;
+  totalPrice: number = 0;
   cartProducts: Product[] = [];
   finalProducts: {id: number, quantity: number}[] = []; 
 
@@ -35,6 +35,7 @@ export class CheckoutComponent implements OnInit {
   constructor(private productService: ProductService, private router: Router) { }
 
   ngOnInit(): void {
+    /*
     this.productService.getCart().subscribe(
       (cart) => {
         this.products = cart.products;
@@ -43,7 +44,19 @@ export class CheckoutComponent implements OnInit {
         );
         this.totalPrice = cart.totalPrice;
       }
-    );
+    );*/
+    let id: number = Number(localStorage.getItem('user'));
+    this.productService.getCart2(id).subscribe((data: any)=>{
+      data.forEach(
+        (element: any)=> {
+          console.log(element)
+          this.productService.getSingleCartProduct(element.productId).subscribe((data2: any) =>{
+            this.products.push({product: data2, quantity: element.quantity});
+            this.totalPrice += data2.price *element.quantity;
+          });
+        }
+      )
+    });
   }
 
   onSubmit(): void {
@@ -54,7 +67,6 @@ export class CheckoutComponent implements OnInit {
         this.finalProducts.push({id, quantity})
       } 
     );
-
     if(this.finalProducts.length > 0) {
       this.productService.purchase(this.finalProducts).subscribe(
         (resp) => console.log(resp),
@@ -65,7 +77,9 @@ export class CheckoutComponent implements OnInit {
             products: [],
             totalPrice: 0.00
           };
-          this.productService.setCart(cart);
+          // this.productService.setCart(cart);
+          let id: number = Number(localStorage.getItem('user'));
+          this.productService.emptyCart(id);
           this.router.navigate(['/home']);
         } 
       );

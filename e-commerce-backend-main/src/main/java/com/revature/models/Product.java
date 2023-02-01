@@ -1,6 +1,9 @@
 package com.revature.models;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -39,4 +42,12 @@ public class Product {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
     @JsonManagedReference(value = "review_product")
     List<Review> reviews;
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "productId=" + id +
+                "name=" + name +
+                '}';
+    }
 }

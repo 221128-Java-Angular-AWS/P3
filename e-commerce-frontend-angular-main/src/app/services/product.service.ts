@@ -55,15 +55,30 @@ export class ProductService {
   public getCart2(id: number): Observable<Product[]>{
     let queryParams = new HttpParams();
     queryParams = queryParams.append("userId", id);
-    console.log('getCart service methods: ', queryParams)
-    return this.http.get<Product[]>(environment.baseUrl+this.productUrl+"/cart", {params:queryParams, headers: environment.headers, withCredentials: environment.withCredentials});
+    return this.http.get<any>(environment.baseUrl+this.productUrl+"/cart", {params:queryParams, headers: environment.headers, withCredentials: environment.withCredentials});
   }
 
   public addCart(userId: number, productId: number){
     let queryParams = new HttpParams();
     queryParams = queryParams.append("userId", userId);
     queryParams = queryParams.append("prodId", productId);
-    console.log('addCart service method: ', queryParams);
-    return this.http.post<any>(environment.baseUrl+this.productUrl+"/cart", {params:queryParams, headers: environment.headers, withCredentials: environment.withCredentials});
+    queryParams = queryParams.append("quantity", 1);
+    return this.http.post<any>(environment.baseUrl+this.productUrl+"/cart",{}, {params:queryParams, headers: environment.headers, withCredentials: environment.withCredentials});
+  }
+
+  public getSingleCartProduct(id: number): Observable<Product> {
+    return this.http.get<Product>(environment.baseUrl+this.productUrl+"/cart"+"/"+id);
+  }
+
+  public emptyCart(id: number){
+    let queryParams = new HttpParams();
+    queryParams = queryParams.append("userId", id);
+    return this.http.delete<any>(environment.baseUrl + this.productUrl + "/cart", {params: queryParams})
+  }
+
+  public removeCartItem(userId: number, productId: number){
+    let queryParams = new HttpParams();
+    queryParams = queryParams.append("prodId", productId);
+    return this.http.delete<any>(environment.baseUrl+this.productUrl+"/cart" + "/" + userId, {params: queryParams});
   }
 }

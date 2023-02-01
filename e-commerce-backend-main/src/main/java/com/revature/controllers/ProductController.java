@@ -78,7 +78,6 @@ public class ProductController {
     	}
         
         productService.saveAll(productList, metadata);
-
         return ResponseEntity.ok(productList);
     }
 
@@ -96,24 +95,42 @@ public class ProductController {
     }
 
     @GetMapping("/cart")
-    public List<Product> getCart(@RequestParam int userId) {
-        System.out.println("Hit product controller get cart mapping");
+    public List<Cart> getCart(@RequestParam int userId) {
         return productService.getCart(userId);
     }
 
     @PostMapping("/cart")
-    public Cart addCart(@RequestParam int userId, @RequestParam int prodId){
-        System.out.println("Hit product controller post mapping");
-        CartDto cart = new CartDto(userId, prodId, userService, productService);
-        User newUser = cart.getUser();
-        Product newProduct = cart.getProduct();
-        Cart temp = new Cart(null, newUser, newProduct);
-        Cart newCart = productService.addCart(temp);
-        return newCart;
+    public Cart addCart(@RequestParam int userId, @RequestParam int prodId, @RequestParam int quantity){
+        boolean ispresent = productService.inCart(userId, prodId);
+        if(ispresent == false){
+            CartDto cart = new CartDto(userId, prodId, quantity, userService, productService);
+            User newUser = cart.getUser();
+            Product newProduct = cart.getProduct();
+            Cart temp = new Cart(null, newUser, newProduct, quantity);
+            Cart newCart = productService.addCart(temp);
+            return newCart;
+        }
+        int cartId = productService.findCart(userId, prodId);
+        return productService.addQuanToCart(cartId, quantity);
     }
 
     @DeleteMapping("/cart")
     public void clearCart(@RequestParam("userId") int userId){
         productService.clearCart(userId);
+    }
+
+    @GetMapping("/cart/{id}")
+    public ResponseEntity<Product> getCartProductById(@PathVariable("id") int id) {
+        Optional<Product> optional = productService.findById(id);
+
+        if(!optional.isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(optional.get());
+    }
+
+    @DeleteMapping("/cart/{id}")
+    public void deleteCartProduct(@PathVariable("id") int userId, @RequestParam("prodId") int prodId){
+        productService.deleteCartProduct(userId, prodId);
     }
 }

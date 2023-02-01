@@ -11,15 +11,25 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class NavbarComponent implements OnInit{
 
-  cartCount!: number;
+  cartCount: number = 0;
   subscription!: Subscription;
 
   constructor(private authService: AuthService, private router: Router, private productService: ProductService) { }
   
   ngOnInit(): void {
+    let userId: number = Number(localStorage.getItem("user"));
+   this.subscription = this.productService.getCart2(userId).subscribe((data: any)=>{
+      data.forEach(
+        (element: any)=> {
+          this.cartCount += element.quantity;
+        }
+      )
+    });
+    /*
     this.subscription = this.productService.getCart().subscribe(
       (cart) => this.cartCount = cart.cartCount
-    );
+    );*/
+    this.cartCount 
   }
 
   ngOnDestroy() {
