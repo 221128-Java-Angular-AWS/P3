@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { Product } from '../models/product';
 import { environment } from 'src/environments/environment';
 import { CartComponent } from '../components/cart/cart.component';
+import { EMPTY } from 'rxjs';
 
 interface Cart {
   cartCount: number;
@@ -53,12 +54,24 @@ export class ProductService {
     return this.http.patch<any>(environment.baseUrl+this.productUrl, payload, {headers: environment.headers, withCredentials: environment.withCredentials})
   }
 
-  public getProductByGenre(genre: string): Observable<Product[]> {
+  public getProductByGenre(genre: string | undefined): Observable<Product[]> {
+
+    if (genre == undefined) {
+      return EMPTY;
+    }
 
     let queryParams = new HttpParams();
     queryParams = queryParams.append("genre", genre);
 
     return this.http.get<Product[]>(environment.baseUrl+this.productUrl+"/genre", {headers: environment.headers, withCredentials: environment.withCredentials, params:queryParams});
+  }
+
+  public searchProduct(name: string): Observable<Product[]> {
+
+    let queryParams = new HttpParams();
+    queryParams = queryParams.append("name", name);
+
+    return this.http.get<Product[]>(environment.baseUrl+this.productUrl+"/search", {headers: environment.headers, withCredentials: environment.withCredentials, params:queryParams});
   }
 
   public getCart2(id: number): Observable<Product[]>{
@@ -92,3 +105,4 @@ export class ProductService {
     return this.http.delete<any>(environment.baseUrl+this.productUrl+"/cart" + "/" + userId, {params: queryParams});
   }
 }
+

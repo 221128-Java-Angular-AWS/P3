@@ -3,6 +3,26 @@
         <img src="../../../assets/images/favicon.png" class="mx-1" width="8%" height="8%" alt="Revature">
         Revature Swag Shop
     </h4>
+    <table>
+        <tr>
+            <th><label>Search For Products: </label></th>
+            <th><input #searchbar id="searchbar" type="search" (search)="searchForProducts(searchbar.value)"></th>
+            <th><button id="searchButton" (click)="searchForProducts(searchbar.value)">Search</button></th>
+        </tr>
+        <tr id="results">
+            <td></td>
+            <td>
+                <div id="searchResults" *ngIf="products.length > 0 || noResults">
+                    <div *ngFor="let product of products">
+                        <!--These will link to the product eventually-->
+                        <div class="searchResult" [routerLink]="['/product', product.id]" (click)="resetSearch()"><div>{{product.name}}</div></div>
+                    </div>
+                    <div *ngIf="noResults" id="noSearchResults">No Product Found</div>
+                </div>
+            </td>
+            <td></td>
+        </tr>
+    </table>
     <form class="form-inline">
         <button class="btn btn-light mx-1" [routerLink]="['/orders']">Orders</button>
         <button class="btn btn-light mx-1" [routerLink]="['/cart']">

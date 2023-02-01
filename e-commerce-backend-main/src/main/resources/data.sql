@@ -48,7 +48,7 @@ INSERT INTO product (id, quantity, price, description, image, name, genre) VALUE
      20.00,
      'A nice pair of headphones',
      'https://i.insider.com/54eb437f6bb3f7697f85da71?width=1000&format=jpeg&auto=webp',
-     'Headphones',
+     'Headphones2',
      'test'
  ),
  (
@@ -57,7 +57,7 @@ INSERT INTO product (id, quantity, price, description, image, name, genre) VALUE
      45.00,
      'A nice TeeShirt',
      'https://d3o2e4jr3mxnm3.cloudfront.net/Mens-Jake-Guitar-Vintage-Crusher-Tee_68382_1_lg.png',
-     'TeeShirt',
+     'TeeShirt2',
      'test'
  ),
  (
@@ -66,7 +66,7 @@ INSERT INTO product (id, quantity, price, description, image, name, genre) VALUE
      2.50,
      'A reusable shopping bag',
      'https://images.ctfassets.net/5gvckmvm9289/3BlDoZxSSjqAvv1jBJP7TH/65f9a95484117730ace42abf64e89572/Noissue-x-Creatsy-Tote-Bag-Mockup-Bundle-_4_-2.png',
-     'Shopping Bag',
+     'Shopping Bag2',
      'Other'
  ),
  (
@@ -75,7 +75,7 @@ INSERT INTO product (id, quantity, price, description, image, name, genre) VALUE
      10.00,
      'A fancy cap for a fancy person',
      'https://d3o2e4jr3mxnm3.cloudfront.net/Rocket-Vintage-Chill-Cap_66374_1_lg.png',
-     'Baseball Cap',
+     'Baseball Cap2',
      'test'
  ),
  (
@@ -84,7 +84,7 @@ INSERT INTO product (id, quantity, price, description, image, name, genre) VALUE
      80.00,
      'A nice coat',
      'https://www.pngarts.com/files/3/Women-Jacket-PNG-High-Quality-Image.png',
-     'Coat',
+     'Coat2',
      'Other'
  );
 

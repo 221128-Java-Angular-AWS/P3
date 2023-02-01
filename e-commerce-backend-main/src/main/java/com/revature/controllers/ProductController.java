@@ -139,4 +139,10 @@ public class ProductController {
 
         return ResponseEntity.ok(productService.findByGenre(genre));
     }
+
+    @Authorized
+    @GetMapping(value = "/search")
+    public ResponseEntity<List<Product>> getProductByName(@RequestParam String name) {
+        return ResponseEntity.ok(productService.findByName(name.toLowerCase()));
+    }
 }

@@ -1,3 +1,4 @@
+
 package com.revature.services;
 
 import com.revature.dtos.ProductInfo;
@@ -43,8 +44,21 @@ public class ProductService {
         productRepository.deleteById(id);
     }
 
-    public List<Product> findByGenre(String genre) { return productRepository.findByGenreContainsIgnoreCase(genre); }
+    public List<Product> findByGenre(String genre) {
+        List<Product> genreList = findAll();
 
+        genreList.removeIf(n -> (!n.getGenre().equals(genre)));
+
+        return genreList;
+    }
+
+    public List<Product> findByName(String name) {
+        List<Product> productSearch = findAll();
+
+        productSearch.removeIf(n -> (!n.getName().toLowerCase().contains(name)));
+
+        return productSearch;
+    }
     public Product findByProdId(Integer productId){
         return productRepository.findByProdId(productId);
     }
