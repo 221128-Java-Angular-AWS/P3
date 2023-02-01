@@ -99,4 +99,6 @@ build/
 
 # Secrets
 *.properties
-*.yml
+application.yml
+node_modules/
+dist/
