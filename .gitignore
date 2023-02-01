@@ -100,3 +100,4 @@ build/
 # Secrets
 *.properties
 application.yml
+node_modules/
