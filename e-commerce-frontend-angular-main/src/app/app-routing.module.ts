@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { ExtraOptions, PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { CartComponent } from './components/cart/cart.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { DisplayProductsComponent } from './components/display-products/display-products.component';
@@ -22,6 +22,11 @@ const routes: Routes = [
   { path: "profile", component: ProfileComponent},
   { path: "product/:id", component: ProductDetailComponent },
 ];
+
+const config: ExtraOptions = {
+  useHash: true,
+  preloadingStrategy: PreloadAllModules,
+};
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
