@@ -81,9 +81,8 @@ public class UserServiceTest {
         Mockito.when(mockUserRepository.save(mockUser)).thenReturn(mockUser);
         User user = sut.save(mockUser);
 
-        Assertions.assertEquals(mockUser, user, "testSaveUserUserObjectArgument complete");
+        Assertions.assertEquals(mockUser, user);
     }
-    // TODO test for negative make it fail the way expected
 
     @Test
     public void testSaveUserIntAndUserObjectOverride() {
@@ -96,7 +95,6 @@ public class UserServiceTest {
 
         Assertions.assertEquals(mockUser, user, "testSaveUserIntAndUserObjectOverride complete");
     }
-    // TODO test for negative make it fail the way expected
 
     @Test
     public void testFindByIntWhereUserIdInPersistence() {

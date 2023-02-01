@@ -36,7 +36,6 @@ public class OrderService {
         return orders;
     }
 
-    // try overload at first, might be better just to rename
     public List<OrderDto> getOrdersForProfile(Integer userId){
         List<OrderDto> orders = new ArrayList<>();
         for(Order order : orderRepo.findByUserIdWithLimit(userId)){
