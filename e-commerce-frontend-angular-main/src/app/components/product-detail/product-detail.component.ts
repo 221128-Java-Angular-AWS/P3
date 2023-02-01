@@ -19,4 +19,12 @@ export class ProductDetailComponent implements OnInit {
       this.product = product;
     });
   }
+
+  addToCart(product: Product): void {
+
+    let userId = Number(localStorage.getItem('user'));
+    this.productService.addCart(userId, product.id, 1).subscribe((cart)=>{
+      console.log(cart);
+    });
+  }
 }
