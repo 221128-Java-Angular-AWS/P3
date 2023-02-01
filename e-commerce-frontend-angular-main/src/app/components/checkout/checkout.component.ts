@@ -63,7 +63,7 @@ export class CheckoutComponent implements OnInit {
         (err) => console.log(err),
         () => {
           let id: number = Number(localStorage.getItem('user'));
-          this.productService.emptyCart(id);
+          this.productService.emptyCart(id).subscribe(()=>{});
           this.router.navigate(['/home']);
         } 
       );

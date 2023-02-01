@@ -21,6 +21,7 @@ export class ProductService {
 
   private productUrl: string = "/api/product";
 
+  
   private _cart = new BehaviorSubject<Cart>({
     cartCount: 0,
     products: [],
@@ -73,6 +74,7 @@ export class ProductService {
   public emptyCart(id: number){
     let queryParams = new HttpParams();
     queryParams = queryParams.append("userId", id);
+    console.log('empty cart');
     return this.http.delete<any>(environment.baseUrl + this.productUrl + "/cart", {params: queryParams})
   }
 
