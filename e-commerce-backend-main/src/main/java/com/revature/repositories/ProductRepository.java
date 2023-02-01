@@ -13,6 +13,5 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     @Query(value = "SELECT * FROM product WHERE id = :productId", nativeQuery = true)
     Product findByProdId(@Param("productId") Integer productId);
 
-    List<Product> findByGenreContainsIgnoreCase(String genre);
 }
 

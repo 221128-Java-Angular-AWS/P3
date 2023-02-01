@@ -24,7 +24,7 @@ export class RelatedProductsComponent implements OnInit {
   }
 
   getRelatedProduct() {
-    this.productService.getProductByGenre(this.currentProduct.genre).subscribe(
+    this.productService.getProductByGenre(this.currentProduct.genre, this.currentProduct.id).subscribe(
       (resp) => this.relatedProduct = resp,
       (err) => console.log(err),
       () => console.log("Related Products Retrieved")

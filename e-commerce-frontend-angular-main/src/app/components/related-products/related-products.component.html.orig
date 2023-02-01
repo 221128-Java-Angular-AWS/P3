@@ -1,9 +1,0 @@
-
-<div class="page text-center">
-    <div class="products" *ngFor="let product of relatedProduct | slice:0:4 let i = index;">
-        <div class="singleProduct border-bottom" *ngIf="product.id != currentProduct.id">
-            <app-product-card class="cardListItem" [productInfo]="product"></app-product-card>
-        </div>
-    </div>
-</div>
-

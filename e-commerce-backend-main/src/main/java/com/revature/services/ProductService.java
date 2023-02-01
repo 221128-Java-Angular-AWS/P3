@@ -1,4 +1,3 @@
-
 package com.revature.services;
 
 import com.revature.dtos.ProductInfo;
@@ -44,10 +43,11 @@ public class ProductService {
         productRepository.deleteById(id);
     }
 
-    public List<Product> findByGenre(String genre) {
+    public List<Product> findByGenre(String genre, Integer id) {
         List<Product> genreList = findAll();
 
         genreList.removeIf(n -> (!n.getGenre().equals(genre)));
+        genreList.removeIf(n -> (n.getId() == id));
 
         return genreList;
     }
