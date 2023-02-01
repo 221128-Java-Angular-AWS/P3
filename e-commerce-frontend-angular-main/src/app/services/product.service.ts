@@ -45,12 +45,20 @@ export class ProductService {
   }
 
   public getSingleProduct(id: number): Observable<Product> {
-    return this.http.get<Product>(environment.baseUrl+id);
+    return this.http.get<Product>(environment.baseUrl+this.productUrl+'/'+id, {headers: environment.headers, withCredentials: environment.withCredentials});
   }
 
   public purchase(products: {id:number, quantity:number}[]): Observable<any> {
     const payload = JSON.stringify(products);
     return this.http.patch<any>(environment.baseUrl+this.productUrl, payload, {headers: environment.headers, withCredentials: environment.withCredentials})
+  }
+
+  public getProductByGenre(genre: string): Observable<Product[]> {
+
+    let queryParams = new HttpParams();
+    queryParams = queryParams.append("genre", genre);
+
+    return this.http.get<Product[]>(environment.baseUrl+this.productUrl+"/genre", {headers: environment.headers, withCredentials: environment.withCredentials, params:queryParams});
   }
 
   public getCart2(id: number): Observable<Product[]>{
@@ -59,11 +67,11 @@ export class ProductService {
     return this.http.get<any>(environment.baseUrl+this.productUrl+"/cart", {params:queryParams, headers: environment.headers, withCredentials: environment.withCredentials});
   }
 
-  public addCart(userId: number, productId: number){
+  public addCart(userId: number, productId: number, quantity: number){
     let queryParams = new HttpParams();
     queryParams = queryParams.append("userId", userId);
     queryParams = queryParams.append("prodId", productId);
-    queryParams = queryParams.append("quantity", 1);
+    queryParams = queryParams.append("quantity", quantity);
     return this.http.post<any>(environment.baseUrl+this.productUrl+"/cart",{}, {params:queryParams, headers: environment.headers, withCredentials: environment.withCredentials});
   }
 

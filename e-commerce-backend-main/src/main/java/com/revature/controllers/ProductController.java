@@ -133,4 +133,10 @@ public class ProductController {
     public void deleteCartProduct(@PathVariable("id") int userId, @RequestParam("prodId") int prodId){
         productService.deleteCartProduct(userId, prodId);
     }
+    @Authorized
+    @GetMapping(value = "/genre")
+    public ResponseEntity<List<Product>> getProductByGenre(@RequestParam String genre) {
+
+        return ResponseEntity.ok(productService.findByGenre(genre));
+    }
 }

@@ -25,10 +25,6 @@ export class NavbarComponent implements OnInit{
         }
       )
     });
-    /*
-    this.subscription = this.productService.getCart().subscribe(
-      (cart) => this.cartCount = cart.cartCount
-    );*/
   }
 
   ngOnDestroy() {

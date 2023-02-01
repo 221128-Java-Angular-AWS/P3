@@ -50,4 +50,16 @@ public class Product {
                 "name=" + name +
                 '}';
     }
+    public Product(int id) {
+        this.id = id;
+    }
+    public Product(int id, int quantity, double price, String description, String image, String name, String genre) {
+        this.id = id;
+        this.quantity = quantity;
+        this.price = price;
+        this.description = description;
+        this.image = image;
+        this.name = name;
+        this.genre = genre;
+    }
 }
