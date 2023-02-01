@@ -1,12 +1,7 @@
-<div class="page">
-    <h2>Related Products to {{currentProduct.name}}:</h2>
-    <table>
-        <tr class="objects">
-            <div class ="products" *ngFor="let product of relatedProduct; let i = index;">
-                <td class="singleProduct" *ngIf="product.genre == currentProduct.genre && product.id != currentProduct.id">
-                    <app-product-card class="cardListItem" [productInfo]="product"></app-product-card>
-                </td>
-            </div>
-        </tr>
-    </table>
+<div class="page text-center">
+    <div class="products" *ngFor="let product of relatedProduct | slice:0:4 let i = index;">
+        <div class="singleProduct border-bottom" *ngIf="product.genre == currentProduct.genre && product.id != currentProduct.id">
+            <app-product-card class="cardListItem" [productInfo]="product"></app-product-card>
+        </div>
+    </div>
 </div>
