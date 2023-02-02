@@ -4,6 +4,7 @@ import { Order } from '../models/order';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators'
 import { environment } from 'src/environments/environment';
+import { Product } from '../models/product';
 
 @Injectable({
   providedIn: 'root'
@@ -21,12 +22,17 @@ export class OrdersService {
   getOrder(orderId: number): Observable<Order>{
     return this.http.get<Order>(environment.baseUrl + "/order/" + orderId, {headers: environment.headers, withCredentials: environment.withCredentials})
     .pipe(
-      catchError(this.handleError<Order>('getOrders'))
+      catchError(this.handleError<Order>('getOrder'))
     );
   }
 
-  createOrder(order: Order){
-    
+  createOrder(products: {id: number, quantity: number}[]): Observable<any>{
+    const payload = JSON.stringify(products);
+    console.log(payload);
+    return this.http.post(environment.baseUrl + "/order", payload, {headers: environment.headers, withCredentials: environment.withCredentials})
+    .pipe(
+      catchError(this.handleError<Order>('createOrder'))
+    );
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

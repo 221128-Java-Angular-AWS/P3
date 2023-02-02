@@ -2,8 +2,11 @@ package com.revature.controllers;
 
 import com.revature.annotations.Authorized;
 import com.revature.dtos.OrderDto;
+import com.revature.dtos.OrderProductDto;
+import com.revature.dtos.ProductInfo;
 import com.revature.exceptions.InvalidOrderException;
 import com.revature.models.Order;
+import com.revature.models.Product;
 import com.revature.models.User;
 import com.revature.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +17,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -33,7 +37,12 @@ public class OrderController {
 
     @PostMapping
     @Authorized
-    public ResponseEntity createOrder(@RequestBody OrderDto order){
+    public ResponseEntity createOrder(HttpSession session, @RequestBody List<ProductInfo> products){
+        List<OrderProductDto> orderProducts = new ArrayList<>();
+        for(ProductInfo product : products){
+            orderProducts.add(new OrderProductDto(new Product(product.getId()), product.getQuantity()));
+        }
+        OrderDto order = new OrderDto(LocalDateTime.now(), ((User)session.getAttribute("user")).getId(), orderProducts);
         try {
             orderService.createOrder(order);
             return ResponseEntity.accepted().build();
