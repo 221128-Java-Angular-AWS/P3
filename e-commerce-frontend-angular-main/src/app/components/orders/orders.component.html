@@ -23,9 +23,9 @@
             <div class="card-body row justify-content-center">
                 <figure *ngFor="let product of order.products" class="figure col-2">
                     <img [src]="product.product.image" height="100%" width="100px" class="p-1 mx-auto d-block">
+                    <app-review ></app-review>
                 </figure>
             </div>
         </div>
-        <app-review></app-review>
     </div>
 </div>

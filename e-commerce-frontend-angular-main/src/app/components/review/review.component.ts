@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Order } from 'src/app/models/order';
 
 @Component({
   selector: 'app-review',
@@ -12,6 +13,7 @@ export class ReviewComponent implements OnInit {
   submitted: boolean = false;
   pending: boolean = true;
   output?: string;
+  @Input() order?: Order;
   constructor() { }
 
   ngOnInit(): void {
@@ -19,6 +21,9 @@ export class ReviewComponent implements OnInit {
 
   assignReview(n: number): void {
     this.review = n;
+  }
+  setOrder(order?: Order): void {
+    this.order =order;
   }
 
   onSubmit(): void {
