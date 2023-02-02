@@ -6,6 +6,7 @@
         <th scope="col">Name</th>
         <th scope="col">Quantity</th>
         <th scope="col">Description</th>
+        <th scope="col"></th>
       </tr>
     </thead>
     <tbody id="cart-table-body">
@@ -14,6 +15,7 @@
             <td>{{product.product.name}}</td>
             <td>{{product.quantity}}</td>
             <td>{{product.product.description}}</td>
+            <td><button class="btn btn-danger" (click)="delete(product.product.id)">Delete</button></td>
         </tr>
     </tbody>
 </table>

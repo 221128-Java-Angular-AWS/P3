@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Order } from 'src/app/models/order';
 import { OrderProduct } from 'src/app/models/order-product';
 import { OrdersService } from 'src/app/services/orders.service';
+import { ReviewComponent } from '../review/review.component';
 
 @Component({
   selector: 'app-orders',
