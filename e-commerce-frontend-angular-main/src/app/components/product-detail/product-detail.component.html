@@ -23,7 +23,7 @@
             <span class="fw-bold">{{product.quantity}} </span> In Stock
         </div>
         
-        <div class="col-md-2 p-5 border-start justify-content-center" class="form-group">
+        <div class="col-md-2 p-5 border-start justify-content-center">
             <h2>{{product.price | currency}}</h2>
             <form #addForm="ngForm" (ngSubmit)="addToCart(addForm, product)">
                 <div class="form-group">
