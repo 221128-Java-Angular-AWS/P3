@@ -1,25 +1,30 @@
 <app-navbar></app-navbar>
 
-<button class="btn" routerLink="/home"  style="border: solid 1px var(--bs-border-color-translucent);">&lt; Go Back</button>
+<div class="container py-5">
+    <button class="btn btn-light" routerLink="/home" style="border: solid 1px var(--bs-border-color-translucent);">&lt;
+        Go Back</button>
 
-<div *ngFor="let order of orders" class="row">
-    <div class="col-12 mx-1 my-1 p-3 card">
-        <div class="card-header" (click)="showOrderDetails(order)" style="cursor:pointer">
-            <div class="row">
-                <div class="col-3 fw-bold">Order ID</div>
-                <div class="col-3 fw-bold">Date Purchased</div>
-                <div class="col-3 fw-bold">Total Items</div>
-                <div class="col-3 fw-bold">Total Price</div>
-                <div class="col-3"><div>{{order.orderId}}</div></div>
-                <div class="col-3">{{order.dateOrdered | date:'MMM d, y'}}</div>
-                <div class="col-3">{{getItemTotal(order)}}</div>
-                <div class="col-3">{{getTotalCost(order) | currency:"USD"}}</div>
+    <div *ngFor="let order of orders" class="row">
+        <div class="col-12 mx-1 my-1 p-3 card">
+            <div class="card-header" routerLink="/orders/{{order.orderId}}" style="cursor:pointer">
+                <div class="row">
+                    <div class="col-3 order-info fw-bold">Order ID</div>
+                    <div class="col-3 order-info fw-bold">Date Purchased</div>
+                    <div class="col-3 order-info fw-bold">Total Items</div>
+                    <div class="col-3 order-info fw-bold">Total Price</div>
+                    <div class="col-3 order-info">
+                        <div>{{order.orderId}}</div>
+                    </div>
+                    <div class="col-3 order-info">{{order.dateOrdered | date:'MMM d, y'}}</div>
+                    <div class="col-3 order-info">{{getItemTotal(order)}}</div>
+                    <div class="col-3 order-info">{{getTotalCost(order) | currency:"USD"}}</div>
+                </div>
             </div>
-        </div>
-        <div class="card-body row justify-content-center">
-            <figure *ngFor="let product of order.products" class="figure col-2">
-                <img [src]="product.product.image" height="100%" width="100px" class="p-1 mx-auto d-block">
-            </figure>
+            <div class="card-body row justify-content-center">
+                <figure *ngFor="let product of order.products" class="figure col-2">
+                    <img [src]="product.product.image" height="100%" width="100px" class="p-1 mx-auto d-block">
+                </figure>
+            </div>
         </div>
     </div>
 </div>

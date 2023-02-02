@@ -1,4 +1,4 @@
-<div class="col-3 mx-1 my-1 p-3 card">
+<div class="col mx-1 my-1 p-3 card">
   <div class="card-body justify-content-center">
     <figure class="figure mx-auto d-block">
       <a routerLink="/product/{{productInfo.id}}"><img [src]="productInfo.image" height="200px" width="100%" class="p-1 mx-auto d-block"></a>
@@ -6,7 +6,9 @@
         <h6>{{productInfo.name}}</h6>
         {{productInfo.price | currency}}
         <br>
-        <span class="fw-bold">{{productInfo.quantity}}</span> In Stock
+        <span class="fw-bold">{{productInfo.quantity}}</span> In Stock <br>
+        <!-- Delete the line below to get rid of the genre on Card -->
+        Genre: <span class="fw-bold">{{productInfo.genre}}</span>
       </figcaption>
     </figure>
   </div>

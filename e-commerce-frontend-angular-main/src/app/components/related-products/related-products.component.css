@@ -1,0 +1,16 @@
+.page {
+    /* background-color: grey; */
+    width:auto;
+    margin: 20px;
+    text-align: center;
+    padding: 15px;
+    align-items: center;
+}
+
+h2 {
+
+}
+
+.products {
+    display: inline-block;
+}

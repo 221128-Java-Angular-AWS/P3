@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Product } from '../models/product';
 import { environment } from 'src/environments/environment';
+import { CartComponent } from '../components/cart/cart.component';
 
 interface Cart {
   cartCount: number;
@@ -20,6 +21,7 @@ export class ProductService {
 
   private productUrl: string = "/api/product";
 
+  
   private _cart = new BehaviorSubject<Cart>({
     cartCount: 0,
     products: [],
@@ -49,5 +51,44 @@ export class ProductService {
   public purchase(products: {id:number, quantity:number}[]): Observable<any> {
     const payload = JSON.stringify(products);
     return this.http.patch<any>(environment.baseUrl+this.productUrl, payload, {headers: environment.headers, withCredentials: environment.withCredentials})
+  }
+
+  public getProductByGenre(genre: string): Observable<Product[]> {
+
+    let queryParams = new HttpParams();
+    queryParams = queryParams.append("genre", genre);
+
+    return this.http.get<Product[]>(environment.baseUrl+this.productUrl+"/genre", {headers: environment.headers, withCredentials: environment.withCredentials, params:queryParams});
+  }
+
+  public getCart2(id: number): Observable<Product[]>{
+    let queryParams = new HttpParams();
+    queryParams = queryParams.append("userId", id);
+    return this.http.get<any>(environment.baseUrl+this.productUrl+"/cart", {params:queryParams, headers: environment.headers, withCredentials: environment.withCredentials});
+  }
+
+  public addCart(userId: number, productId: number, quantity: number){
+    let queryParams = new HttpParams();
+    queryParams = queryParams.append("userId", userId);
+    queryParams = queryParams.append("prodId", productId);
+    queryParams = queryParams.append("quantity", quantity);
+    return this.http.post<any>(environment.baseUrl+this.productUrl+"/cart",{}, {params:queryParams, headers: environment.headers, withCredentials: environment.withCredentials});
+  }
+
+  public getSingleCartProduct(id: number): Observable<Product> {
+    return this.http.get<Product>(environment.baseUrl+this.productUrl+"/cart"+"/"+id);
+  }
+
+  public emptyCart(id: number){
+    let queryParams = new HttpParams();
+    queryParams = queryParams.append("userId", id);
+    console.log('empty cart');
+    return this.http.delete<any>(environment.baseUrl + this.productUrl + "/cart", {params: queryParams})
+  }
+
+  public removeCartItem(userId: number, productId: number){
+    let queryParams = new HttpParams();
+    queryParams = queryParams.append("prodId", productId);
+    return this.http.delete<any>(environment.baseUrl+this.productUrl+"/cart" + "/" + userId, {params: queryParams});
   }
 }
