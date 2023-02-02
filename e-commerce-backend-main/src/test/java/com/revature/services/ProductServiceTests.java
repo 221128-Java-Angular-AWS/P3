@@ -83,7 +83,7 @@ class ProductServiceTests {
     @Test
     void findByGenreTest() {
         String genre = "test";
-        sut = new ProductService(mockProductRepository);
+        sut = new ProductService(mockProductRepository, null);
         Mockito.when(mockProductRepository.findProductsByGenre(genre, id)).thenReturn(mockProductList);
         Optional<List<Product>> genreProducts = Optional.of(sut.findByGenre(genre, id));
         Assertions.assertEquals(Optional.of(mockProductList), genreProducts);
@@ -92,7 +92,7 @@ class ProductServiceTests {
     @Test
     void findByNameTest() {
         String name = "Headphones";
-        sut = new ProductService(mockProductRepository);
+        sut = new ProductService(mockProductRepository, null);
         Mockito.when(mockProductRepository.findProductsByName(name)).thenReturn(mockProductList);
         Optional<List<Product>> nameProducts = Optional.of(sut.findByName(name));
         Assertions.assertEquals(Optional.of(mockProductList), nameProducts);
