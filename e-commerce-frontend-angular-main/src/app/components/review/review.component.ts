@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-review',
@@ -7,6 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReviewComponent implements OnInit {
   review?: number;
+  userInput: string = '';
+  submitted: boolean = false;
+  pending: boolean = true;
+  output?: string;
   constructor() { }
 
   ngOnInit(): void {
@@ -16,4 +21,9 @@ export class ReviewComponent implements OnInit {
     this.review = n;
   }
 
+  onSubmit(): void {
+    if (this.review) {
+      this.submitted=true;
+    }
+  }
 }
