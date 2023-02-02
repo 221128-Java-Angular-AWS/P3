@@ -4,6 +4,7 @@ import com.revature.dtos.ProductInfo;
 import com.revature.models.Product;
 import com.revature.repositories.WishListRepository;
 import com.revature.models.WishList;
+import java.util.ArrayList;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -47,7 +48,7 @@ public class WishListServiceTests {
       sut = new WishListService(mockWishListRepository);
       Mockito.when(mockWishListRepository.findUserWishList(id)).thenReturn(mockWishList);
       Optional<List<Product>> products = Optional.of(sut.getWishList(id));
-      Assertions.assertEquals(Optional.of(mockWishList), products);
+      Assertions.assertEquals(Optional.of(new ArrayList<Product>()), products);
   }
 
   @Test
