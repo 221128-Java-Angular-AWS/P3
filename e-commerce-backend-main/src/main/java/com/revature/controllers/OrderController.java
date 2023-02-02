@@ -35,14 +35,18 @@ public class OrderController {
         this.req = req;
     }
 
+    //Creating a new order
     @PostMapping
     @Authorized
     public ResponseEntity createOrder(HttpSession session, @RequestBody List<ProductInfo> products){
+        //convert product info into an order
         List<OrderProductDto> orderProducts = new ArrayList<>();
         for(ProductInfo product : products){
             orderProducts.add(new OrderProductDto(new Product(product.getId()), product.getQuantity()));
         }
         OrderDto order = new OrderDto(LocalDateTime.now(), ((User)session.getAttribute("user")).getId(), orderProducts);
+
+        //persist the order
         try {
             orderService.createOrder(order);
             return ResponseEntity.accepted().build();
@@ -51,20 +55,24 @@ public class OrderController {
         }
     }
 
+    //Get all orders for current user
     @GetMapping
     @ResponseStatus(value = HttpStatus.ACCEPTED)
     @Authorized
     public ResponseEntity<List<OrderDto>> getOrders(HttpSession session){
+        //retrieve current user's info
         if(session.getAttribute("user") != null) {
             return ResponseEntity.ok(orderService.getOrders(((User)session.getAttribute("user")).getId()));
         }
         return ResponseEntity.badRequest().build();
     }
 
+    //Get a specific order by ID
     @GetMapping("/{id}")
     @ResponseStatus(value = HttpStatus.ACCEPTED)
     @Authorized
     public ResponseEntity getOrder(HttpSession session, @PathVariable("id") Integer orderId){
+        //get current user's info, to make sure the order belongs to them
         if(session.getAttribute("user") != null) {
             try {
                 return ResponseEntity.ok(orderService.getOrder(orderId, ((User) session.getAttribute("user")).getId()));
@@ -74,12 +82,5 @@ public class OrderController {
         }
         return ResponseEntity.badRequest().body("Not logged in");
     }
-
-//    @GetMapping
-//    @ResponseStatus(value = HttpStatus.ACCEPTED)
-//    public @ResponseBody List<OrderDto> getOrders(@RequestParam Integer userId){
-//        return orderService.getOrders(userId);
-//    }
-
 
 }
