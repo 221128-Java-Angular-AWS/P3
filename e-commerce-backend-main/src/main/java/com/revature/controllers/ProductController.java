@@ -21,8 +21,7 @@ import javax.transaction.Transactional;
 
 @RestController
 @RequestMapping("/api/product")
-//@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:3000", "http://p3-static-hosting.s3-website.us-east-2.amazonaws.com"}, allowCredentials = "true")
-@CrossOrigin(origins = "", allowCredentials = "true")
+@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:3000", "http://p3-static-hosting.s3-website.us-east-2.amazonaws.com"}, allowCredentials = "true")
 @Transactional
 public class ProductController {
 
