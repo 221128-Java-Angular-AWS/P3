@@ -1,53 +1,55 @@
 <app-navbar></app-navbar>
-<div class="p-4 mb-3 bg-light border">
-    <div *ngIf="!editUser">
-        <h4 class="text-center">User Profile</h4>
-        <hr>
-        <table class="table table-borderless">
-            <tbody>
-                <tr *ngIf="user">
-                    <td>User Email: {{ user.email }}</td>
-                </tr>
-                <tr *ngIf="user">
-                    <td>First Name: {{ user.firstName }}</td>
-                </tr>
-                <tr *ngIf="user"> 
-                    <td>Last Name: {{ user.lastName }}</td>
-                </tr>
-                <tr *ngIf="user">
-                    <td>
-                        <button type="button" class="edit-button btn btn-sm btn-dark" (click)="editMode()"> Edit </button>
-                          |  
-                        <button class="edit-button btn btn-sm btn-dark" [routerLink]="['/home']"> Back to Shop </button>
-                    </td>
-                </tr>
-        </table>
-    </div>
-
-    <div *ngIf="editUser">
-        <h4 class="text-center">User Profile</h4>
-        <hr>
-        <table class="table table-borderless">
-            <tbody>
-                <tr>
-                    <td>Username: <input id ="username" #username type = "text" class="form-control" value={{user?.email}}></td>
-                </tr>
-                <tr>
-                    <td>First Name: <input id = "firstName" #firstName type = "text" class="form-control" value={{user?.firstName}}></td>
-                </tr>
-                <tr>
-                    <td>Last Name: <input id = "lastName" #lastName type = "text" class="form-control" value={{user?.lastName}}></td>
-                </tr>
-                <tr>
-                    <!-- change this, maybe a button to switch to another template for password updates -->
-                    <td>Password (Optional, Leave blank if not updating password): <input id = "password" #password type = "password" class="form-control" value = {{null}}></td>
-                </tr>
-                <tr>
-                    <td>
-                        <button type="button" class="edit-button btn btn-sm btn-dark" (click)="save(username.value, firstName.value, lastName.value, password.value)">Save</button>
-                        <button class="btn btn-sm btn-dark mx-1" (click)="cancelEdit()">Cancel</button>
-                    </td>
-                </tr>
-        </table>
+<div class="container py-5">
+    <div class="p-4 mb-3 bg-light border">
+        <div *ngIf="!editUser">
+            <h4 class="text-center">User Profile</h4>
+            <hr>
+            <table class="table table-borderless">
+                <tbody>
+                    <tr *ngIf="user">
+                        <td>User Email: {{ user.email }}</td>
+                    </tr>
+                    <tr *ngIf="user">
+                        <td>First Name: {{ user.firstName }}</td>
+                    </tr>
+                    <tr *ngIf="user"> 
+                        <td>Last Name: {{ user.lastName }}</td>
+                    </tr>
+                    <tr *ngIf="user">
+                        <td>
+                            <button type="button" class="edit-button btn btn-sm btn-dark" (click)="editMode()"> Edit </button>
+                              |  
+                            <button class="edit-button btn btn-sm btn-dark" [routerLink]="['/home']"> Back to Shop </button>
+                        </td>
+                    </tr>
+            </table>
+        </div>
+    
+        <div *ngIf="editUser">
+            <h4 class="text-center">User Profile</h4>
+            <hr>
+            <table class="table table-borderless">
+                <tbody>
+                    <tr>
+                        <td>Username: <input id ="username" #username type = "text" class="form-control" value={{user?.email}}></td>
+                    </tr>
+                    <tr>
+                        <td>First Name: <input id = "firstName" #firstName type = "text" class="form-control" value={{user?.firstName}}></td>
+                    </tr>
+                    <tr>
+                        <td>Last Name: <input id = "lastName" #lastName type = "text" class="form-control" value={{user?.lastName}}></td>
+                    </tr>
+                    <tr>
+                        <!-- change this, maybe a button to switch to another template for password updates -->
+                        <td>Password (Optional, Leave blank if not updating password): <input id = "password" #password type = "password" class="form-control" value = {{null}}></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button type="button" class="edit-button btn btn-sm btn-dark" (click)="save(username.value, firstName.value, lastName.value, password.value)">Save</button>
+                            <button class="btn btn-sm btn-dark mx-1" (click)="cancelEdit()">Cancel</button>
+                        </td>
+                    </tr>
+            </table>
+        </div>
     </div>
 </div>

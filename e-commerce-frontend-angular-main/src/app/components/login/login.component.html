@@ -1,14 +1,20 @@
-<img src="../../../assets/images/rev-logo.png" width="30%" height="30%" alt="Revature">
-<form id="login-form" [formGroup]="loginForm">
-    <div class="form-group">
-      <label for="exampleInputEmail1">Email address</label>
-      <input type="email" class="form-control" formControlName="email" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-      <small id="emailHelp" class="form-text text-muted">Ensure you enter the correct email</small>
-    </div>
-    <div class="form-group">
-      <label for="exampleInputPassword1">Password</label>
-      <input type="password" class="form-control" formControlName="password" id="exampleInputPassword1" placeholder="Password">
-    </div>
-    <button class="btn btn-primary" (click)="onSubmit()">Login</button>
-    <button class="btn btn-primary" [routerLink]="['/register']">Register</button>
-</form>
+<div class="container py-5 text-center">
+  <main class="form-signin w-25 m-auto">
+    <form [formGroup]="loginForm">
+      <img class="mb-4" src="../../../assets/images/rev-logo.png" alt="" width="50%" height="50%" routerLink="/login">
+
+      <div class="form-floating">
+        <input type="email" class="form-control" formControlName="email" id="floatingInput"
+          placeholder="name@example.com">
+        <label for="floatingInput">Email address</label>
+      </div>
+      <div class="form-floating">
+        <input type="password" class="form-control" formControlName="password" id="floatingPassword"
+          placeholder="Password">
+        <label for="floatingPassword">Password</label>
+      </div>
+      <button class="btn btn-primary my-3 mx-1" (click)="onSubmit()">Login</button>
+      <button class="btn btn-primary my-3 mx-1" [routerLink]="['/register']">Register</button>
+    </form>
+  </main>
+</div>
