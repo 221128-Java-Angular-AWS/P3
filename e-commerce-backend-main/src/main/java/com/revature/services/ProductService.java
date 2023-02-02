@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package com.revature.services;
 
 import com.revature.dtos.ProductInfo;
@@ -106,3 +107,67 @@ public class ProductService {
         cartRepository.deleteCartProduct(userId, prodId);
     }
 }
+=======
+package com.revature.services;
+
+import com.revature.dtos.ProductInfo;
+import com.revature.models.Product;
+import com.revature.repositories.ProductRepository;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
+
+@Service
+public class ProductService {
+
+    private final ProductRepository productRepository;
+
+    public ProductService(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
+
+    public List<Product> findAll() {
+        return productRepository.findAll();
+    }
+
+    public Optional<Product> findById(int id) {
+        return productRepository.findById(id);
+    }
+
+    public Product save(Product product) {
+        return productRepository.save(product);
+    }
+    
+    public List<Product> saveAll(List<Product> productList, List<ProductInfo> metadata) {
+    	return productRepository.saveAll(productList);
+    }
+
+    public void delete(int id) {
+        productRepository.deleteById(id);
+    }
+
+    public List<Product> findByGenre(String genre, Integer id) {
+        List<Product> genreList = findAll();
+
+        genreList.removeIf(n -> (!n.getGenre().equals(genre)));
+        genreList.removeIf(n -> (n.getId() == id));
+
+        //Randomizes the order since only 4 items are displayed
+        Collections.shuffle(genreList);
+
+        return genreList;
+    }
+
+    public List<Product> findByName(String name) {
+        List<Product> productSearch = findAll();
+
+        productSearch.removeIf(n -> (!n.getName().toLowerCase().contains(name)));
+
+        return productSearch;
+    }
+
+}
+>>>>>>> 0419e61 (Finished Search Function, Randomized related item display)

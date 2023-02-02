@@ -79,4 +79,22 @@ class ProductServiceTests {
         sut.delete(id);
         verify(mockProductRepository).deleteById(id);
     }
+
+    @Test
+    void findByGenreTest() {
+        String genre = "test";
+        sut = new ProductService(mockProductRepository);
+        Mockito.when(mockProductRepository.findProductsByGenre(genre, id)).thenReturn(mockProductList);
+        Optional<List<Product>> genreProducts = Optional.of(sut.findByGenre(genre, id));
+        Assertions.assertEquals(Optional.of(mockProductList), genreProducts);
+    }
+
+    @Test
+    void findByNameTest() {
+        String name = "Headphones";
+        sut = new ProductService(mockProductRepository);
+        Mockito.when(mockProductRepository.findProductsByName(name)).thenReturn(mockProductList);
+        Optional<List<Product>> nameProducts = Optional.of(sut.findByName(name));
+        Assertions.assertEquals(Optional.of(mockProductList), nameProducts);
+    }
 }

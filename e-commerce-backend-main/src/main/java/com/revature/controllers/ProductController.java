@@ -136,7 +136,6 @@ public class ProductController {
     @Authorized
     @GetMapping(value = "/genre")
     public ResponseEntity<List<Product>> getProductByGenre(@RequestParam String genre, Integer id) {
-
         return ResponseEntity.ok(productService.findByGenre(genre, id));
     }
 
