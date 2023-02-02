@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/models/product';
 import { ProductService } from 'src/app/services/product.service';
 import { ActivatedRoute } from '@angular/router';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-product-detail',
@@ -10,6 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ProductDetailComponent implements OnInit {
   product!: Product;
+
 
   constructor(private productService: ProductService, private route: ActivatedRoute) { }
 
@@ -20,10 +22,10 @@ export class ProductDetailComponent implements OnInit {
     });
   }
 
-  addToCart(product: Product): void {
-
+  addToCart(addForm: NgForm, product: Product): void {
+    let quantity: number = Number(addForm.value.quantity)
     let userId = Number(localStorage.getItem('user'));
-    this.productService.addCart(userId, product.id, 1).subscribe((cart)=>{
+    this.productService.addCart(userId, product.id, quantity).subscribe((cart)=>{
       console.log(cart);
     });
   }
