@@ -7,7 +7,7 @@ export class Product {
     image: string;
     genre?: string;
 
-    constructor (id: number, name: string, quantity: number, description: string, price: number, image: string, genre?: string) {
+    constructor (id: number, name: string, quantity: number, description: string, price: number, image: string, genre: string) {
         this.id = id;
         this.name = name;
         this.quantity = quantity;
