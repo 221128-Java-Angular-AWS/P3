@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row justify-content-center">
-     <div class="col cardListItem" *ngFor="let product of products">
-      <div class="col-3 mx-1 my-1 p-3 card">
+     <div class="col" *ngFor="let product of products">
+      <div class="col-3 mx-1 my-1 p-3 card cardListItem">
         <div class="card-body justify-content-center">
           <figure class="figure mx-auto d-block">
             <a routerLink="/product/{{product.id}}"><img [src]="product.image" height="200px" width="100%" class="p-1 mx-auto d-block"></a>
