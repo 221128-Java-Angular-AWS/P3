@@ -89,6 +89,7 @@ export class ProductService {
   public removeCartItem(userId: number, productId: number){
     let queryParams = new HttpParams();
     queryParams = queryParams.append("prodId", productId);
+    console.log(queryParams.get("prodId"));
     return this.http.delete<any>(environment.baseUrl+this.productUrl+"/cart" + "/" + userId, {params: queryParams, headers: environment.headers, withCredentials: environment.withCredentials});
   }
 }

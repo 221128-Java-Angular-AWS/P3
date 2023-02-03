@@ -39,7 +39,8 @@ class ProductServiceTests {
 
     @Test
     void findAllTest() {
-        sut = new ProductService(mockProductRepository, mockCartRepository);
+        sut = new ProductService(mockProductRepository, null);
+
         Mockito.when(mockProductRepository.findAll()).thenReturn(mockProductList);
         Optional<List<Product>> products = Optional.of(sut.findAll());
         Assertions.assertEquals(Optional.of(mockProductList), products);
@@ -47,7 +48,8 @@ class ProductServiceTests {
 
     @Test
     void findByIdTest() {
-        sut = new ProductService(mockProductRepository, mockCartRepository);
+        sut = new ProductService(mockProductRepository, null);
+
         Mockito.when(mockProductRepository.findById(id)).thenReturn(Optional.of(mockProduct));
         Optional<Product> product = sut.findById(id);
         Assertions.assertEquals(Optional.of(mockProduct), product);
@@ -55,7 +57,8 @@ class ProductServiceTests {
 
     @Test
     void saveTest() {
-        sut = new ProductService(mockProductRepository, mockCartRepository);
+        sut = new ProductService(mockProductRepository, null);
+
         Mockito.when(mockProductRepository.save(mockProduct)).thenReturn(mockProduct);
         Optional<Product> product = Optional.of(sut.save(mockProduct));
         Assertions.assertEquals(Optional.of(mockProduct), product);
@@ -63,7 +66,8 @@ class ProductServiceTests {
 
     @Test
     void saveAllTest() {
-        sut = new ProductService(mockProductRepository, mockCartRepository);
+        sut = new ProductService(mockProductRepository, null);
+
         Mockito.when(mockProductRepository.saveAll(mockProductList)).thenReturn(mockProductList);
         Optional<List<Product>> products = Optional.of(sut.saveAll(mockProductList, mockProductInfoList));
         Assertions.assertEquals(Optional.of(mockProductList), products);
@@ -71,7 +75,8 @@ class ProductServiceTests {
 
     @Test
     void deleteTest() {
-        sut = new ProductService(mockProductRepository, mockCartRepository);
+        sut = new ProductService(mockProductRepository, null);
+        
         sut.delete(id);
         verify(mockProductRepository).deleteById(id);
     }

@@ -26,6 +26,10 @@ export class CartComponent implements OnInit {
     this.productService.getCart2(id).subscribe((data: any)=>{
       data.forEach(
         (element: any)=> {
+          if (element.quantity == 0) {
+            element.quantity = 1;
+          }
+
           this.productService.getSingleCartProduct(element.productId).subscribe((data2: any) =>{
             this.products.push({product: data2, quantity: element.quantity});
             this.totalPrice += data2.price *element.quantity;
@@ -39,8 +43,9 @@ export class CartComponent implements OnInit {
     console.log(product_id)
     let userId = Number(localStorage.getItem('user'));
     this.productService.removeCartItem(userId, product_id).subscribe(()=>{
+      window.location.reload(); // moved by will, was refreshing before removing the item from the cart otherwise
     });
-    window.location.reload();
+    
   }
   emptyCart(): void {
     let id: number = Number(localStorage.getItem('user'));

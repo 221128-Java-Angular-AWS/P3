@@ -17,6 +17,7 @@ export class NavbarComponent implements OnInit{
   constructor(private authService: AuthService, private router: Router, private productService: ProductService) { }
   
   ngOnInit(): void {
+    /*
     let userId: number = Number(localStorage.getItem("user"));
     this.subscription = this.productService.getCart2(userId).subscribe((data: any)=>{
       data.forEach(
@@ -24,11 +25,11 @@ export class NavbarComponent implements OnInit{
           this.cartCount += element.quantity;
         }
       )
-    });
+    });*/
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    // this.subscription.unsubscribe();
   }
 
   logout() {

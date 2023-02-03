@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Product } from 'src/app/models/product';
 import { ProductService } from 'src/app/services/product.service';
 import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import { OrdersService } from 'src/app/services/orders.service';
 
 @Component({
   selector: 'app-checkout',
@@ -32,7 +33,7 @@ export class CheckoutComponent implements OnInit {
     country: new UntypedFormControl('', Validators.required)
   });
 
-  constructor(private productService: ProductService, private router: Router) { }
+  constructor(private productService: ProductService,private ordersService: OrdersService, private router: Router) { }
 
   ngOnInit(): void {
     let id: number = Number(localStorage.getItem('user'));
@@ -64,6 +65,7 @@ export class CheckoutComponent implements OnInit {
         () => {
           let id: number = Number(localStorage.getItem('user'));
           this.productService.emptyCart(id).subscribe(()=>{});
+          this.ordersService.createOrder(this.finalProducts).subscribe(()=>{});
           this.router.navigate(['/home']);
         } 
       );
