@@ -4,6 +4,8 @@ import com.revature.models.Product;
 
 import java.util.Objects;
 
+// This class is used to store Order Products in a more convenient way for the front-end
+// Only has info on the product and quantity of that product
 public class OrderProductDto {
     private Product product;
     private Integer quantity;

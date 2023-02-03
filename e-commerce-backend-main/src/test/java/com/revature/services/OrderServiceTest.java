@@ -112,6 +112,22 @@ public class OrderServiceTest {
     }
 
     @Test
+    public void testGetOrdersForProfile() {
+        LocalDateTime now = LocalDateTime.now();
+        List<Order> profileOrders = new ArrayList<>();
+        profileOrders.add(new Order(1, now, new User(1), new ArrayList<OrderProduct>()));
+        Mockito.when(repoMock.findByUserIdWithLimit(1)).thenReturn(profileOrders);
+
+        List<OrderDto> result = sut.getOrdersForProfile(1);
+
+        OrderDto order = new OrderDto(1, now, 1, new ArrayList<OrderProductDto>());
+        List<OrderDto> expectedOrders = new ArrayList<>();
+        expectedOrders.add(order);
+
+        Assertions.assertEquals(expectedOrders, result);
+    }
+
+    @Test
     public void testGetUserValidOrderId(){
         //mock response from the repo
         LocalDateTime now = LocalDateTime.now();
