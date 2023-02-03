@@ -44,8 +44,8 @@ public class ReviewController {
     @PostMapping(value = "/add")
     @Authorized
     public ResponseEntity<Review> postReview(HttpSession session, @RequestBody Review review) {
-        System.out.println("In Controller!");
-        User user = new User( ((User)session.getAttribute("user")).getId());
+        System.out.println("In Controller!:"+ session.getAttribute("user"));
+        review.setUser((User)session.getAttribute("user"));
         return ResponseEntity.ok(reviewService.saveReview(review));
     }
 
