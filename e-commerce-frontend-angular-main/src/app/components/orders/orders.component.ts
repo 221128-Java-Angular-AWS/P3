@@ -13,10 +13,13 @@ import { Product } from 'src/app/models/product';
 })
 export class OrdersComponent implements OnInit {
   orders: Order[] = [];
+  
 
+  
   constructor(private ordersService: OrdersService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    
     this.ordersService.getOrders().subscribe((orders) => {this.orders = orders;});
   }
 

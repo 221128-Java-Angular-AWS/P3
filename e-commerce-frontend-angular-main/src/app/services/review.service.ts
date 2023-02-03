@@ -11,8 +11,6 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ReviewService {
-  private reviewsUrl: string = `${environment.baseUrl}/review`
-
   
   constructor(private httpClient: HttpClient) { }
 
@@ -22,13 +20,21 @@ export class ReviewService {
   }
 
   getReview(orderId: number): Observable<Review> {
-    return this.httpClient.get<Review>(this.reviewsUrl + "/" + orderId, {headers: environment.headers, withCredentials: environment.withCredentials}).pipe(
+    return this.httpClient.get<Review>(environment.baseUrl + "/review/" + orderId, {headers: environment.headers, withCredentials: environment.withCredentials}).pipe(
       catchError(this.handleError<Review>('getReview'))
     )
   }
   postReview(review: Review): Observable<any> {
     const payload = JSON.stringify(review);
-    return this.httpClient.post(environment.baseUrl +"/review", payload, {headers: environment.headers, withCredentials: environment.withCredentials}).pipe(catchError(this.handleError<Review>('postReview'))
+    console.log(environment.baseUrl +"/review");
+    return this.httpClient.post(environment.baseUrl +"/review/add", review, {headers: environment.headers, withCredentials: environment.withCredentials}).pipe(catchError(this.handleError<Review>('postReview'))
+    );
+  }
+
+  ping(): Observable<string> {
+    console.log("Attempting to ping!")
+    return this.httpClient.get<string>("http://localhost:8080"+"/review/ping").pipe(
+      catchError(this.handleError<string>('ping'))
     );
   }
 }

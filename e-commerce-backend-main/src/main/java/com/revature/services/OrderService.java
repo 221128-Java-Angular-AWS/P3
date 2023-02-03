@@ -21,6 +21,7 @@ public class OrderService {
     }
 
     public void createOrder(OrderDto order) throws InvalidOrderException{
+        System.out.println("Creating an order!");
         if(order.getProducts().size() > 0)
             orderRepo.save(order.toOrder());
         else {

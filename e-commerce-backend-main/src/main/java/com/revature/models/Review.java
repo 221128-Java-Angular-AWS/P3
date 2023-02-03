@@ -13,6 +13,7 @@ import javax.persistence.*;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "reviews")
 public class Review {
 
     @Id
@@ -33,5 +34,14 @@ public class Review {
     @JsonProperty
     private Product product;
 
+    public Review(int reviewId) {
+        this.reviewId = reviewId;
+    }
 
+    public Review(String message, int rating, User user, Product product) {
+        this.message = message;
+        this.rating = rating;
+        this.user = user;
+        this.product = product;
+    }
 }
