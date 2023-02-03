@@ -68,8 +68,13 @@ export class ProfileComponent implements OnInit {
     updateUser.password = password;
 
     this.profileService.postUser(updateUser).subscribe(
-      (resp) => {this.user = resp,
-        this.editUser = false;
+      (resp) => {
+        if (resp == undefined) {
+          alert("Error updating user");
+        } else {
+          this.user = resp,
+          this.editUser = false;
+        }
       },
       (err) => console.log(err),
       () => console.log("User profile updated")

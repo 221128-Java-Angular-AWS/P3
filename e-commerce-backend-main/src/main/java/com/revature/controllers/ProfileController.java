@@ -2,6 +2,7 @@ package com.revature.controllers;
 
 import com.revature.advice.AuthAspect;
 import com.revature.annotations.Authorized;
+import com.revature.exceptions.EmailTakenException;
 import com.revature.models.User;
 import com.revature.services.OrderService;
 import com.revature.services.ReviewService;
@@ -51,7 +52,12 @@ public class ProfileController {
     public ResponseEntity<User> postUserInfo(HttpSession session, @RequestBody User user) {
         User loggedInUser = (User) session.getAttribute("user");
         int userId = loggedInUser.getId();
-        return ResponseEntity.ok(userService.save(userId, user));
+        try {
+            user = userService.save(userId, user);
+        } catch(EmailTakenException e) {
+            return ResponseEntity.badRequest().build();
+        }
+        return ResponseEntity.ok(user);
     }
 
 }
