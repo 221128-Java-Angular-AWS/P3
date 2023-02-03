@@ -26,7 +26,6 @@ export class LoginComponent implements OnInit {
       (user) => {
         this.authService.loggedIn=true;
         localStorage.setItem('user', user.id);
-        sessionStorage.setItem('user', user.id);
       },
       (err) => console.log(err),
       () => this.router.navigate(['home'])

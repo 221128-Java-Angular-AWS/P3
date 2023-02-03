@@ -48,9 +48,11 @@ public class AuthAspect {
     public Object authenticate(ProceedingJoinPoint pjp, Authorized authorized) throws Throwable {
 
         HttpSession session = req.getSession(); // Get the session (or create one)
+        System.out.println(session.getAttribute("user"));
 
         // If the user is not logged in
         if(session.getAttribute("user") == null) {
+            System.out.println(session.getAttribute("user"));
             throw new NotLoggedInException("Must be logged in to perform this action");
         }
 
