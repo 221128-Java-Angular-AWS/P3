@@ -5,7 +5,6 @@ export const environment = {
   headers: {
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': '*',
-    'X-Content-Type-Options': 'nosniff'
-    
+    'Cookie': 'SameSite=None; Secure'
   }
 };
