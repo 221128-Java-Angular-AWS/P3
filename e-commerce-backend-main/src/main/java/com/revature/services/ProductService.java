@@ -5,6 +5,7 @@ import com.revature.models.Cart;
 import com.revature.models.Product;
 import com.revature.repositories.CartRepository;
 import com.revature.repositories.ProductRepository;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -25,7 +26,7 @@ public class ProductService {
     }
 
     public List<Product> findAll() {
-        return productRepository.findAll();
+        return productRepository.findAll(Sort.by("id"));
     }
 
     public Optional<Product> findById(int id) {

@@ -42,6 +42,7 @@ public class OrderService {
         return orders;
     }
 
+    //Get 5 most recent orders to display on user profile
     public List<OrderDto> getOrdersForProfile(Integer userId){
         List<OrderDto> orders = new ArrayList<>();
         for(Order order : orderRepo.findByUserIdWithLimit(userId)){
