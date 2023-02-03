@@ -76,7 +76,7 @@ class ProductServiceTests {
     @Test
     void deleteTest() {
         sut = new ProductService(mockProductRepository, null);
-        
+
         sut.delete(id);
         verify(mockProductRepository).deleteById(id);
     }
