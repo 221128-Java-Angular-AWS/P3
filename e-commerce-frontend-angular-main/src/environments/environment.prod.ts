@@ -5,5 +5,6 @@ export const environment = {
   headers: {
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': 'http://p3-static-hosting.s3-website.us-east-2.amazonaws.com',
+    'Set-Cookie': 'SameSite=None;'
   }
 };
