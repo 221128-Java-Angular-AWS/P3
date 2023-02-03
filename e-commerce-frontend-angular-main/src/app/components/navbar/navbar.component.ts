@@ -23,7 +23,7 @@ export class NavbarComponent implements OnInit{
   ngOnInit(): void {
     /*
     let userId: number = Number(localStorage.getItem("user"));
-   this.subscription = this.productService.getCart2(userId).subscribe((data: any)=>{
+    this.subscription = this.productService.getCart2(userId).subscribe((data: any)=>{
       data.forEach(
         (element: any)=> {
           this.cartCount += element.quantity;
