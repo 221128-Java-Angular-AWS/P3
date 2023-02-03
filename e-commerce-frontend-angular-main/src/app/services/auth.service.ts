@@ -15,6 +15,7 @@ export class AuthService {
 
   login(email: string, password: string): Observable<any> {
     const payload = {email:email, password:password};
+    console.log(payload);
     return this.http.post<any>(`${this.authUrl}/login`, payload, {headers: environment.headers, withCredentials: environment.withCredentials});
   }
 
