@@ -21,14 +21,20 @@ export class WishListService {
   }
 
   public removeFromWishList(productId: Number, userId: Number): Observable<Object> {
-    console.log("Found wishlist service");
     let productIdUrl = `/${productId}`;
     let userIdUrl = `/${userId}`;
-    console.log(`Attempting to delete product ${productId} of user ${userId}`);
-    console.log("Sending HTTP Delete request to: " + environment.baseUrl + this.wishListUrl + userIdUrl + productIdUrl);
     return this.http.delete(environment.baseUrl + this.wishListUrl + userIdUrl + productIdUrl, {headers: environment.headers, withCredentials: environment.withCredentials})
     .pipe(
       catchError(this.handleError<Product>('removeWishListItem'))
+    );
+  }
+
+  public addToWishList(productId: Number, userId: Number): Observable<Object> {
+    let productIdUrl = `/${productId}`;
+    let userIdUrl = `/${userId}`;
+    return this.http.post(environment.baseUrl + this.wishListUrl + userIdUrl + productIdUrl, {headers: environment.headers, withCredentials: environment.withCredentials})
+    .pipe(
+      catchError(this.handleError<Product>('addWishListItem'))
     );
   }
 
