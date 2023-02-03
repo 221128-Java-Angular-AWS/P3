@@ -50,9 +50,11 @@ public class AuthAspect {
 
         HttpSession session = req.getSession(); // Get the session (or create one)
         User user = (User) session.getAttribute("user");
+        System.out.println(session.getAttribute("user"));
 
         // If the user is not logged in
         if(user == null) {
+            System.out.println(session.getAttribute("user"));
             throw new NotLoggedInException("Must be logged in to perform this action");
         }
 
