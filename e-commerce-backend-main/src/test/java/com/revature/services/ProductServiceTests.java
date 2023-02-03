@@ -10,6 +10,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Sort;
 
 import java.util.List;
 import java.util.Optional;
@@ -41,7 +42,7 @@ class ProductServiceTests {
     void findAllTest() {
 
         sut = new ProductService(mockProductRepository, null);
-        Mockito.when(mockProductRepository.findAll()).thenReturn(mockProductList);
+        Mockito.when(mockProductRepository.findAll(Sort.by("id"))).thenReturn(mockProductList);
         Optional<List<Product>> products = Optional.of(sut.findAll());
         Assertions.assertEquals(Optional.of(mockProductList), products);
     }
