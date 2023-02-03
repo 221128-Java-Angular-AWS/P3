@@ -1,11 +1,12 @@
 .order-wishlist-box {
     display:inline-block;
     margin: 1em;
+
 }
 
 #parent-box {
     display: flex;
-    gap: 2em;
+    gap: 3em;
 }
 
 #order-box {
