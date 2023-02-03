@@ -27,7 +27,7 @@ export class ReviewService {
     )
   }
   postReview(review: Review): Observable<any> {
-    const payload = review;
+    const payload = JSON.stringify(review);
     return this.httpClient.post(environment.baseUrl +"/review", payload, {headers: environment.headers, withCredentials: environment.withCredentials}).pipe(catchError(this.handleError<Review>('postReview'))
     );
   }

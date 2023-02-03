@@ -23,7 +23,10 @@
             <div class="card-body row justify-content-center">
                 <figure *ngFor="let product of order.products" class="figure col-2">
                     <img [src]="product.product.image" height="100%" width="100px" class="p-1 mx-auto d-block">
-                    <app-review ></app-review>
+                    <!--<button type = "submit" class="submit-rev" (click)="onReview(product)">Review</button>-->
+                    <a routerLink="/review/{{product.product.id}}">
+                        Submit Review
+                    </a>
                 </figure>
             </div>
         </div>

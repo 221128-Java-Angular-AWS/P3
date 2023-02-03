@@ -39,7 +39,11 @@ export class OrdersComponent implements OnInit {
   }
 
   goToReviewProduct(product: Product) {
-    this.router.navigate([`/product/${product.id}`])
+    this.router.navigate([`/review/${product.id}`])
+  }
+
+  onReview(product: OrderProduct): void {
+
   }
 
 }

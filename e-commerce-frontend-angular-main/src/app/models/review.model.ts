@@ -9,8 +9,7 @@ export class Review {
     user?: User;
     product?: Product;
 
-    constructor(reviewId?: number, message?: string, rating?: number, user?: User, product?: Product) {
-        this.reviewId = reviewId;
+    constructor(message?: string, rating?: number, user?: User, product?: Product) {
         this.message = message;
         this.rating = rating;
         this.user = user;

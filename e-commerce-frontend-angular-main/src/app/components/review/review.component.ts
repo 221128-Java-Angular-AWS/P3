@@ -1,6 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Order } from 'src/app/models/order';
+import { Product } from 'src/app/models/product';
+import { Review } from 'src/app/models/review.model';
+import { User } from 'src/app/models/user';
+import { ReviewService } from 'src/app/services/review.service';
 
 @Component({
   selector: 'app-review',
@@ -8,27 +11,28 @@ import { Order } from 'src/app/models/order';
   styleUrls: ['./review.component.css']
 })
 export class ReviewComponent implements OnInit {
-  review?: number;
+  reviewInt?: number;
   userInput: string = '';
   submitted: boolean = false;
   pending: boolean = true;
   output?: string;
-  @Input() order?: Order;
-  constructor() { }
+  @Input() user?: User;
+  @Input() product?: Product;
+
+  constructor(private reviewService: ReviewService) { }
 
   ngOnInit(): void {
   }
 
   assignReview(n: number): void {
-    this.review = n;
-  }
-  setOrder(order?: Order): void {
-    this.order =order;
+    this.reviewInt = n;
   }
 
   onSubmit(): void {
-    if (this.review) {
+    if (this.reviewInt) {
       this.submitted=true;
+      let review = new Review(this.userInput, this.reviewInt, this.user, this.product);
+      this.reviewService.postReview(review)
     }
   }
 }
