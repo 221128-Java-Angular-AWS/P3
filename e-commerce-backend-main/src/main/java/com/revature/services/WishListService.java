@@ -33,6 +33,10 @@ public class WishListService {
         wishListRepository.deleteById(id);
     }
 
+    public int addWishListItem(int userId, int productId) {
+        return wishListRepository.addWishListItem(userId, productId);
+    }
+
     public Optional<WishList> findById(int id) {
         return wishListRepository.findById(id);
     }

@@ -22,7 +22,7 @@ export class ProductService {
 
   private productUrl: string = "/api/product";
 
-  
+
   private _cart = new BehaviorSubject<Cart>({
     cartCount: 0,
     products: [],
@@ -59,7 +59,7 @@ export class ProductService {
     if (genre == undefined) {
       return EMPTY;
     }
-   
+
     return this.http.get<Product[]>(environment.baseUrl+this.productUrl+"/genre", {headers: environment.headers, withCredentials: environment.withCredentials, params:{genre: genre, id: id}});
   }
 
