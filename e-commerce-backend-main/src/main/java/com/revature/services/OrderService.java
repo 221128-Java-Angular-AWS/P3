@@ -42,6 +42,14 @@ public class OrderService {
         return orders;
     }
 
+    public List<OrderDto> getOrdersForProfile(Integer userId){
+        List<OrderDto> orders = new ArrayList<>();
+        for(Order order : orderRepo.findByUserIdWithLimit(userId)){
+            orders.add(new OrderDto(order));
+        }
+        return orders;
+    }
+
     //Get a specific order belonging to a user
     public OrderDto getOrder(Integer orderId, Integer userId){
         //find the order
