@@ -40,7 +40,6 @@ class ProductServiceTests {
     @Test
     void findAllTest() {
         sut = new ProductService(mockProductRepository, null);
-
         Mockito.when(mockProductRepository.findAll()).thenReturn(mockProductList);
         Optional<List<Product>> products = Optional.of(sut.findAll());
         Assertions.assertEquals(Optional.of(mockProductList), products);
@@ -49,7 +48,6 @@ class ProductServiceTests {
     @Test
     void findByIdTest() {
         sut = new ProductService(mockProductRepository, null);
-
         Mockito.when(mockProductRepository.findById(id)).thenReturn(Optional.of(mockProduct));
         Optional<Product> product = sut.findById(id);
         Assertions.assertEquals(Optional.of(mockProduct), product);
@@ -58,7 +56,6 @@ class ProductServiceTests {
     @Test
     void saveTest() {
         sut = new ProductService(mockProductRepository, null);
-
         Mockito.when(mockProductRepository.save(mockProduct)).thenReturn(mockProduct);
         Optional<Product> product = Optional.of(sut.save(mockProduct));
         Assertions.assertEquals(Optional.of(mockProduct), product);
@@ -67,7 +64,6 @@ class ProductServiceTests {
     @Test
     void saveAllTest() {
         sut = new ProductService(mockProductRepository, null);
-
         Mockito.when(mockProductRepository.saveAll(mockProductList)).thenReturn(mockProductList);
         Optional<List<Product>> products = Optional.of(sut.saveAll(mockProductList, mockProductInfoList));
         Assertions.assertEquals(Optional.of(mockProductList), products);
@@ -76,8 +72,25 @@ class ProductServiceTests {
     @Test
     void deleteTest() {
         sut = new ProductService(mockProductRepository, null);
-
         sut.delete(id);
         verify(mockProductRepository).deleteById(id);
+    }
+
+    @Test
+    void findByGenreTest() {
+        String genre = "test";
+        sut = new ProductService(mockProductRepository, null);
+        Mockito.when(mockProductRepository.findProductsByGenre(genre, id)).thenReturn(mockProductList);
+        Optional<List<Product>> genreProducts = Optional.of(sut.findByGenre(genre, id));
+        Assertions.assertEquals(Optional.of(mockProductList), genreProducts);
+    }
+
+    @Test
+    void findByNameTest() {
+        String name = "Headphones";
+        sut = new ProductService(mockProductRepository, null);
+        Mockito.when(mockProductRepository.findProductsByName(name)).thenReturn(mockProductList);
+        Optional<List<Product>> nameProducts = Optional.of(sut.findByName(name));
+        Assertions.assertEquals(Optional.of(mockProductList), nameProducts);
     }
 }
