@@ -12,6 +12,7 @@ import { catchError } from 'rxjs/operators';
 })
 export class ReviewService {
   
+  
   constructor(private httpClient: HttpClient) { }
 
   private handleError<T>(operation = 'operation', result?: T) {
@@ -19,10 +20,12 @@ export class ReviewService {
     return of(result as T);}
   }
 
-  getReview(orderId: number): Observable<Review> {
-    return this.httpClient.get<Review>(environment.baseUrl + "/review/" + orderId, {headers: environment.headers, withCredentials: environment.withCredentials}).pipe(
-      catchError(this.handleError<Review>('getReview'))
+  getReview(orderId: number): Observable<Review[]> {
+    let temp =  this.httpClient.get<Review[]>(environment.baseUrl + "/review/" + orderId, {headers: environment.headers, withCredentials: environment.withCredentials}).pipe(
+      catchError(this.handleError<Review[]>('getReview'))
     )
+    console.log(temp + "Will return this");
+    return temp;
   }
   postReview(review: Review): Observable<any> {
     const payload = JSON.stringify(review);
@@ -31,10 +34,16 @@ export class ReviewService {
     );
   }
 
+  getAverageReview(product: Product): Observable<number> {
+    let num = this.httpClient.get<number>(environment.baseUrl + "/review/avg" +)
+  }
+
   ping(): Observable<string> {
     console.log("Attempting to ping!")
     return this.httpClient.get<string>("http://localhost:8080"+"/review/ping").pipe(
       catchError(this.handleError<string>('ping'))
     );
   }
+
+
 }

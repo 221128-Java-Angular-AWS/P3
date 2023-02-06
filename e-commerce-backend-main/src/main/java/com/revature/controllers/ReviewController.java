@@ -54,9 +54,13 @@ public class ReviewController {
 
     @GetMapping(value = "/{productId}")
     @Authorized
-    public Review hasReviewed(HttpSession session, @PathVariable("productId") int productId) {
-        Integer userId = ((User)session.getAttribute("user")).getId();
-        return reviewService.getReview(userId, productId);
+    public List<Review> hasReviewed(HttpSession session, @PathVariable("productId") int productId) {
+        User user = (User)session.getAttribute("user");
+        Product product = productService.findByProdId(productId);
+        System.out.println("In hasReviewed method of review controller: " + user.toString() + " and " + product.toString());
+        List<Review> temporary = reviewService.getReview(user.getId(), product.getId());
+        System.out.println(temporary.toString() + "!!!!!!!!!!!!!!!!!!!!!!!!!! !");
+        return temporary;
     }
 
     @GetMapping(value = "/ping")

@@ -1,7 +1,9 @@
 package com.revature.services;
 
 import com.revature.exceptions.NotReviewedException;
+import com.revature.models.Product;
 import com.revature.models.Review;
+import com.revature.models.User;
 import com.revature.repositories.ReviewRepository;
 import org.springframework.stereotype.Service;
 
@@ -20,8 +22,15 @@ public class ReviewService {
         return reviewRepository.save(review);
     }
 
-    public Review getReview(Integer userId, Integer productId){
-        Review review = reviewRepository.findByUserIdAndProductId(userId, productId);
+    public List<Review> getReview(Integer userId, Integer productId){
+        /*
+        System.out.println("First in getReview method");
+        List<Review> lall = reviewRepository.getAll();
+        lall.forEach(x -> System.out.println(x));
+        */
+
+        List<Review> review = reviewRepository.findByUserIdAndProductId(userId, productId);
+        //System.out.println("In service method of getReview(): " + review.getReviewId());
         if(review == null) throw new NotReviewedException("Product hasn't been reviewed by customer, yet!");
         else {
             return review;

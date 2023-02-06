@@ -15,7 +15,6 @@ export class OrdersComponent implements OnInit {
   orders: Order[] = [];
   
 
-  
   constructor(private ordersService: OrdersService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -45,8 +44,7 @@ export class OrdersComponent implements OnInit {
     this.router.navigate([`/review/${product.id}`])
   }
 
-  onReview(product: OrderProduct): void {
+  
 
-  }
 
 }
