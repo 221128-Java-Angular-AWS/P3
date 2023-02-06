@@ -22,7 +22,7 @@ export class ProductService {
 
   private productUrl: string = "/api/product";
 
-  
+
   private _cart = new BehaviorSubject<Cart>({
     cartCount: 0,
     products: [],
@@ -59,7 +59,7 @@ export class ProductService {
     if (genre == undefined) {
       return EMPTY;
     }
-   
+
     return this.http.get<Product[]>(environment.baseUrl+this.productUrl+"/genre", {headers: environment.headers, withCredentials: environment.withCredentials, params:{genre: genre, id: id}});
   }
 
@@ -99,8 +99,11 @@ export class ProductService {
   public removeCartItem(userId: number, productId: number){
     let queryParams = new HttpParams();
     queryParams = queryParams.append("prodId", productId);
-    console.log(queryParams.get("prodId"));
     return this.http.delete<any>(environment.baseUrl+this.productUrl+"/cart" + "/" + userId, {params: queryParams, headers: environment.headers, withCredentials: environment.withCredentials});
+  }
+
+  public getUserId(){
+    return this.http.get<number>(environment.baseUrl+this.productUrl+"/cart" + "/user", {headers: environment.headers, withCredentials: environment.withCredentials});
   }
 }
 

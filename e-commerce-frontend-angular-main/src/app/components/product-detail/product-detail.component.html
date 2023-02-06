@@ -17,8 +17,7 @@
             <h2>{{product.name}}</h2>
             <h6>Rating: &#9733;&#9733;&#9733;&#9733;&#9734;
                 <button type="button" class="btn btn-sm btn-warning mx-1">Leave a Review</button>
-                <button type="button" class="btn btn-sm btn-primary">Add to Wishlist</button>
-                <button type="button" class="btn btn-sm btn-danger mx-1">Remove from Wishlist</button>
+                <button type="button" class="btn btn-sm btn-primary" (click)="addToWishList(product, userId)">Add to Wishlist</button>
             </h6>
             <span class="fw-bold">{{product.quantity}} </span> In Stock
         </div>

@@ -68,7 +68,6 @@ public class ProductService {
     }
 
     public List<Cart> getCart(int id){
-        // System.out.println(cartRepository.getCart(id));
         return cartRepository.getCart(id);
     }
 
