@@ -57,8 +57,6 @@ public class WishListController {
     public ResponseEntity<WishList> deleteWishListItem(@PathVariable("product_id") int productId, HttpSession session) {
         User user = (User) session.getAttribute("user");
         int userId = user.getId();
-        System.out.println("User:");
-        System.out.println(user);
 
         Optional<WishList> optional = wishListService.findByUserAndProduct(userId, productId);
 
