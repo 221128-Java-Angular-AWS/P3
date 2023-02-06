@@ -3,6 +3,7 @@
     <form [formGroup]="loginForm">
       <img class="mb-4" src="../../../assets/images/DDLogin.png" alt="Digital Domain" width="50%" height="50%" routerLink="/login">
 
+      <div *ngIf="error" class="alert alert-danger p-1">Email or password was incorrect</div>
       <div class="form-floating">
         <input type="email" class="form-control" formControlName="email" id="floatingInput"
           placeholder="name@example.com">
