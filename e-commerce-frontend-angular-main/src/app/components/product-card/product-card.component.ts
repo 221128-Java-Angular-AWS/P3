@@ -51,4 +51,8 @@ export class ProductCardComponent implements OnInit{
     .subscribe(() => console.log('Product added to wishlist'));
   }
 
+  addToCart(product: Product, userId: number): void{
+    this.productService.addCart(userId, product.id, 1).subscribe(()=>{});
+  }
+
 }
