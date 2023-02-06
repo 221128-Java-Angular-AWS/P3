@@ -48,28 +48,28 @@ public class UserServiceTest {
     // set up the mocked user repository
     @BeforeAll
     public static void beforeAll() {
-        System.out.println("Starting tests...");
+        System.out.println("Starting UserService tests...");
     }
 
     @AfterAll
     public static void afterAll() {
-        System.out.println("Tests complete.");
+        System.out.println("UserService Tests complete.");
     }
 
     @Test
-    public void testFindByCredentialsCorrectCredentialsProvided() {
+    public void testFindByEmailCorrectCredentialsProvided() {
         sut = new UserService(mockUserRepository);
-        Mockito.when(mockUserRepository.findByEmailAndPassword(email, password)).thenReturn(Optional.of(mockUser));
-        Optional<User> user = sut.findByCredentials(email, password);
+        Mockito.when(mockUserRepository.findByEmail(email)).thenReturn(Optional.of(mockUser));
+        Optional<User> user = sut.getUser(email);
 
         Assertions.assertEquals(Optional.of(mockUser), user);
     }
 
     @Test
-    public void testFindByCredentialsIncorrectCredentialsProvided() {
+    public void testFindByEmailIncorrectCredentialsProvided() {
         sut = new UserService(mockUserRepository);
-        Mockito.when(mockUserRepository.findByEmailAndPassword(email, password)).thenReturn(Optional.empty());
-        Optional<User> user = sut.findByCredentials(email, password);
+        Mockito.when(mockUserRepository.findByEmail(email)).thenReturn(Optional.empty());
+        Optional<User> user = sut.getUser(email);
 
         Assertions.assertEquals(Optional.empty(), user);
     }

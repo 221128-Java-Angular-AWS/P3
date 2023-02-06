@@ -49,12 +49,12 @@ public class OrderServiceTest {
 
     @BeforeAll
     public static void beforeAll() {
-        System.out.println("Starting tests...");
+        System.out.println("Starting OrderService tests...");
     }
 
     @AfterAll
     public static void afterAll() {
-        System.out.println("Tests complete.");
+        System.out.println("OrderService Tests complete.");
     }
 
     @BeforeEach
