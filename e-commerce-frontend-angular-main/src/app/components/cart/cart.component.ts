@@ -18,33 +18,34 @@ export class CartComponent implements OnInit {
   totalPrice: number = 0;
   cartProducts: Product[] = [];
   subscription!: Subscription;
+  userId!: number;
 
   constructor(private productService: ProductService, private router: Router) { }
 
   ngOnInit(): void {
-    let id: number = Number(localStorage.getItem('user'));
-    this.productService.getCart2(id).subscribe((data: any)=>{
-      data.forEach(
-        (element: any)=> {
-          this.productService.getSingleCartProduct(element.productId).subscribe((data2: any) =>{
-            this.products.push({product: data2, quantity: element.quantity});
-            this.totalPrice += data2.price *element.quantity;
-          });
-        }
-      )
-    });
-    
+    this.productService.getUserId().subscribe((id)=> {
+      this.productService.getCart2(id).subscribe((data: any)=>{
+         data.forEach(
+          (element: any)=> {
+            this.productService.getSingleCartProduct(element.productId).subscribe((data2: any) =>{
+              this.products.push({product: data2, quantity: element.quantity});
+              this.totalPrice += data2.price *element.quantity;
+            });
+          }
+          )
+        }), this.userId = id;
+      }
+    );
   }
+
   delete(product_id: number): void{
-    console.log(product_id)
-    let userId = Number(localStorage.getItem('user'));
-    this.productService.removeCartItem(userId, product_id).subscribe(()=>{
+    this.productService.removeCartItem(this.userId, product_id).subscribe(()=>{
     });
     window.location.reload();
   }
+
   emptyCart(): void {
-    let id: number = Number(localStorage.getItem('user'));
-    this.productService.emptyCart(id).subscribe(()=>{});
+    this.productService.emptyCart(this.userId).subscribe(()=>{});
     this.router.navigate(['/home']);
   }
 

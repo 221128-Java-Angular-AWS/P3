@@ -12,6 +12,7 @@ import com.revature.services.UserService;
 import org.springframework.boot.context.config.UnsupportedConfigDataLocationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import javax.servlet.http.HttpSession;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -94,11 +95,13 @@ public class ProductController {
         return ResponseEntity.ok(optional.get());
     }
 
+    @Authorized
     @GetMapping("/cart")
     public List<Cart> getCart(@RequestParam int userId) {
         return productService.getCart(userId);
     }
 
+    @Authorized
     @PostMapping("/cart")
     public Cart addCart(@RequestParam int userId, @RequestParam int prodId, @RequestParam int quantity){
         boolean ispresent = productService.inCart(userId, prodId);
@@ -114,11 +117,13 @@ public class ProductController {
         return productService.addQuanToCart(cartId, quantity);
     }
 
+    @Authorized
     @DeleteMapping("/cart")
     public void clearCart(@RequestParam("userId") int userId){
         productService.clearCart(userId);
     }
 
+    @Authorized
     @GetMapping("/cart/{id}")
     public ResponseEntity<Product> getCartProductById(@PathVariable("id") int id) {
         Optional<Product> optional = productService.findById(id);
@@ -129,10 +134,20 @@ public class ProductController {
         return ResponseEntity.ok(optional.get());
     }
 
+    @Authorized
     @DeleteMapping("/cart/{id}")
     public void deleteCartProduct(@PathVariable("id") int userId, @RequestParam("prodId") int prodId){
         productService.deleteCartProduct(userId, prodId);
     }
+
+    @Authorized
+    @GetMapping("/cart/user")
+    public int getUserId(HttpSession session){
+        User loggedInUser = (User) session.getAttribute("user");
+        int userId = loggedInUser.getId();
+        return userId;
+    }
+
     @Authorized
     @GetMapping(value = "/genre")
     public ResponseEntity<List<Product>> getProductByGenre(@RequestParam String genre) {

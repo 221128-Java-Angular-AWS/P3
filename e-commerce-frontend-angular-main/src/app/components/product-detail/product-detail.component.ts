@@ -11,7 +11,7 @@ import { NgForm } from '@angular/forms';
 })
 export class ProductDetailComponent implements OnInit {
   product!: Product;
-
+  userId!: number;
 
   constructor(private productService: ProductService, private route: ActivatedRoute, private router: Router) { }
 
@@ -20,12 +20,14 @@ export class ProductDetailComponent implements OnInit {
     this.productService.getSingleProduct(productId).subscribe((product) => {
       this.product = product;
     });
+    this.productService.getUserId().subscribe((id)=> this.userId = id);
+    
   }
 
   addToCart(addForm: NgForm, product: Product): void {
+
     let quantity: number = Number(addForm.value.quantity)
-    let userId = Number(localStorage.getItem('user'));
-    this.productService.addCart(userId, product.id, quantity).subscribe((cart)=>{
+    this.productService.addCart(this.userId, product.id, quantity).subscribe((cart)=>{
       console.log(cart);
       this.router.navigate(['cart']);
     });

@@ -76,19 +76,23 @@ export class ProductService {
   }
 
   public getSingleCartProduct(id: number): Observable<Product> {
-    return this.http.get<Product>(environment.baseUrl+this.productUrl+"/cart"+"/"+id);
+    return this.http.get<Product>(environment.baseUrl+this.productUrl+"/cart"+"/"+id, {headers: environment.headers, withCredentials: environment.withCredentials});
   }
 
   public emptyCart(id: number){
     let queryParams = new HttpParams();
     queryParams = queryParams.append("userId", id);
     console.log('empty cart');
-    return this.http.delete<any>(environment.baseUrl + this.productUrl + "/cart", {params: queryParams})
+    return this.http.delete<any>(environment.baseUrl + this.productUrl + "/cart", {params: queryParams, headers: environment.headers, withCredentials: environment.withCredentials})
   }
 
   public removeCartItem(userId: number, productId: number){
     let queryParams = new HttpParams();
     queryParams = queryParams.append("prodId", productId);
-    return this.http.delete<any>(environment.baseUrl+this.productUrl+"/cart" + "/" + userId, {params: queryParams});
+    return this.http.delete<any>(environment.baseUrl+this.productUrl+"/cart" + "/" + userId, {params: queryParams, headers: environment.headers, withCredentials: environment.withCredentials});
+  }
+
+  public getUserId(){
+    return this.http.get<number>(environment.baseUrl+this.productUrl+"/cart" + "/user", {headers: environment.headers, withCredentials: environment.withCredentials});
   }
 }
