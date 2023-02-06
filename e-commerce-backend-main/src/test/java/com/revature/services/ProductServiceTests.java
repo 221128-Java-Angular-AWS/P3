@@ -13,6 +13,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Sort;
 
 import java.util.List;
 import java.util.Optional;
@@ -56,14 +57,16 @@ class ProductServiceTests {
     private Integer mockCId = -1;
     @Test
     void findAllTest() {
+
         sut = new ProductService(mockProductRepository, null);
-        Mockito.when(mockProductRepository.findAll()).thenReturn(mockProductList);
+        Mockito.when(mockProductRepository.findAll(Sort.by("id"))).thenReturn(mockProductList);
         Optional<List<Product>> products = Optional.of(sut.findAll());
         Assertions.assertEquals(Optional.of(mockProductList), products);
     }
 
     @Test
     void findByIdTest() {
+
         sut = new ProductService(mockProductRepository, null);
         Mockito.when(mockProductRepository.findById(id)).thenReturn(Optional.of(mockProduct));
         Optional<Product> product = sut.findById(id);
@@ -80,14 +83,16 @@ class ProductServiceTests {
 
     @Test
     void saveAllTest() {
+
         sut = new ProductService(mockProductRepository, null);
-        Mockito.when(mockProductRepository.saveAll(mockProductList)).thenReturn(mockProductList);
+    Mockito.when(mockProductRepository.saveAll(mockProductList)).thenReturn(mockProductList);
         Optional<List<Product>> products = Optional.of(sut.saveAll(mockProductList, mockProductInfoList));
         Assertions.assertEquals(Optional.of(mockProductList), products);
     }
 
     @Test
     void deleteTest() {
+
         sut = new ProductService(mockProductRepository, null);
         sut.delete(id);
         verify(mockProductRepository).deleteById(id);
@@ -152,6 +157,23 @@ class ProductServiceTests {
     void deleteCartProdTest(){
         sut = new ProductService(mockProductRepository, mockCartRepository);
         sut.deleteCartProduct(id, id);
-        verify(mockCartRepository).deleteCartProduct(id, id);;
+        verify(mockCartRepository).deleteCartProduct(id, id);
+    }
+    
+    void findByGenreTest() {
+        String genre = "test";
+        sut = new ProductService(mockProductRepository, null);
+        Mockito.when(mockProductRepository.findProductsByGenre(genre, id)).thenReturn(mockProductList);
+        Optional<List<Product>> genreProducts = Optional.of(sut.findByGenre(genre, id));
+        Assertions.assertEquals(Optional.of(mockProductList), genreProducts);
+    }
+
+    @Test
+    void findByNameTest() {
+        String name = "Headphones";
+        sut = new ProductService(mockProductRepository, null);
+        Mockito.when(mockProductRepository.findProductsByName(name)).thenReturn(mockProductList);
+        Optional<List<Product>> nameProducts = Optional.of(sut.findByName(name));
+        Assertions.assertEquals(Optional.of(mockProductList), nameProducts);
     }
 }

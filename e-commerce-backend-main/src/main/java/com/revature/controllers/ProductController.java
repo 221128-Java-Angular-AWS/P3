@@ -150,8 +150,13 @@ public class ProductController {
 
     @Authorized
     @GetMapping(value = "/genre")
-    public ResponseEntity<List<Product>> getProductByGenre(@RequestParam String genre) {
+    public ResponseEntity<List<Product>> getProductByGenre(@RequestParam String genre, Integer id) {
+        return ResponseEntity.ok(productService.findByGenre(genre, id));
+    }
 
-        return ResponseEntity.ok(productService.findByGenre(genre));
+    @Authorized
+    @GetMapping(value = "/search")
+    public ResponseEntity<List<Product>> getProductByName(@RequestParam String name) {
+        return ResponseEntity.ok(productService.findByName(name.toLowerCase()));
     }
 }

@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+//This class is used to store order info in a more convenient way for the front-end,
+// without having a join-table between the order and products.
+// Has methods to convert between OrderDto and Order
 public class OrderDto {
 
     private Integer orderId;
@@ -34,6 +37,7 @@ public class OrderDto {
         this.products = products;
     }
 
+    //Creates a new OrderDto by passing it an Order
     public OrderDto(Order order){
         this.orderId = order.getOrderId();
         this.dateOrdered = order.getDateOrdered();
@@ -76,6 +80,7 @@ public class OrderDto {
         this.products = products;
     }
 
+    //Converts the OrderDto into an Order
     public Order toOrder(){
         Order order = new Order();
         if(orderId != null) order.setOrderId(orderId);
