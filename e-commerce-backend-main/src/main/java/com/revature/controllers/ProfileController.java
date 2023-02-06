@@ -20,21 +20,16 @@ import java.util.Optional;
 public class ProfileController {
 
     private final UserService userService;
-    private final ReviewService reviewService;
-    private final OrderService orderService;
     // need a wishlist service as well
 
     @Autowired
     public ProfileController(UserService userService, ReviewService reviewService, OrderService orderService) {
         this.userService = userService;
-        this.reviewService = reviewService;
-        this.orderService = orderService;
     }
 
     @Authorized
     @GetMapping
     public ResponseEntity<User> getUserInfo(HttpSession session) {
-        // does this just work? Yes, yes it does
         User loggedInUser = (User) session.getAttribute("user");
         int userId = loggedInUser.getId();
         Optional<User> optional = userService.findById(userId);

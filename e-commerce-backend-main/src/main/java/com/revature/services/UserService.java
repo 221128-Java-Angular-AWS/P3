@@ -55,8 +55,7 @@ public class UserService {
         if (user.getLastName() == null) {
             user.setLastName(currentUser.getLastName());
         }
-        // TODO: remove password before return for security reasons or do below
-        return userRepository.save(user); // TODO: maybe change this so that password changes are their own entity
+        return userRepository.save(user);
     }
 
     public Optional<User> findById(int userId) {
