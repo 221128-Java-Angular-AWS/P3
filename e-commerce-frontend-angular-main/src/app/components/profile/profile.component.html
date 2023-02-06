@@ -52,22 +52,7 @@
 
                 <div id="wishlist-box">
                     <h5>Wishlist</h5>
-                    <div *ngFor="let product of products" class="row">
-                        <div class="col-12 mx-1 my-1 p-1 card">
-                          <div class="card-body justify-content-center">
-                            <figure class="figure mx-auto d-block">
-                                <a routerLink="/product/{{product.id}}"><img [src]="product.image" height="200px" width="100%" class="p-1 mx-auto d-block"></a>
-                                <figcaption class="figure-caption text-center">
-                                    <h6>{{product.name}}</h6>
-                                    {{product.price | currency}}
-                                    <br>
-                                    <span class="fw-bold">{{product.quantity}}</span> In Stock
-                                </figcaption>
-                                
-                            </figure>
-                        </div>
-                    </div>
-                 </div>
+                    <app-wishlist></app-wishlist>
                 </div>
 
             </div>

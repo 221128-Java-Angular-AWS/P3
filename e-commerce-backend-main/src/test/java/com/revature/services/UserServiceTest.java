@@ -17,24 +17,9 @@ import java.util.Optional;
 
 @ExtendWith(MockitoExtension.class)
 public class UserServiceTest {
-    /*
-    the 3 A's of unit testing:
-     - Arrange - set up the parameters for valid testing
-     - Act - perform the test
-     - Assert - verify the outcome of the action
 
-     @Test
-     @BeforeEach
-     @AfterEach
-     @AfterAll
-     @BeforeAll
-     */
-
-    // what is the system I am testing?
     public UserService sut;
 
-    // what needs to be mocked to test this system?
-    // access modifiers?
     @Mock
     private User mockUser;
 

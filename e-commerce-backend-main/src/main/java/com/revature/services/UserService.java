@@ -33,7 +33,7 @@ public class UserService {
     public User save(int userId, User user){
         user.setId(userId);
         User currentUser = this.findById(userId).get();
-        // TODO once changed to test if email is in use by another user redo unit test
+
         if (user.getEmail() != null) {
             Optional<User> emailCheck = userRepository.findByEmail(user.getEmail());
             if (emailCheck.isPresent()) {
