@@ -35,6 +35,12 @@ public class WishListController {
         return ResponseEntity.ok(wishListService.getWishList(userId));
     }
 
+    @PostMapping("/{user_id}/{product_id}")
+    @ResponseStatus(value = HttpStatus.CREATED)
+    public void addWishListItem(@PathVariable("user_id") int userID, @PathVariable("product_id") int productID) {
+        wishListService.addWishListItem(userID, productID);
+    }
+
 //    @Authorized
     @DeleteMapping("/{user_id}/{product_id}")
     public ResponseEntity<WishList> deleteWishListItem(@PathVariable("user_id") int userID, @PathVariable("product_id") int productID) {

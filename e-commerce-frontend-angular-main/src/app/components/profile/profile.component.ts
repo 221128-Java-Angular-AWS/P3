@@ -3,7 +3,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/models/user';
 import { ProfileService } from 'src/app/services/profile.service';
 import { OrdersService } from 'src/app/services/orders.service';
+import { WishListService } from 'src/app/services/wishList.service';
 import { Order } from 'src/app/models/order';
+import { Product } from 'src/app/models/product';
 
 @Component({
   selector: 'app-profile',
@@ -13,11 +15,13 @@ import { Order } from 'src/app/models/order';
 export class ProfileComponent implements OnInit {
   user?: User;
   editUser: boolean = false;
-  orders: Order[] = []
+  orders: Order[] = [];
+  products: Product[] = [];
 
   constructor(
     private profileService: ProfileService,
     private ordersService: OrdersService,
+    private wishListService: WishListService,
     private route: ActivatedRoute,
     private router: Router
 
@@ -25,7 +29,14 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.profileService.getUser().subscribe(
-      (resp) => this.user = resp,
+      (resp) => {
+        this.user = resp;
+        this.wishListService.getWishListProducts(resp.id!).subscribe(
+          (resp) => this.products = resp,
+          (err) => console.log(err),
+          () => console.log("WishList products retrieved")
+        );
+      },
       (err) => console.log(err),
       () => console.log("User retrieved")
     );

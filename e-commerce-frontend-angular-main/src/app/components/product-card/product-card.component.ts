@@ -3,6 +3,9 @@ import { Subscription } from 'rxjs';
 import { Product } from 'src/app/models/product';
 import { ProductService } from 'src/app/services/product.service';
 import { Router } from '@angular/router';
+import { WishListService } from 'src/app/services/wishList.service';
+import { User } from 'src/app/models/user';
+
 
 @Component({
   selector: 'app-product-card',
@@ -20,25 +23,32 @@ export class ProductCardComponent implements OnInit{
   totalPrice: number = 0;
 
   @Input() productInfo!: Product;
+  @Input() user!: User;
 
   constructor(
     private productService: ProductService,
+    private wishListService: WishListService,
     private router: Router) {
       //this allows the related items to change page
       this.router.routeReuseStrategy.shouldReuseRoute = function () {
         return false;
     }
   }
-  
-  
+
+
   ngOnInit(): void {
   }
 
-  
 
-  
+
+
   ngOnDestroy() {
     // this.subscription.unsubscribe();
+  }
+
+  addToWishList(product: Product, userId: Number): void {
+    this.wishListService.addToWishList(product.id, userId)
+    .subscribe(() => console.log('Product added to wishlist'));
   }
 
 }
