@@ -51,3 +51,4 @@ In review component!
 </ng-template>
 <div *ngIf="hasBeenReviewed">hasBeenReviewed</div>
 <ng-template id="ifAlreadyReviewed" [ngIf]="reviewed==true"><h2>Thanks for your feedback!</h2></ng-template>
+<button type="submit" (click)="checkReviewed()">CheckReviewed!</button>

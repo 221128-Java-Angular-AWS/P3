@@ -24,7 +24,6 @@ export class ReviewService {
     let temp =  this.httpClient.get<Review[]>(environment.baseUrl + "/review/" + orderId, {headers: environment.headers, withCredentials: environment.withCredentials}).pipe(
       catchError(this.handleError<Review[]>('getReview'))
     )
-    console.log(temp + "Will return this");
     return temp;
   }
   postReview(review: Review): Observable<any> {
@@ -33,10 +32,12 @@ export class ReviewService {
     return this.httpClient.post(environment.baseUrl +"/review/add", review, {headers: environment.headers, withCredentials: environment.withCredentials}).pipe(catchError(this.handleError<Review>('postReview'))
     );
   }
-
+/*
   getAverageReview(product: Product): Observable<number> {
-    let num = this.httpClient.get<number>(environment.baseUrl + "/review/avg" +)
+    let num = this.httpClient.get<number>(environment.baseUrl + "/review/avg/" + product.id, {headers: en})
   }
+
+  */
 
   ping(): Observable<string> {
     console.log("Attempting to ping!")

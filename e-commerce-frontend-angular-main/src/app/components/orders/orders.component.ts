@@ -4,6 +4,8 @@ import { Order } from 'src/app/models/order';
 import { OrderProduct } from 'src/app/models/order-product';
 import { OrdersService } from 'src/app/services/orders.service';
 import { ReviewComponent } from '../review/review.component';
+import { ReviewService } from 'src/app/services/review.service';
+import { Review } from 'src/app/models/review.model';
 import { Product } from 'src/app/models/product';
 
 @Component({
@@ -13,9 +15,8 @@ import { Product } from 'src/app/models/product';
 })
 export class OrdersComponent implements OnInit {
   orders: Order[] = [];
-  
 
-  constructor(private ordersService: OrdersService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private ordersService: OrdersService, private reviewService: ReviewService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     
@@ -44,7 +45,24 @@ export class OrdersComponent implements OnInit {
     this.router.navigate([`/review/${product.id}`])
   }
 
-  
-
+  checkReviewed(product: Product): boolean{
+    let booleanReview = false;
+    let reviewedList = null;
+    console.log(product?.id);
+    if(product){
+      //console.log("product: "+this.product.id);
+      this.reviewService.getReview(product?.id).subscribe((hasBeenReviewed: Review[]) => {
+        reviewedList = hasBeenReviewed;
+        console.log("Response happens now, hasBeenReviewed Object");
+        console.log(JSON.stringify(reviewedList));
+        if(reviewedList) booleanReview = true;
+      })
+    }
+    return booleanReview;
+    //if(this.hasBeenReviewed === undefined) console.log("Something is very broken")
+    //else {console.log("OO: nelly! " + this.hasBeenReviewed[0].rating);}
+    //console.log(booleanReview + "boolean");
+    //return booleanReview;
+  }
 
 }

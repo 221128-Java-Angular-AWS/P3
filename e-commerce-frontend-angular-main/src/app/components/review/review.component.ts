@@ -17,13 +17,14 @@ export class ReviewComponent implements OnInit {
   review?: Review;
   userInput: string = '';
   submitted: boolean = false;
-  reviewed: boolean = false;
+  reviewed?: boolean | undefined;
   output?: string;
   ping?: string;
   user?: User;
   product?: Product;
   hasBeenReviewed?: Review[];
   custom: string = "This is output";
+  //booleanReviewed?: boolean;
   //@Output() reviewedChanged: EventEmitter<boolean> = new EventEmitter();
   //@Input() user?: User;
   //@Input() product?: Product;
@@ -35,7 +36,9 @@ export class ReviewComponent implements OnInit {
     this.productService.getSingleProduct(id).subscribe((product) => {
       this.product = product;
     });
-    this.reviewed = this.checkReviewed();
+    this.checkReviewed().then(result => this.reviewed = result);
+    console.log(this.reviewed)
+    //console.log(this.booleanReviewed);
   }
 
   assignReview(n: number): void {
@@ -53,23 +56,50 @@ export class ReviewComponent implements OnInit {
         this.review = review;
       })
       //this.reviewedChanged.emit(this.reviewed);
+      this.checkReviewed();
     }
   }
 
-  checkReviewed():boolean {
+  async checkReviewed(){
     let booleanReview = false;
     console.log(this.product?.id);
     if(this.product){
       //console.log("product: "+this.product.id);
-      this.reviewService.getReview(this.product?.id).subscribe((hasBeenReviewed) => {
+      await this.reviewService.getReview(this.product?.id).subscribe((hasBeenReviewed: Review[]) => {
         this.hasBeenReviewed = hasBeenReviewed;
+        console.log("Response happens now, hasBeenReviewed Object");
+        console.log(JSON.stringify(this.hasBeenReviewed));
+        if(this.hasBeenReviewed) {
+          booleanReview = true;
+          console.log("If has been reviewed true" + booleanReview);}
+        return booleanReview;
       })
-      if(this.hasBeenReviewed) booleanReview = true;
-    }
-    if(this.hasBeenReviewed === undefined) console.log("Something is very broken")
-    else {console.log("OO: nelly! " + this.hasBeenReviewed[0].rating);}
-    
-    console.log(booleanReview + "boolean");
-    return booleanReview;
+    } 
+    return false
+    //console.log(booleanReview)
+    //return Promise.resolve(booleanReview);
+    //if(this.hasBeenReviewed === undefined) console.log("Something is very broken")
+    //else {console.log("OO: nelly! " + this.hasBeenReviewed[0].rating);}
+    //console.log(booleanReview + "boolean");
+    //return booleanReview;
   }
+  /*
+  asyncgetBoolRev() {
+    let booleanReview = false;
+    console.log(this.product?.id);
+    if(this.product){
+      //console.log("product: "+this.product.id);
+      await this.reviewService.getReview(this.product?.id).subscribe((hasBeenReviewed: Review[]) => {
+        this.hasBeenReviewed = hasBeenReviewed;
+        console.log("Response happens now, hasBeenReviewed Object");
+        console.log(JSON.stringify(this.hasBeenReviewed));
+        if(this.hasBeenReviewed) {
+          //this.booleanReviewed = true;
+          console.log(booleanReview);}
+        return booleanReview;
+      })
+    } 
+  }
+  */
+
 }
