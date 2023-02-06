@@ -2,6 +2,7 @@ package com.revature.controllers;
 
 import com.revature.annotations.Authorized;
 import com.revature.dtos.OrderDto;
+import com.revature.models.Product;
 import com.revature.models.Review;
 import com.revature.models.User;
 import com.revature.services.ProductService;
@@ -36,9 +37,11 @@ public class ReviewController {
         this.productService = productService;
     }
 
-    @Authorized
+    /*@Authorized
     @GetMapping
     public ResponseEntity<List<Review>> getReviews() { return ResponseEntity.ok(reviewService.getAll());}
+
+     */
 
 
     @PostMapping(value = "/add")
@@ -47,6 +50,13 @@ public class ReviewController {
         System.out.println("In Controller!:"+ session.getAttribute("user"));
         review.setUser((User)session.getAttribute("user"));
         return ResponseEntity.ok(reviewService.saveReview(review));
+    }
+
+    @GetMapping(value = "/{productId}")
+    @Authorized
+    public Review hasReviewed(HttpSession session, @PathVariable("productId") int productId) {
+        Integer userId = ((User)session.getAttribute("user")).getId();
+        return reviewService.getReview(userId, productId);
     }
 
     @GetMapping(value = "/ping")

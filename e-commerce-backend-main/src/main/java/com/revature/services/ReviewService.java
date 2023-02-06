@@ -1,5 +1,6 @@
 package com.revature.services;
 
+import com.revature.exceptions.NotReviewedException;
 import com.revature.models.Review;
 import com.revature.repositories.ReviewRepository;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,14 @@ public class ReviewService {
     public Review saveReview(Review review) {
         System.out.println("In save Review");
         return reviewRepository.save(review);
+    }
+
+    public Review getReview(Integer userId, Integer productId){
+        Review review = reviewRepository.findByUserIdAndProductId(userId, productId);
+        if(review == null) throw new NotReviewedException("Product hasn't been reviewed by customer, yet!");
+        else {
+            return review;
+        }
     }
 
 
