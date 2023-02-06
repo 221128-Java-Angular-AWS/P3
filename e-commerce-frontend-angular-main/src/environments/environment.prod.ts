@@ -5,6 +5,8 @@ export const environment = {
   headers: {
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': '*',
-    'Set-Cookie': 'SameSite=None; Secure;'
+    'Sec-Fetch-Dest': 'empty',
+    'Sec-Fetch-Mode': 'cors',
+    'Sec-Fetch-Site': 'cross-site',
   }
 };
