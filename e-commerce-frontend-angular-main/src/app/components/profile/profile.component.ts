@@ -6,6 +6,7 @@ import { OrdersService } from 'src/app/services/orders.service';
 import { WishListService } from 'src/app/services/wishList.service';
 import { Order } from 'src/app/models/order';
 import { Product } from 'src/app/models/product';
+import * as bcrypt from 'bcryptjs';
 
 @Component({
   selector: 'app-profile',
@@ -65,7 +66,9 @@ export class ProfileComponent implements OnInit {
     updateUser.firstName = firstName;
     updateUser.lastName = lastName;
     // add more security to password change
-    updateUser.password = password;
+    if (password != undefined) {
+      updateUser.password = bcrypt.hashSync(password, 10);
+    }
 
     this.profileService.postUser(updateUser).subscribe(
       (resp) => {
