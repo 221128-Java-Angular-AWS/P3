@@ -23,7 +23,7 @@ public class AuthController {
         this.authService = authService;
     }
 
-    @PutMapping("/login")
+    @PostMapping("/login")
     public ResponseEntity<User> login(@RequestBody LoginRequest loginRequest, HttpSession session) {
         Optional<User> optional = authService.findByCredentials(loginRequest.getEmail(), loginRequest.getPassword());
 
