@@ -17,7 +17,7 @@ export class AuthService {
     const payload = {email:email, password:password};
     console.log(payload);
     console.log(document.cookie);
-    return this.http.post<any>(`${this.authUrl}/login`, JSON.stringify(payload), {headers: environment.headers, withCredentials: environment.withCredentials});
+    return this.http.put<any>(`${this.authUrl}/login`, JSON.stringify(payload), {headers: environment.headers, withCredentials: environment.withCredentials});
   }
 
   logout(): void{
