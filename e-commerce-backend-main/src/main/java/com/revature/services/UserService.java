@@ -43,16 +43,16 @@ public class UserService {
             }
         }
         // ensure the request is not nulling fields
-        if (user.getEmail() == null) {
+        if (user.getEmail() == null || user.getEmail().equals("")) {
             user.setEmail(currentUser.getEmail());
         }
-        if (user.getPassword() == null || user.getPassword() == "") {
+        if (user.getPassword() == null || user.getPassword().equals("")) {
             user.setPassword(currentUser.getPassword());
         }
-        if (user.getFirstName() == null) {
+        if (user.getFirstName() == null || user.getFirstName().equals("")) {
             user.setFirstName(currentUser.getFirstName());
         }
-        if (user.getLastName() == null) {
+        if (user.getLastName() == null || user.getLastName().equals("")) {
             user.setLastName(currentUser.getLastName());
         }
         return userRepository.save(user);
