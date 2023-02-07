@@ -15,6 +15,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.domain.Sort;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,22 +40,8 @@ class ProductServiceTests {
     @Mock
     CartRepository mockCartRepository;
 
-    @Mock
-    private List<Cart> mockCartList;
-
-    @Mock
-    private Cart mockCart;
-
-    @Mock
-    private CartDto mockCartDto;
-
     private final Integer id = 1;
 
-    private Boolean mockB = false;
-
-    private final Integer quantity = 2;
-
-    private Integer mockCId = -1;
     @Test
     void findAllTest() {
 
@@ -99,67 +86,71 @@ class ProductServiceTests {
     }
 
     @Test
-    void getCartTest(){
+    void getCartTest(@Mock CartRepository mockCartRepository, @Mock ProductRepository mockProductRepository){
         sut = new ProductService(mockProductRepository, mockCartRepository);
-        sut.getCart(id);
-        Mockito.when(mockCartRepository.getCart(id)).thenReturn(mockCartList);
+        List<Cart> cartList = new LinkedList<Cart>();
+        Cart cart = new Cart(id, new User(id), new Product (id), 4);
+        cartList.add(cart);
+        Mockito.when(mockCartRepository.getCart(id)).thenReturn(cartList);
         List<Cart> carts = sut.getCart(id);
-        Assertions.assertEquals(carts, mockCartList);
+        Assertions.assertEquals(cartList, carts);
     }
 
     @Test
-    void addCartTest(){
+    void addCartTest(@Mock CartRepository mockCartRepository, @Mock ProductRepository mockProductRepository){
+        Cart cart = new Cart(id, new User(id), new Product (id), 4);
         sut = new ProductService(mockProductRepository, mockCartRepository);
-        Mockito.when(mockCartRepository.save(mockCart)).thenReturn(mockCart);
-        Cart c = sut.addCart(mockCart);
-        Assertions.assertEquals(mockCart, c);
+        Mockito.when(mockCartRepository.save(cart)).thenReturn(cart);
+        Optional <Cart> c = Optional.of(sut.addCart(cart));
+        Assertions.assertEquals(Optional.of(cart), c);
     }
 
     @Test
-    void clearCartTest(){
+    void clearCartTest(@Mock CartRepository mockCartRepository, @Mock ProductRepository mockProductRepository){
         sut = new ProductService(mockProductRepository, mockCartRepository);
         sut.clearCart(id);
         verify(mockCartRepository).clearCart(id);
     }
 
     @Test
-    void inCartTest(){
+    void inCartTest(@Mock CartRepository mockCartRepository, @Mock ProductRepository mockProductRepository){
         sut = new ProductService(mockProductRepository, mockCartRepository);
-        mockCartRepository.findAll().forEach( element ->{
-            if(element.getUser().getId() == id && element.getProduct().getId() == id){
-                mockB = true;
-            }
-        });
+        List<Cart> cartList = new LinkedList<Cart>();
+        Cart cart = new Cart(id, new User(id), new Product (id), 4);
+        cartList.add(cart);
+        Mockito.when(mockCartRepository.findAll()).thenReturn(cartList);
         boolean b = sut.inCart(id, id);
-        Assertions.assertEquals(mockB, b);
+        Assertions.assertEquals(true, b);
     }
 
     @Test
-    void findCartTest(){
-        mockCartRepository.findAll().forEach(element ->{
-            if(element.getUser().getId() == id && element.getProduct().getId() == id){
-                mockCId = element.getId();
-            }
-        });
+    void findCartTest(@Mock CartRepository mockCartRepository, @Mock ProductRepository mockProductRepository){
         sut = new ProductService(mockProductRepository, mockCartRepository);
+        List<Cart> cartList = new LinkedList<Cart>();
+        Cart cart = new Cart(id, new User(id), new Product (id), 4);
+        cartList.add(cart);
+        Mockito.when(mockCartRepository.findAll()).thenReturn(cartList);
         int cId = sut.findCart(id, id);
-        Assertions.assertEquals(mockCId, cId);
+        Assertions.assertEquals(1, cId);
     }
 
     @Test
-    void addQuanCartTest(){
-        Cart mockCart = new Cart(1, new User(1), new Product (1), 4);
-        mockCart.setQuantity(mockCart.getQuantity() + quantity);
-        Assertions.assertEquals(6, mockCart.getQuantity());
+    void addQuanCartTest(@Mock CartRepository mockCartRepository, @Mock ProductRepository mockProductRepository){
+        Cart cart = new Cart(1, new User(1), new Product (1), 4);
+        Mockito.when(mockCartRepository.findById(id)).thenReturn(Optional.of(cart));
+        sut = new ProductService(mockProductRepository, mockCartRepository);
+        int quan = 2;
+        sut.addQuanToCart(id, quan);
+        Assertions.assertEquals(6, cart.getQuantity());
     }
 
     @Test
-    void deleteCartProdTest(){
+    void deleteCartProdTest(@Mock CartRepository mockCartRepository, @Mock ProductRepository mockProductRepository){
         sut = new ProductService(mockProductRepository, mockCartRepository);
         sut.deleteCartProduct(id, id);
         verify(mockCartRepository).deleteCartProduct(id, id);
     }
-    
+
     void findByGenreTest() {
         String genre = "test";
         sut = new ProductService(mockProductRepository, null);
