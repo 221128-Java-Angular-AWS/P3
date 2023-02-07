@@ -6,38 +6,12 @@ import { environment } from 'src/environments/environment';
 import { CartComponent } from '../components/cart/cart.component';
 import { EMPTY } from 'rxjs';
 
-interface Cart {
-  cartCount: number;
-  products: {
-    product: Product,
-    quantity: number
-  }[];
-  totalPrice: number;
-}
-
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
 
   private productUrl: string = "/api/product";
-
-
-  private _cart = new BehaviorSubject<Cart>({
-    cartCount: 0,
-    products: [],
-    totalPrice: 0.00
-  });
-
-  private _cart$ = this._cart.asObservable();
-
-  getCart(): Observable<Cart> {
-    return this._cart$;
-  }
-
-  setCart(latestValue: Cart) {
-    return this._cart.next(latestValue);
-  }
 
   constructor(private http: HttpClient) { }
 
