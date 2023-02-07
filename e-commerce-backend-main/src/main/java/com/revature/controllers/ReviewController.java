@@ -71,9 +71,13 @@ public class ReviewController {
     }
 
     @GetMapping(value = "/avg/{productId}")
-    @Authorized
+    //@Authorized
     public Double avgReview(HttpSession session, @PathVariable("productId") int productId) {
+        System.out.println("10000000000000000000000000000000000000000000");
         Double temp = Math.floor(reviewService.getAverage(productId)*10)/10;
+        if( temp == null) temp = 0.0;
+        System.out.println("3");
+        System.out.println(temp+"oo");
         return temp;
     }
 

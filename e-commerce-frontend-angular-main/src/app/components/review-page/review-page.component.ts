@@ -12,6 +12,8 @@ import { Location } from '@angular/common';
 })
 export class ReviewPageComponent implements OnInit {
   product?: Product;
+  rating?: number;
+  reviewInt?: number;
   constructor(private route: ActivatedRoute, private reviewService: ReviewService, private location: Location, private productService: ProductService) { }
 
   ngOnInit(): void {
@@ -27,5 +29,17 @@ export class ReviewPageComponent implements OnInit {
     this.location.back();
   }
   
+  test() {
+    let productId=5;
+    this.reviewService.getAverage(productId).subscribe((rating) => {
+      this.rating = rating;
+      console.log("rating=" + rating);
+      console.log("Oo")
+    })
+}
+
+assignReview(n: number): void {
+  this.reviewInt = n;
+}
 
 }

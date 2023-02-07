@@ -18,7 +18,14 @@ public class ReviewService {
     public List<Review> getAll() {  return reviewRepository.findAll();}
 
     public Double getAverage(Integer productId) {
-        return reviewRepository.getAvg(productId);
+        System.out.println("2000000000000");
+        Double review = reviewRepository.getAvg(productId);
+        if(review == null) {
+            return 0.0;
+            //throw new NotReviewedException("Product hasn't been reviewed yet!");
+        } else {
+            return review;
+        }
     }
 
     public Review saveReview(Review review) {

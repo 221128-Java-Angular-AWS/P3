@@ -38,11 +38,13 @@ export class ReviewService {
   }
 
   */
-/*
+
   getAverage(productId: number): Observable<any> {
-    return this.httpClient.get(environment.baseUrl + "/avg/" + productId, {headers: environment.headers, withCredentials: environment.withCredentials}).pipe(catchError(this.handleError<Review>('getAverage'))
+    console.log("In git avergge")
+    let num =this.httpClient.get<number>(environment.baseUrl + "/review/avg/" + productId, {headers: environment.headers, withCredentials: environment.withCredentials}).pipe(catchError(this.handleError<number>('getAverage')));
+    console.log(num);
+    return num;
   }
-  */
 
   ping(): Observable<string> {
     console.log("Attempting to ping!")

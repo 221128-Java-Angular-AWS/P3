@@ -3,6 +3,7 @@ import { Product } from 'src/app/models/product';
 import { ProductService } from 'src/app/services/product.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import { ReviewService } from 'src/app/services/review.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -12,8 +13,9 @@ import { NgForm } from '@angular/forms';
 export class ProductDetailComponent implements OnInit {
   product!: Product;
   userId!: number;
+  rating!: number;
 
-  constructor(private productService: ProductService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private productService: ProductService, private route: ActivatedRoute, private router: Router, private reviewService: ReviewService) { }
 
   ngOnInit(): void {
     const productId = Number(this.route.snapshot.paramMap.get('id'));
@@ -21,7 +23,11 @@ export class ProductDetailComponent implements OnInit {
       this.product = product;
     });
     this.productService.getUserId().subscribe((id)=> this.userId = id);
-    
+    this.reviewService.getAverage(productId).subscribe((rating) => {
+      this.rating = rating;
+      console.log("rating=" + rating);
+      console.log("Oo")
+    })
   }
 
   addToCart(addForm: NgForm, product: Product): void {
@@ -32,4 +38,9 @@ export class ProductDetailComponent implements OnInit {
       this.router.navigate(['cart']);
     });
   }
+
+
+
+
+  
 }
