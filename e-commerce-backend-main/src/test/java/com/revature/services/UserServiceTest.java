@@ -1,5 +1,6 @@
 package com.revature.services;
 
+import com.revature.exceptions.EmailTakenException;
 import com.revature.models.User;
 import com.revature.repositories.UserRepository;
 import org.junit.jupiter.api.AfterAll;
@@ -16,26 +17,14 @@ import java.util.Optional;
 
 @ExtendWith(MockitoExtension.class)
 public class UserServiceTest {
-    /*
-    the 3 A's of unit testing:
-     - Arrange - set up the parameters for valid testing
-     - Act - perform the test
-     - Assert - verify the outcome of the action
 
-     @Test
-     @BeforeEach
-     @AfterEach
-     @AfterAll
-     @BeforeAll
-     */
-
-    // what is the system I am testing?
     public UserService sut;
 
-    // what needs to be mocked to test this system?
-    // access modifiers?
     @Mock
     private User mockUser;
+
+    @Mock
+    private User mockUserByEmail = new User(55,"email", "password", "firstname", "lastname");
 
     // Strings are final and cannot be mocked
     private String email = "mock@email.com";
@@ -93,7 +82,24 @@ public class UserServiceTest {
 
         User user = sut.save(1, mockUser);
 
-        Assertions.assertEquals(mockUser, user, "testSaveUserIntAndUserObjectOverride complete");
+        Assertions.assertEquals(mockUser, user);
+    }
+
+    @Test
+    public void testSaveUserIntAndUserObjectOverrideException() {
+        sut = new UserService(mockUserRepository);
+        Mockito.when(mockUser.getEmail()).thenReturn("mockEmail");
+        Mockito.when(mockUserByEmail.getId()).thenReturn(2);
+        Mockito.when(mockUserRepository.findByEmail(mockUser.getEmail())).thenReturn(Optional.of(mockUserByEmail));
+
+        System.out.println(mockUserByEmail.getId());
+        System.out.println(mockUser.getId());
+        Mockito.when(sut.findById(1)).thenReturn(Optional.of(mockUser));
+
+        Assertions.assertThrows(
+                EmailTakenException.class,
+                () -> sut.save(1, mockUser)
+        );
     }
 
     @Test
