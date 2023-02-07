@@ -56,8 +56,6 @@ export class CheckoutComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.ordersService.ping().subscribe(((ping)=> {this.ping = ping}));
-    console.log(this.ping);
     this.products.forEach(
       (element) => {
         const id = element.product.id;

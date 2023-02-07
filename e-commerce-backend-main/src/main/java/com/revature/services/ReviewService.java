@@ -32,7 +32,7 @@ public class ReviewService {
 
     public List<Review> getReview(Integer userId, Integer productId){
         List<Review> review = reviewRepository.findByUserIdAndProductId(userId, productId);
-        //System.out.println("In service method of getReview(): " + review.getReviewId());
+
         if(review == null) throw new NotReviewedException("Product hasn't been reviewed by customer, yet!");
         else {
             return review;

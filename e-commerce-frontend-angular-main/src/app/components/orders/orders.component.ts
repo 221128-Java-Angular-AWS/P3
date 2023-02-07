@@ -59,10 +59,6 @@ export class OrdersComponent implements OnInit {
       })
     }
     return booleanReview;
-    //if(this.hasBeenReviewed === undefined) console.log("Something is very broken")
-    //else {console.log("OO: nelly! " + this.hasBeenReviewed[0].rating);}
-    //console.log(booleanReview + "boolean");
-    //return booleanReview;
   }
 
 }
