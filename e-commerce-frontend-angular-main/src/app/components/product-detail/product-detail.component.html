@@ -15,11 +15,14 @@
 
         <div class="col-md-8 p-5">
             <h2>{{product.name}}</h2>
-            <h6>Rating: &#9733;&#9733;&#9733;&#9733;&#9734;
-                <button type="button" class="btn btn-sm btn-warning mx-1">Leave a Review</button>
-                <button type="button" class="btn btn-sm btn-primary" *ngIf="!wishListed" (click)="addToWishList(product)">Add to Wishlist</button>
+            <h6>Rating: {{rating}}&#9733;
+                <button type="button" class="btn btn-sm btn-warning mx-1" (click)="goToAllReviews()">See
+                    Reviews</button>
+                <button type="button" class="btn btn-sm btn-primary" *ngIf="!wishListed"
+                    (click)="addToWishList(product)">Add to Wishlist</button>
                 <button type="button" class="btn btn-sm btn-primary" *ngIf="wishListed">Added to Wishlist!</button>
-                <button type="button" class="btn btn-sm btn-danger mx-1" *ngIf="wishListed" (click)="removeFromWishList(product)">Remove from Wishlist</button>
+                <button type="button" class="btn btn-sm btn-danger mx-1" *ngIf="wishListed"
+                    (click)="removeFromWishList(product)">Remove from Wishlist</button>
             </h6>
             <span class="fw-bold">{{product.quantity}} </span> In Stock
         </div>

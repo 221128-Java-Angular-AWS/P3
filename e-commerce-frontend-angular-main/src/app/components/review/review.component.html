@@ -1,0 +1,44 @@
+<ng-template id="ifNotReviewed" [ngIf]="reviewed==false">
+
+<br>
+<br>
+<ng-template id="rating-component" [ngIf]="submitted==false">
+<div class="rate">
+    <input type="radio" id="star5" name="rate" value="5" (click)="assignReview(5)"/>
+    <label for="star5" title="text">5 stars</label>
+    <input type="radio" id="star4" name="rate" value="4" (click)="assignReview(4)"/>
+    <label for="star4" title="text">4 stars</label>
+    <input type="radio" id="star3" name="rate" value="3" (click)="assignReview(3)"/>
+    <label for="star3" title="text">3 stars</label>
+    <input type="radio" id="star2" name="rate" value="2" (click)="assignReview(2)" />
+    <label for="star2" title="text">2 stars</label>
+    <input type="radio" id="star1" name="rate" value="1" (click)="assignReview(1)" />
+    <label for="star1" title="text">1 star</label>
+  </div>
+  <div class="assign review">{{reviewInt}}</div>
+  <br>
+  <br>
+  <div class="new-input">
+    <div id="label-input">
+    <label for="written-input">Add a written review:</label>
+    </div>
+    <textarea class="written-input" cols="70" rows="10" [(ngModel)]="userInput"></textarea>
+  </div>
+
+
+  <button type="submit" (click)="onSubmit()">Submit</button>
+  <br>
+  <br>
+</ng-template>
+
+<ng-template [ngIf]="submitted==true">
+    <div class="Thanks">
+        <h3>Thank you!</h3>
+    </div>
+</ng-template>
+</ng-template>
+
+<!--<button type="submit" (click)="checkReviewed()">CheckReviewed!</button>-->
+
+<ng-template id="ifAlreadyReviewed" [ngIf]="reviewed==true"><h2>Thanks for your feedback!</h2></ng-template>
+<!--<button type="submit" (click)="checkReviewed()">CheckReviewed!</button>-->
