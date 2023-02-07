@@ -46,4 +46,10 @@ export class ProductDetailComponent implements OnInit {
     this.wishListService.addToWishList(product.id)
     .subscribe();
   }
+
+  removeFromWishList(product: Product): void {
+    this.wishListed = false;
+    this.wishListService.removeFromWishList(product.id)
+    .subscribe();
+  }
 }
