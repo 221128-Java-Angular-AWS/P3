@@ -39,8 +39,8 @@ export class ProductDetailComponent implements OnInit {
     });
   }
 
-
-
-
+  goToAllReviews() {
+  this.router.navigate([`reviews/${this.product.id}`])
+  }
   
 }

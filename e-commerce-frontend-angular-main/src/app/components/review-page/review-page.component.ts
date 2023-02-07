@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from 'src/app/models/product';
 import { ProductService } from 'src/app/services/product.service';
+import { Review } from 'src/app/models/review.model';
 import { ReviewService } from 'src/app/services/review.service';
 import { Location } from '@angular/common';
 
@@ -11,9 +12,10 @@ import { Location } from '@angular/common';
   styleUrls: ['./review-page.component.css']
 })
 export class ReviewPageComponent implements OnInit {
-  product?: Product;
+  product!: Product;
   rating?: number;
   reviewInt?: number;
+  reviews?: Review[];
   constructor(private route: ActivatedRoute, private reviewService: ReviewService, private location: Location, private productService: ProductService) { }
 
   ngOnInit(): void {
@@ -41,5 +43,11 @@ export class ReviewPageComponent implements OnInit {
 assignReview(n: number): void {
   this.reviewInt = n;
 }
+/*
+getAllReviews(): void {
+  this.reviewService.getReviews(this.product.id).subscribe((reviews) => {
+    this.reviews = reviews;
+  })
+}*/
 
 }

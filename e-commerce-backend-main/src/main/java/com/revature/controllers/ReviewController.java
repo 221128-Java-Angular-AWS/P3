@@ -22,6 +22,7 @@ import com.revature.annotations.Authorized;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/review")
@@ -68,6 +69,14 @@ public class ReviewController {
     public String ping(HttpSession session) {
         System.out.println("poncceita");
         return "Ponnc";
+    }
+
+    @GetMapping(value = "/all/{productId}")
+    public ResponseEntity<List<Review>> getAllReviews(HttpSession session, @PathVariable("productId") int productId) {
+        System.out.println("Leeroyyyyyy Jennnnnnnnnkinssssssss");
+        List<Review> temporary = reviewService.getAll(productId);
+        temporary.forEach(x -> System.out.println("Review =" + "is " + x.getReviewId()));
+        return ResponseEntity.ok(temporary);
     }
 
     @GetMapping(value = "/avg/{productId}")

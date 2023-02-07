@@ -15,7 +15,7 @@ public class ReviewService {
     private final ReviewRepository reviewRepository;
 
     public ReviewService(ReviewRepository reviewRepository) { this.reviewRepository = reviewRepository;}
-    public List<Review> getAll() {  return reviewRepository.findAll();}
+    public List<Review> getAll(Integer productId) {  return reviewRepository.getAll(productId);}
 
     public Double getAverage(Integer productId) {
         System.out.println("2000000000000");

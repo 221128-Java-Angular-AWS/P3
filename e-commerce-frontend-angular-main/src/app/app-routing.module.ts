@@ -10,6 +10,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 import { ReviewPageComponent } from './components/review-page/review-page.component';
 import { RouterModule, Routes } from '@angular/router';
+import { AllReviewsComponent } from './components/all-reviews/all-reviews.component';
 
 const routes: Routes = [
   { path: "", redirectTo: "/login", pathMatch: "full" },
@@ -22,7 +23,8 @@ const routes: Routes = [
   { path: "orders/:id", component: OrderDetailsComponent },
   { path: "profile", component: ProfileComponent},
   { path: "product/:id", component: ProductDetailComponent },
-  { path: "review/:id", component: ReviewPageComponent}
+  { path: "review/:id", component: ReviewPageComponent},
+  { path: "reviews/:id", component: AllReviewsComponent}
 ];
 
 @NgModule({

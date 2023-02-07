@@ -46,6 +46,12 @@ export class ReviewService {
     return num;
   }
 
+  getReviews(productId: number): Observable<any> {
+    alert("Int get revis");
+    let reviews = this.httpClient.get<Review[]>(environment.baseUrl + "/review/all/" + productId, {headers: environment.headers, withCredentials: environment.withCredentials}).pipe(catchError(this.handleError<number>('getReviews')));
+    return reviews;
+  }
+
   ping(): Observable<string> {
     console.log("Attempting to ping!")
     return this.httpClient.get<string>("http://localhost:8080"+"/review/ping").pipe(
