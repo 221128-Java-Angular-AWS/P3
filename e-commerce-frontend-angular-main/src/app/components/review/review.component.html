@@ -1,5 +1,6 @@
 <ng-template id="ifNotReviewed" [ngIf]="reviewed==false">
-</ng-template>
+  {{reviewed}}
+
 <br>
 <br>
 <ng-template id="rating-component" [ngIf]="submitted==false">
@@ -45,7 +46,7 @@
         <h3>Thank you!</h3>
     </div>
 </ng-template>
-
+</ng-template>
 
 <button type="submit" (click)="checkReviewed()">CheckReviewed!</button>
 

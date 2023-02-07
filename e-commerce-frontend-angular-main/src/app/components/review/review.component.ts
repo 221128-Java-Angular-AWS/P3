@@ -1,11 +1,14 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 import { Product } from 'src/app/models/product';
 import { Review } from 'src/app/models/review.model';
 import { User } from 'src/app/models/user';
 import { ProductService } from 'src/app/services/product.service';
+import { ProfileService } from 'src/app/services/profile.service';
 import { ReviewService } from 'src/app/services/review.service';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-review',
@@ -29,13 +32,26 @@ export class ReviewComponent implements OnInit {
   //@Input() user?: User;
   //@Input() product?: Product;
 
-  constructor(private route: ActivatedRoute, private productService: ProductService, private reviewService: ReviewService) { }
+  constructor(private route: ActivatedRoute, private productService: ProductService, private reviewService: ReviewService, private profileService: ProfileService) { }
 
   ngOnInit(): void {
     //this.onInit().then(response => console.log("1) Response for ngOnInit: " + response));
-    this.onInit().then(response => console.log(response));
+    this.profileService.getUser().subscribe( 
+      (response) => 
+        {
+        this.user = response;
+        const id = Number(this.route.snapshot.paramMap.get('id'));
+        this.productService.getSingleProduct(id).subscribe(
+          (product) => 
+            {this.product = product;
+            console.log("1) Product set to " + this.product.id);
+            this.checkReviewed();
+            });
+        }
+    );
   }
-
+  
+/*
   async onInit(){
     
         const id = await Number(this.route.snapshot.paramMap.get('id'));
@@ -46,7 +62,7 @@ export class ReviewComponent implements OnInit {
         await this.checkReviewed().then(result => console.log("2) check Review()" + result))//.then(this.reviewed = result);
         await console.log("3) On Init "+this.reviewed);
       
-    /*
+   
     var promise = new Promise<void>((resolve, reject) => {
       setTimeout(() => {
         const id = Number(this.route.snapshot.paramMap.get('id'));
@@ -59,8 +75,9 @@ export class ReviewComponent implements OnInit {
         resolve();
       }, 10000)
     })
-    */
+    
   }
+  */
 
   assignReview(n: number): void {
     this.reviewInt = n;
@@ -77,26 +94,25 @@ export class ReviewComponent implements OnInit {
         this.review = review;
       })
       //this.reviewedChanged.emit(this.reviewed);
-      this.checkReviewed().then(response => console.log("Response!:  "+response));
+      this.checkReviewed();
     }
   }
 
-  async checkReviewed(){
+  checkReviewed(): void{
     console.log("i) Entering the dark zone:");
     let booleanReview = false;
     console.log(this.product?.id);
     if(this.product){
       //console.log("product: "+this.product.id);
-      await this.reviewService.getReview(this.product?.id).subscribe((hasBeenReviewed: Review[]) => {
+      this.reviewService.getReview(this.product?.id).subscribe((hasBeenReviewed: Review[]) => {
         this.hasBeenReviewed = hasBeenReviewed;
         console.log("ii) Response happens now, hasBeenReviewed Object" +JSON.stringify(this.hasBeenReviewed));
-        if(this.hasBeenReviewed) {
+        if(this.hasBeenReviewed.length >0) {
           booleanReview = true;
-          console.log("iii) If has been reviewed true" + booleanReview);}
-        return booleanReview;
+          console.log("iii) If has been reviewed: " + booleanReview);}
+          this.reviewed = booleanReview;
       })
     } 
-    return false
     //console.log(booleanReview)
     //return Promise.resolve(booleanReview);
     //if(this.hasBeenReviewed === undefined) console.log("Something is very broken")
@@ -106,7 +122,7 @@ export class ReviewComponent implements OnInit {
   }
 
   getAverage(): void {
-    
+
   }
   /*
   asyncgetBoolRev() {
