@@ -3,6 +3,7 @@ import { Product } from 'src/app/models/product';
 import { ProductService } from 'src/app/services/product.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import { WishListService } from 'src/app/services/wishList.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -12,8 +13,9 @@ import { NgForm } from '@angular/forms';
 export class ProductDetailComponent implements OnInit {
   product!: Product;
   userId!: number;
+  wishListed: Boolean = false;
 
-  constructor(private productService: ProductService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private productService: ProductService, private route: ActivatedRoute, private wishListService: WishListService, private router: Router) { }
 
   ngOnInit(): void {
     const productId = Number(this.route.snapshot.paramMap.get('id'));
@@ -21,7 +23,7 @@ export class ProductDetailComponent implements OnInit {
       this.product = product;
     });
     this.productService.getUserId().subscribe((id)=> this.userId = id);
-    
+
   }
 
   addToCart(addForm: NgForm, product: Product): void {
@@ -31,5 +33,17 @@ export class ProductDetailComponent implements OnInit {
       console.log(cart);
       this.router.navigate(['cart']);
     });
+  }
+
+  addToWishList(product: Product): void {
+    this.wishListed = true;
+    this.wishListService.addToWishList(product.id)
+    .subscribe();
+  }
+
+  removeFromWishList(product: Product): void {
+    this.wishListed = false;
+    this.wishListService.removeFromWishList(product.id)
+    .subscribe();
   }
 }
