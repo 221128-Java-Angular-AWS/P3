@@ -6,6 +6,7 @@ import { OrdersService } from 'src/app/services/orders.service';
 import { WishListService } from 'src/app/services/wishList.service';
 import { Order } from 'src/app/models/order';
 import { Product } from 'src/app/models/product';
+import * as bcrypt from 'bcryptjs';
 
 @Component({
   selector: 'app-profile',
@@ -31,14 +32,14 @@ export class ProfileComponent implements OnInit {
     this.profileService.getUser().subscribe(
       (resp) => {
         this.user = resp;
-        this.wishListService.getWishListProducts(resp.id!).subscribe(
+        this.wishListService.getWishListProducts().subscribe(
           (resp) => this.products = resp,
           (err) => console.log(err),
-          () => console.log("WishList products retrieved")
+          () => console.log()
         );
       },
       (err) => console.log(err),
-      () => console.log("User retrieved")
+      () => console.log()
     );
     this.ordersService.getOrdersForProfile().subscribe(
       (resp) => this.orders = resp,
@@ -65,11 +66,18 @@ export class ProfileComponent implements OnInit {
     updateUser.firstName = firstName;
     updateUser.lastName = lastName;
     // add more security to password change
-    updateUser.password = password;
+    if (password != undefined) {
+      updateUser.password = bcrypt.hashSync(password, 10);
+    }
 
     this.profileService.postUser(updateUser).subscribe(
-      (resp) => {this.user = resp,
-        this.editUser = false;
+      (resp) => {
+        if (resp == undefined) {
+          alert("Error updating user");
+        } else {
+          this.user = resp,
+          this.editUser = false;
+        }
       },
       (err) => console.log(err),
       () => console.log("User profile updated")
