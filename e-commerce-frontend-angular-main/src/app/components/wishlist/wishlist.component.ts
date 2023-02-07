@@ -20,31 +20,25 @@ export class WishlistComponent implements OnInit {
 
   products: Product[] = [];
   user!: User;
+  userId!: number;
 
   ngOnInit(): void {
-    console.log('Initializing wishlist');
-    this.profileService.getUser().subscribe(
-      (resp) => {
-        this.user = resp;
-        this.wishListService.getWishListProducts(resp.id!).subscribe(
-          (resp) => this.products = resp,
-          (err) => console.log(err),
-          () => console.log("WishList products retrieved")
-        );
-      },
+    this.wishListService.getWishListProducts().subscribe(
+      (resp) => this.products = resp,
       (err) => console.log(err),
-      () => console.log("User retrieved")
+      () => {}
     );
+    this.productService.getUserId().subscribe((id)=> {this.userId = id});
   }
 
-  removeFromWishList(product: Product, userId: Number): void {
-    this.wishListService.removeFromWishList(product.id, userId)
-    .subscribe(() => console.log('Wishlist item deleted'));
+  removeFromWishList(product: Product): void {
+    this.wishListService.removeFromWishList(product.id)
+    .subscribe();
     this.products.splice(this.products.indexOf(product), 1);
   }
 
-  addToCart(product: Product, userId: Number): void {
-    this.productService.addCart(userId.valueOf(), product.id, 1)
-    .subscribe(() => console.log('Product added to cart from wishlist'));
+  addToCart(product: Product): void {
+    this.productService.addCart(this.userId, product.id, 1)
+    .subscribe();
   }
 }

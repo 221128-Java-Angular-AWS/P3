@@ -21,6 +21,7 @@ export class ProductCardComponent implements OnInit{
   }[] = [];
   subscription!: Subscription;
   totalPrice: number = 0;
+  userId!: number;
 
   @Input() productInfo!: Product;
   @Input() user!: User;
@@ -37,6 +38,7 @@ export class ProductCardComponent implements OnInit{
 
 
   ngOnInit(): void {
+    this.productService.getUserId().subscribe((id)=> {this.userId = id})
   }
 
 
@@ -46,13 +48,13 @@ export class ProductCardComponent implements OnInit{
     // this.subscription.unsubscribe();
   }
 
-  addToWishList(product: Product, userId: Number): void {
-    this.wishListService.addToWishList(product.id, userId)
-    .subscribe(() => console.log('Product added to wishlist'));
+  addToWishList(product: Product): void {
+    this.wishListService.addToWishList(product.id)
+    .subscribe();
   }
 
-  addToCart(product: Product, userId: number): void{
-    this.productService.addCart(userId, product.id, 1).subscribe(()=>{});
+  addToCart(product: Product): void{
+    this.productService.addCart(this.userId, product.id, 1).subscribe(()=>{});
   }
 
 }
