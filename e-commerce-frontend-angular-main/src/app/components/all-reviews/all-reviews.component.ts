@@ -19,9 +19,12 @@ export class AllReviewsComponent implements OnInit {
   constructor(private route: ActivatedRoute, private reviewService: ReviewService, private location: Location, private productService: ProductService) { }
 
   ngOnInit(): void {
-    //this.getProduct();
+    this.getProduct();
     this.getAllReviews();
     console.log(JSON.stringify(this.reviews))
+    this.reviewService.getAverage(this.product.id).subscribe((rating) => {
+      this.rating = rating;
+    })
   }
 
   getProduct(): void {

@@ -1,8 +1,34 @@
-<button type = "button" (click)="backToProd()">Back To Orders</button>
-<div class="showImage" *ngIf="product">{{product.image}}</div>
-<li class="list" *ngFor="let review of reviews">
-    <h3>{{review.rating}} &#9733;</h3>
-    <br>
-    <br>
-    {{review.message}}
-</li>
+<app-navbar></app-navbar>
+<div class="container py-5">
+    <div class="row">
+        <div class="col-md-2">
+            <button class="btn btn-light" (click)="backToProd()"> Back to Product </button>
+        </div>
+        <br><br><br>
+    </div>
+
+    <div class="row border-bottom" *ngIf="product">
+        <div class="col-md-2">
+            <div class="justify-text-center">
+                <img [src]="product.image" height="100%" width="200px" class="p-1">
+            </div>
+        </div>
+
+        <div class="col-md-8 p-5">
+            <h2>{{product.name}}</h2>
+        </div>
+    </div>
+
+    <div class="row my-5">
+        <div class="col-md-12 justify-content-center text-center">
+            <app-review></app-review>
+        </div>
+        <div class="col-md-12 my-5">
+            <ul>
+                <li class="list" *ngFor="let review of reviews">
+                    <h5>{{review.rating}} &#9733; - {{review.message}}</h5>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
