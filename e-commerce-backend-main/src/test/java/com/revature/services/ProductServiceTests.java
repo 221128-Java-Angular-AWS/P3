@@ -151,6 +151,7 @@ class ProductServiceTests {
         verify(mockCartRepository).deleteCartProduct(id, id);
     }
 
+    @Test
     void findByGenreTest() {
         String genre = "test";
         sut = new ProductService(mockProductRepository, null);
