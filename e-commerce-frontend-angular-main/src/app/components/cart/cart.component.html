@@ -7,6 +7,7 @@
         <th scope="col">Name</th>
         <th scope="col">Quantity</th>
         <th scope="col">Description</th>
+        <th scope="col">Price</th>
         <th scope="col"></th>
       </tr>
     </thead>
@@ -16,11 +17,12 @@
         <td>{{product.product.name}}</td>
         <td>{{product.quantity}}</td>
         <td>{{product.product.description}}</td>
+        <td>${{product.product.price*product.quantity}}</td>
         <td><button class="btn btn-danger" (click)="delete(product.product.id)">Delete</button></td>
       </tr>
     </tbody>
   </table>
   <button class="btn btn-danger" [routerLink]="['/home']">Back</button>
   <button class="btn btn-warning" (click)="emptyCart()">Empty Cart</button>
-  <button class="btn btn-primary" [routerLink]="['/checkout']">Proceed to Checkout (${{totalPrice}})</button>
+  <button class="btn btn-primary" [routerLink]="['/checkout']">Proceed to Checkout ({{totalPrice| currency}})</button>
 </div>
