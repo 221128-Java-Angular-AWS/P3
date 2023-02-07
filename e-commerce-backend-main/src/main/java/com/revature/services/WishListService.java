@@ -48,6 +48,13 @@ public class WishListService {
         return wishListRepository.addWishListItem(userId, productId);
     }
 
+    public Boolean checkIfWishListed(int userId, int productId) {
+        if (wishListRepository.findByUserAndProduct(userId, productId).isPresent()) {
+            return true;
+        }
+        return false;
+    }
+
     public Optional<WishList> findById(int id) {
         return wishListRepository.findById(id);
     }

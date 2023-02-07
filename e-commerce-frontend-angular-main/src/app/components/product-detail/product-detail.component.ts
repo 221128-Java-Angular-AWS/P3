@@ -25,6 +25,10 @@ export class ProductDetailComponent implements OnInit {
       this.product = product;
     });
     this.productService.getUserId().subscribe((id)=> this.userId = id);
+    this.wishListService.checkIfWishListed(productId)
+    .subscribe((isWishListed) => {
+      this.wishListed =  Boolean(isWishListed);
+    });
     this.reviewService.getAverage(productId).subscribe((rating) => {
       this.rating = rating;
     })
