@@ -51,4 +51,8 @@ export class ProductCardComponent implements OnInit{
     .subscribe();
   }
 
+  addToCart(product: Product, userId: number): void{
+    this.productService.addCart(userId, product.id, 1).subscribe(()=>{});
+  }
+
 }

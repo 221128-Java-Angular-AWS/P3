@@ -10,6 +10,8 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
+  error: boolean = false;
+  
   loginForm = new UntypedFormGroup({
     email: new UntypedFormControl(''),
     password: new UntypedFormControl('')
@@ -22,12 +24,12 @@ export class LoginComponent implements OnInit {
   }
   
   onSubmit(): void {
+    this.error = false;
     this.authService.login(this.loginForm.get('email')?.value, this.loginForm.get('password')?.value).subscribe(
-      (user) => {
+      () => {
         this.authService.loggedIn=true;
-        localStorage.setItem('user', user.id);
       },
-      (err) => console.log(err),
+      (err) => {console.log(err); this.error = true;},
       () => this.router.navigate(['home'])
     );
   }
