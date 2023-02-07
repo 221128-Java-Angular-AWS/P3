@@ -39,9 +39,7 @@ export class CartComponent implements OnInit {
   }
 
   delete(product_id: number): void{
-    console.log(product_id)
-    let userId = Number(localStorage.getItem('user'));
-    this.productService.removeCartItem(userId, product_id).subscribe(()=>{
+    this.productService.removeCartItem(this.userId, product_id).subscribe(()=>{
       window.location.reload(); // moved by will, was refreshing before removing the item from the cart otherwise
     });
     
