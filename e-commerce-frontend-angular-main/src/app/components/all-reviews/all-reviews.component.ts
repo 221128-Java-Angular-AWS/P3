@@ -28,7 +28,6 @@ export class AllReviewsComponent implements OnInit {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.productService.getSingleProduct(id).subscribe( product => {
       this.product = product;
-      console.log("Bl")
     });
   }
 
@@ -36,7 +35,6 @@ export class AllReviewsComponent implements OnInit {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.reviewService.getReviews(id).subscribe((reviews) => {
       this.reviews = reviews;
-      console.log("Red")
     })
   }
 

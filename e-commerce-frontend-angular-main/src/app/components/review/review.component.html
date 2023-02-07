@@ -1,5 +1,4 @@
 <ng-template id="ifNotReviewed" [ngIf]="reviewed==false">
-  {{reviewed}}
 
 <br>
 <br>
@@ -17,16 +16,7 @@
     <label for="star1" title="text">1 star</label>
   </div>
   <div class="assign review">{{reviewInt}}</div>
-<!--
-  <div class="form-group">
-    <label for="written-input">Add a written review</label>
-    <div id="textbox">
-    <input class="wideInput"  id="written-input" [(ngModel)]="userInput">
-    </div>
-  </div> -->
-
   <br>
-  
   <br>
   <div class="new-input">
     <div id="label-input">
@@ -48,8 +38,7 @@
 </ng-template>
 </ng-template>
 
-<button type="submit" (click)="checkReviewed()">CheckReviewed!</button>
+<!--<button type="submit" (click)="checkReviewed()">CheckReviewed!</button>-->
 
-<div *ngIf="hasBeenReviewed">hasBeenReviewed</div>
 <ng-template id="ifAlreadyReviewed" [ngIf]="reviewed==true"><h2>Thanks for your feedback!</h2></ng-template>
-<button type="submit" (click)="checkReviewed()">CheckReviewed!</button>
+<!--<button type="submit" (click)="checkReviewed()">CheckReviewed!</button>-->

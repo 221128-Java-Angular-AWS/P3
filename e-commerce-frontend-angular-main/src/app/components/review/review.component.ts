@@ -44,7 +44,7 @@ export class ReviewComponent implements OnInit {
         this.productService.getSingleProduct(id).subscribe(
           (product) => 
             {this.product = product;
-            console.log("1) Product set to " + this.product.id);
+            //console.log("1) Product set to " + this.product.id);
             this.checkReviewed();
             });
         }
@@ -87,7 +87,7 @@ export class ReviewComponent implements OnInit {
     if (this.reviewInt) {
       this.submitted=true;
       let review = new Review(this.userInput, this.reviewInt, this.user, this.product);
-      console.log(JSON.stringify(review) + "Is the review JSON." + this.product?.id)
+      //console.log(JSON.stringify(review) + "Is the review JSON." + this.product?.id)
       //this.reviewService.ping().subscribe(((ping)=> {this.ping = ping}));
       //console.log(this.ping);
       this.reviewService.postReview(review).subscribe((review) => {
@@ -99,17 +99,16 @@ export class ReviewComponent implements OnInit {
   }
 
   checkReviewed(): void{
-    console.log("i) Entering the dark zone:");
+    //console.log("i) Entering the dark zone:");
     let booleanReview = false;
-    console.log(this.product?.id);
     if(this.product){
-      //console.log("product: "+this.product.id);
       this.reviewService.getReview(this.product?.id).subscribe((hasBeenReviewed: Review[]) => {
         this.hasBeenReviewed = hasBeenReviewed;
-        console.log("ii) Response happens now, hasBeenReviewed Object" +JSON.stringify(this.hasBeenReviewed));
-        if(this.hasBeenReviewed.length >0) {
-          booleanReview = true;
-          console.log("iii) If has been reviewed: " + booleanReview);}
+        //console.log("ii) Response happens now, hasBeenReviewed Object" +JSON.stringify(this.hasBeenReviewed));
+        if(this.hasBeenReviewed.length >0) 
+          {
+            booleanReview = true;
+          }
           this.reviewed = booleanReview;
       })
     } 
@@ -124,23 +123,5 @@ export class ReviewComponent implements OnInit {
   getAverage(): void {
 
   }
-  /*
-  asyncgetBoolRev() {
-    let booleanReview = false;
-    console.log(this.product?.id);
-    if(this.product){
-      //console.log("product: "+this.product.id);
-      await this.reviewService.getReview(this.product?.id).subscribe((hasBeenReviewed: Review[]) => {
-        this.hasBeenReviewed = hasBeenReviewed;
-        console.log("Response happens now, hasBeenReviewed Object");
-        console.log(JSON.stringify(this.hasBeenReviewed));
-        if(this.hasBeenReviewed) {
-          //this.booleanReviewed = true;
-          console.log(booleanReview);}
-        return booleanReview;
-      })
-    } 
-  }
-  */
 
 }

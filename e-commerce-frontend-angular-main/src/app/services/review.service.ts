@@ -28,7 +28,6 @@ export class ReviewService {
   }
   postReview(review: Review): Observable<any> {
     const payload = JSON.stringify(review);
-    console.log(environment.baseUrl +"/review");
     return this.httpClient.post(environment.baseUrl +"/review/add", review, {headers: environment.headers, withCredentials: environment.withCredentials}).pipe(catchError(this.handleError<Review>('postReview'))
     );
   }
@@ -40,14 +39,11 @@ export class ReviewService {
   */
 
   getAverage(productId: number): Observable<any> {
-    console.log("In git avergge")
     let num =this.httpClient.get<number>(environment.baseUrl + "/review/avg/" + productId, {headers: environment.headers, withCredentials: environment.withCredentials}).pipe(catchError(this.handleError<number>('getAverage')));
-    console.log(num);
     return num;
   }
 
   getReviews(productId: number): Observable<any> {
-    alert("Int get revis");
     let reviews = this.httpClient.get<Review[]>(environment.baseUrl + "/review/all/" + productId, {headers: environment.headers, withCredentials: environment.withCredentials}).pipe(catchError(this.handleError<number>('getReviews')));
     return reviews;
   }

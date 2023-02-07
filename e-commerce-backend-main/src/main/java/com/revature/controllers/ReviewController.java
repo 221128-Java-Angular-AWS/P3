@@ -38,17 +38,9 @@ public class ReviewController {
         this.productService = productService;
     }
 
-    /*@Authorized
-    @GetMapping
-    public ResponseEntity<List<Review>> getReviews() { return ResponseEntity.ok(reviewService.getAll());}
-
-     */
-
-
     @PostMapping(value = "/add")
     @Authorized
     public ResponseEntity<Review> postReview(HttpSession session, @RequestBody Review review) {
-        System.out.println("In Controller!:"+ session.getAttribute("user"));
         review.setUser((User)session.getAttribute("user"));
         return ResponseEntity.ok(reviewService.saveReview(review));
     }
@@ -57,36 +49,29 @@ public class ReviewController {
     @Authorized
     public List<Review> hasReviewed(HttpSession session, @PathVariable("productId") int productId) {
         User user = (User)session.getAttribute("user");
-        Product product = productService.findByProdId(productId);
-        System.out.println("In hasReviewed method of review controller: " + user.toString() + " and " + product.toString());
-        List<Review> temporary = reviewService.getReview(user.getId(), product.getId());
-        System.out.println(temporary.toString() + "!!!!!!!!!!!!!!!!!!!!!!!!!! !");
+        // Product product = productService.findByProdId(productId);
+        //System.out.println("In hasReviewed method of review controller: " + user.toString() + " and " + product.toString());
+        List<Review> temporary = reviewService.getReview(user.getId(), productId);
         return temporary;
     }
 
     @GetMapping(value = "/ping")
     //@Authorized
     public String ping(HttpSession session) {
-        System.out.println("poncceita");
-        return "Ponnc";
+        return "Pong";
     }
 
     @GetMapping(value = "/all/{productId}")
     public ResponseEntity<List<Review>> getAllReviews(HttpSession session, @PathVariable("productId") int productId) {
-        System.out.println("Leeroyyyyyy Jennnnnnnnnkinssssssss");
         List<Review> temporary = reviewService.getAll(productId);
-        temporary.forEach(x -> System.out.println("Review =" + "is " + x.getReviewId()));
         return ResponseEntity.ok(temporary);
     }
 
     @GetMapping(value = "/avg/{productId}")
     //@Authorized
     public Double avgReview(HttpSession session, @PathVariable("productId") int productId) {
-        System.out.println("10000000000000000000000000000000000000000000");
         Double temp = Math.floor(reviewService.getAverage(productId)*10)/10;
         if( temp == null) temp = 0.0;
-        System.out.println("3");
-        System.out.println(temp+"oo");
         return temp;
     }
 

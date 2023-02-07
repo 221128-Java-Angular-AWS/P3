@@ -25,8 +25,6 @@ export class ProductDetailComponent implements OnInit {
     this.productService.getUserId().subscribe((id)=> this.userId = id);
     this.reviewService.getAverage(productId).subscribe((rating) => {
       this.rating = rating;
-      console.log("rating=" + rating);
-      console.log("Oo")
     })
   }
 
