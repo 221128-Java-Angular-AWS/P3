@@ -32,14 +32,14 @@ export class ProfileComponent implements OnInit {
     this.profileService.getUser().subscribe(
       (resp) => {
         this.user = resp;
-        this.wishListService.getWishListProducts(resp.id!).subscribe(
+        this.wishListService.getWishListProducts().subscribe(
           (resp) => this.products = resp,
           (err) => console.log(err),
-          () => console.log("WishList products retrieved")
+          () => console.log()
         );
       },
       (err) => console.log(err),
-      () => console.log("User retrieved")
+      () => console.log()
     );
     this.ordersService.getOrdersForProfile().subscribe(
       (resp) => this.orders = resp,
