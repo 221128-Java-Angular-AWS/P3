@@ -25,6 +25,7 @@ export class ProductCardComponent implements OnInit{
 
   @Input() productInfo!: Product;
   @Input() user!: User;
+  wishListed: Boolean = false;
 
   constructor(
     private productService: ProductService,
@@ -49,6 +50,7 @@ export class ProductCardComponent implements OnInit{
   }
 
   addToWishList(product: Product): void {
+    this.wishListed = true;
     this.wishListService.addToWishList(product.id)
     .subscribe();
   }
