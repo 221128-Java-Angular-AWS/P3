@@ -37,8 +37,8 @@ export class ProductDetailComponent implements OnInit {
     });
   }
 
-  addToWishList(product: Product, userId: Number): void {
-    this.wishListService.addToWishList(product.id, userId)
-    .subscribe(() => console.log('Product added to wishlist'));
+  addToWishList(product: Product): void {
+    this.wishListService.addToWishList(product.id)
+    .subscribe();
   }
 }
