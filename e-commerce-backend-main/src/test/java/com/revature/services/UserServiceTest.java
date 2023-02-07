@@ -37,6 +37,7 @@ public class UserServiceTest {
     @Mock
     private User mockUser;
 
+    // Strings are final and cannot be mocked
     private String email = "mock@email.com";
 
     private String password = "password";
@@ -47,25 +48,72 @@ public class UserServiceTest {
     // set up the mocked user repository
     @BeforeAll
     public static void beforeAll() {
-        System.out.println("Starting tests...");
+        System.out.println("Starting UserService tests...");
     }
 
     @AfterAll
     public static void afterAll() {
-        System.out.println("Tests complete.");
+        System.out.println("UserService Tests complete.");
     }
 
     @Test
-    public void testFindByCredentials() {
+    public void testFindByEmailCorrectCredentialsProvided() {
         sut = new UserService(mockUserRepository);
-        Mockito.when(mockUserRepository.findByEmailAndPassword(email, password)).thenReturn(Optional.of(mockUser));
-        Optional<User> user = sut.findByCredentials(email, password);
+        Mockito.when(mockUserRepository.findByEmail(email)).thenReturn(Optional.of(mockUser));
+        Optional<User> user = sut.getUser(email);
 
         Assertions.assertEquals(Optional.of(mockUser), user);
     }
 
+    @Test
+    public void testFindByEmailIncorrectCredentialsProvided() {
+        sut = new UserService(mockUserRepository);
+        Mockito.when(mockUserRepository.findByEmail(email)).thenReturn(Optional.empty());
+        Optional<User> user = sut.getUser(email);
+
+        Assertions.assertEquals(Optional.empty(), user);
+    }
 
 
+    @Test
+    public void testSaveUserUserObjectArgument() {
+        sut = new UserService(mockUserRepository);
+        Mockito.when(mockUserRepository.save(mockUser)).thenReturn(mockUser);
+        User user = sut.save(mockUser);
+
+        Assertions.assertEquals(mockUser, user);
+    }
+
+    @Test
+    public void testSaveUserIntAndUserObjectOverride() {
+        sut = new UserService(mockUserRepository);
+        Mockito.when(mockUserRepository.save(mockUser)).thenReturn(mockUser);
+        Mockito.when(sut.findById(1)).thenReturn(Optional.of(mockUser));
+        Mockito.when(mockUserRepository.save(mockUser)).thenReturn(mockUser);
+
+        User user = sut.save(1, mockUser);
+
+        Assertions.assertEquals(mockUser, user, "testSaveUserIntAndUserObjectOverride complete");
+    }
+
+    @Test
+    public void testFindByIntWhereUserIdInPersistence() {
+        sut = new UserService(mockUserRepository);
+        Mockito.when(mockUserRepository.findById(1)).thenReturn(Optional.of(mockUser));
+        Optional<User> user = sut.findById(1);
+
+        Assertions.assertEquals(Optional.of(mockUser), user);
+    }
+
+    @Test
+    public void testFindByIntWhereUserIdNotInPersistence() {
+        sut = new UserService(mockUserRepository);
+        Optional<User> userNotFound = Optional.empty();
+        Mockito.when(mockUserRepository.findById(1)).thenReturn(Optional.empty());
+        Optional<User> user = sut.findById(1);
+
+        Assertions.assertEquals(Optional.empty(), user);
+    }
 
 
 

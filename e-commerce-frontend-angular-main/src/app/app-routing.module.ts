@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
 import { CartComponent } from './components/cart/cart.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { DisplayProductsComponent } from './components/display-products/display-products.component';
@@ -10,6 +9,7 @@ import { OrderDetailsComponent } from './components/order-details/order-details.
 import { ProfileComponent } from './components/profile/profile.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 import { ReviewPageComponent } from './components/review-page/review-page.component';
+import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   { path: "", redirectTo: "/login", pathMatch: "full" },

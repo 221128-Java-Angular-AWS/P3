@@ -21,6 +21,7 @@ export class CheckoutComponent implements OnInit {
   cartProducts: Product[] = [];
   finalProducts: {id: number, quantity: number}[] = []; 
   ping: string="";
+  userId!: number;
 
   checkoutForm = new UntypedFormGroup({
     fname: new UntypedFormControl('', Validators.required),
@@ -38,18 +39,20 @@ export class CheckoutComponent implements OnInit {
   constructor(private productService: ProductService,private ordersService: OrdersService, private router: Router, private reviewService: ReviewService) { }
 
   ngOnInit(): void {
-    let id: number = Number(localStorage.getItem('user'));
-    this.productService.getCart2(id).subscribe((data: any)=>{
-      data.forEach(
-        (element: any)=> {
-          console.log(element)
-          this.productService.getSingleCartProduct(element.productId).subscribe((data2: any) =>{
-            this.products.push({product: data2, quantity: element.quantity});
-            this.totalPrice += data2.price *element.quantity;
-          });
-        }
-      )
-    });
+    this.productService.getUserId().subscribe((id)=>{
+      this.userId = id;
+      this.productService.getCart2(id).subscribe((data: any)=>{
+        data.forEach(
+          (element: any)=> {
+            console.log(element)
+            this.productService.getSingleCartProduct(element.productId).subscribe((data2: any) =>{
+              this.products.push({product: data2, quantity: element.quantity});
+              this.totalPrice += data2.price *element.quantity;
+            });
+          }
+        )
+      });
+    })
   }
 
   onSubmit(): void {
@@ -67,8 +70,7 @@ export class CheckoutComponent implements OnInit {
         (resp) => console.log(resp),
         (err) => console.log(err),
         () => {
-          let id: number = Number(localStorage.getItem('user'));
-          this.productService.emptyCart(id).subscribe(()=>{});
+          this.productService.emptyCart(this.userId).subscribe(()=>{});
           this.ordersService.createOrder(this.finalProducts).subscribe(()=>{});
           this.router.navigate(['/home']);
         } 

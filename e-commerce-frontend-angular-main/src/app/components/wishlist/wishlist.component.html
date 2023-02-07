@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row justify-content-center">
-     <div class="col cardListItem" *ngFor="let product of products">
-      <div class="col-3 mx-1 my-1 p-3 card">
+    <div class="col" *ngFor="let product of products">
+      <div class="col-3 mx-1 my-1 p-3 card cardListItem">
         <div class="card-body justify-content-center">
           <figure class="figure mx-auto d-block">
             <a routerLink="/product/{{product.id}}"><img [src]="product.image" height="200px" width="100%" class="p-1 mx-auto d-block"></a>
@@ -11,9 +11,11 @@
               <br>
               <span class="fw-bold">{{product.quantity}}</span> In Stock
             </figcaption>
+            <button class="btn btn-primary my-3 mx-1" (click)="addToCart(product, user.id!)">Add to Cart</button>
+            <button class="btn btn-warning my-3 mx-1" (click)="removeFromWishList(product, user.id!)">Remove from Wish List</button>
           </figure>
         </div>
       </div>
-      </div>
+    </div>
   </div>
 </div>

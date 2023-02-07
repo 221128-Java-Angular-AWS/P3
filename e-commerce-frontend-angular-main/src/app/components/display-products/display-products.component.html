@@ -1,9 +1,8 @@
 <app-navbar></app-navbar>
-
 <div class="container py-5">
     <div class="row justify-content-center">
         <div class="col-3" *ngFor="let product of allProducts">
-            <app-product-card class="cardListItem" [productInfo]="product"></app-product-card>
+            <app-product-card class="cardListItem" [productInfo]="product" [user]="user"></app-product-card>
         </div>
     </div>
 </div>

@@ -1,9 +1,7 @@
 package com.revature.services;
 
-import com.revature.dtos.ProductInfo;
 import com.revature.models.Product;
 import com.revature.models.WishList;
-import com.revature.repositories.ProductRepository;
 import com.revature.repositories.WishListRepository;
 import org.springframework.stereotype.Service;
 
@@ -22,15 +20,21 @@ public class WishListService {
 
     public List<Product> getWishList(Integer userId) {
         List<WishList> wishList = wishListRepository.findUserWishList(userId);
-        List<Product> wishProducts = new ArrayList<>();
-        for(WishList product: wishList) {
-            wishProducts.add(product.getProduct());
+        List<Product> wishProducts = new ArrayList<Product>();
+        if (wishList.size() > 0) {
+            for(WishList product: wishList) {
+                wishProducts.add(product.getProduct());
+            }
         }
         return wishProducts;
     }
 
     public void deleteWishListItem(int id) {
         wishListRepository.deleteById(id);
+    }
+
+    public int addWishListItem(int userId, int productId) {
+        return wishListRepository.addWishListItem(userId, productId);
     }
 
     public Optional<WishList> findById(int id) {

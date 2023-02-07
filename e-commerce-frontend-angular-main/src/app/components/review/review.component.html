@@ -1,5 +1,5 @@
-In review component!
 <ng-template id="ifNotReviewed" [ngIf]="reviewed==false">
+</ng-template>
 <br>
 <br>
 <ng-template id="rating-component" [ngIf]="submitted==false">
@@ -48,7 +48,7 @@ In review component!
 
 
 <button type="submit" (click)="checkReviewed()">CheckReviewed!</button>
-</ng-template>
+
 <div *ngIf="hasBeenReviewed">hasBeenReviewed</div>
 <ng-template id="ifAlreadyReviewed" [ngIf]="reviewed==true"><h2>Thanks for your feedback!</h2></ng-template>
 <button type="submit" (click)="checkReviewed()">CheckReviewed!</button>

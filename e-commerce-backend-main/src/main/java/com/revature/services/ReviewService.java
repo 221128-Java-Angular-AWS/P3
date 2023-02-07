@@ -17,6 +17,10 @@ public class ReviewService {
     public ReviewService(ReviewRepository reviewRepository) { this.reviewRepository = reviewRepository;}
     public List<Review> getAll() {  return reviewRepository.findAll();}
 
+    public Double getAverage(Integer productId) {
+        return reviewRepository.getAvg(productId);
+    }
+
     public Review saveReview(Review review) {
         System.out.println("In save Review");
         return reviewRepository.save(review);

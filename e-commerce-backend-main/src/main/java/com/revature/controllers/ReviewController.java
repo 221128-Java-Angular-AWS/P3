@@ -70,4 +70,11 @@ public class ReviewController {
         return "Ponnc";
     }
 
+    @GetMapping(value = "/avg/{productId}")
+    @Authorized
+    public Double avgReview(HttpSession session, @PathVariable("productId") int productId) {
+        Double temp = Math.floor(reviewService.getAverage(productId)*10)/10;
+        return temp;
+    }
+
 }

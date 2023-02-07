@@ -18,4 +18,7 @@ public interface ReviewRepository extends JpaRepository<Review, Integer> {
 
     @Query(value = "SELECT * FROM reviews", nativeQuery = true)
     List<Review> getAll();
+
+    @Query(value = "SELECT AVG(rating) FROM reviews WHERE product_id = :productId", nativeQuery = true)
+    Double getAvg(@Param("productId") Integer productId);
 }

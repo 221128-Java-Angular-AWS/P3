@@ -49,12 +49,12 @@ public class OrderServiceTest {
 
     @BeforeAll
     public static void beforeAll() {
-        System.out.println("Starting tests...");
+        System.out.println("Starting OrderService tests...");
     }
 
     @AfterAll
     public static void afterAll() {
-        System.out.println("Tests complete.");
+        System.out.println("OrderService Tests complete.");
     }
 
     @BeforeEach
@@ -108,6 +108,22 @@ public class OrderServiceTest {
         List<OrderDto> result = sut.getOrders(1);
 
         //ensure the converted order is equal to the expected order
+        Assertions.assertEquals(expectedOrders, result);
+    }
+
+    @Test
+    public void testGetOrdersForProfile() {
+        LocalDateTime now = LocalDateTime.now();
+        List<Order> profileOrders = new ArrayList<>();
+        profileOrders.add(new Order(1, now, new User(1), new ArrayList<OrderProduct>()));
+        Mockito.when(repoMock.findByUserIdWithLimit(1)).thenReturn(profileOrders);
+
+        List<OrderDto> result = sut.getOrdersForProfile(1);
+
+        OrderDto order = new OrderDto(1, now, 1, new ArrayList<OrderProductDto>());
+        List<OrderDto> expectedOrders = new ArrayList<>();
+        expectedOrders.add(order);
+
         Assertions.assertEquals(expectedOrders, result);
     }
 

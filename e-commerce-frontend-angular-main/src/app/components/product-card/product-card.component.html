@@ -1,4 +1,4 @@
-<div class="col mx-1 my-1 p-3 card">
+<div class="col mx-1 my-1 p-3 card" *ngIf="productInfo.quantity != 0">
   <div class="card-body justify-content-center">
     <figure class="figure mx-auto d-block">
       <a routerLink="/product/{{productInfo.id}}"><img [src]="productInfo.image" height="200px" width="100%" class="p-1 mx-auto d-block"></a>
@@ -10,6 +10,8 @@
         <!-- Delete the line below to get rid of the genre on Card -->
         Genre: <span class="fw-bold">{{productInfo.genre}}</span>
       </figcaption>
+      <button class="btn btn-primary my-3 mx-1" (click)="addToCart(productInfo, user.id!)">Add to Cart</button>
+      <button class="btn btn-primary my-3 mx-1" (click)="addToWishList(productInfo, user.id!)" >Add to Wish List</button>
     </figure>
   </div>
 </div>

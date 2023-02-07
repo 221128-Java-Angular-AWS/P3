@@ -17,16 +17,16 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public Optional<User> findByCredentials(String email, String password) {
-        return userRepository.findByEmailAndPassword(email, password);
-    }
-
     public User save(User user) {
         return userRepository.save(user);
     }
 
     public User getUser(Integer userId){
         return userRepository.findByUserId(userId);
+    }
+
+    public Optional<User> getUser(String email){
+        return userRepository.findByEmail(email);
     }
     
     public User save(int userId, User user){
