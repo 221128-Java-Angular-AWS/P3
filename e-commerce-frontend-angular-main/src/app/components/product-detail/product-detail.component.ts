@@ -3,6 +3,7 @@ import { Product } from 'src/app/models/product';
 import { ProductService } from 'src/app/services/product.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import { ReviewService } from 'src/app/services/review.service';
 import { WishListService } from 'src/app/services/wishList.service';
 
 @Component({
@@ -13,9 +14,10 @@ import { WishListService } from 'src/app/services/wishList.service';
 export class ProductDetailComponent implements OnInit {
   product!: Product;
   userId!: number;
+  rating!: number;
   wishListed: Boolean = false;
 
-  constructor(private productService: ProductService, private route: ActivatedRoute, private wishListService: WishListService, private router: Router) { }
+  constructor(private productService: ProductService, private route: ActivatedRoute, private wishListService: WishListService, private router: Router, private reviewService: ReviewServic) { }
 
   ngOnInit(): void {
     const productId = Number(this.route.snapshot.paramMap.get('id'));
@@ -27,6 +29,9 @@ export class ProductDetailComponent implements OnInit {
     .subscribe((isWishListed) => {
       this.wishListed =  Boolean(isWishListed);
     });
+    this.reviewService.getAverage(productId).subscribe((rating) => {
+      this.rating = rating;
+    })
   }
 
   addToCart(addForm: NgForm, product: Product): void {
@@ -38,6 +43,10 @@ export class ProductDetailComponent implements OnInit {
     });
   }
 
+  goToAllReviews() {
+  this.router.navigate([`reviews/${this.product.id}`])
+  }
+  
   addToWishList(product: Product): void {
     this.wishListed = true;
     this.wishListService.addToWishList(product.id)

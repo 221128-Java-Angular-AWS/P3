@@ -1,0 +1,8 @@
+<button type = "button" (click)="backToProd()">Back To Orders</button>
+<div class="showImage" *ngIf="product">{{product.image}}</div>
+<li class="list" *ngFor="let review of reviews">
+    <h3>{{review.rating}} &#9733;</h3>
+    <br>
+    <br>
+    {{review.message}}
+</li>
