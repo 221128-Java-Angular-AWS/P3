@@ -10,10 +10,9 @@
         <!-- Delete the line below to get rid of the genre on Card -->
         Genre: <span class="fw-bold">{{productInfo.genre}}</span>
       </figcaption>
-
       <div class="my-3"></div>
-      <button class="btn btn-primary my-1 mx-1" (click)="addToCart(productInfo, user.id!)">Add to Cart</button>
-      <button class="btn btn-primary mx-1" (click)="addToWishList(productInfo)" >Add to Wish List</button>
+      <button class="btn btn-primary my-1 mx-1" (click)="addToCart(productInfo)">Add to Cart</button>
+      <button class="btn btn-primary mx-1" (click)="addToWishList(productInfo)">Add to Wish List</button>
     </figure>
   </div>
 </div>

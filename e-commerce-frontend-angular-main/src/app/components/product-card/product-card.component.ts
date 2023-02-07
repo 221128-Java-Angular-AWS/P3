@@ -38,7 +38,7 @@ export class ProductCardComponent implements OnInit{
 
 
   ngOnInit(): void {
-    this.productService.getUserId().subscribe((id)=> this.userId = id);
+    this.productService.getUserId().subscribe((id)=> {this.userId = id})
   }
 
 
@@ -53,10 +53,8 @@ export class ProductCardComponent implements OnInit{
     .subscribe();
   }
 
-  addToCart(product: Product, userId: number): void{
-    this.productService.addCart(userId, product.id, 1).subscribe((cart)=>{
-      console.log(cart);
-    });
+  addToCart(product: Product): void{
+    this.productService.addCart(this.userId, product.id, 1).subscribe(()=>{});
   }
 
 }

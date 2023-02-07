@@ -20,6 +20,7 @@ export class WishlistComponent implements OnInit {
 
   products: Product[] = [];
   user!: User;
+  userId!: number;
 
   ngOnInit(): void {
     this.wishListService.getWishListProducts().subscribe(
@@ -27,6 +28,7 @@ export class WishlistComponent implements OnInit {
       (err) => console.log(err),
       () => {}
     );
+    this.productService.getUserId().subscribe((id)=> {this.userId = id});
   }
 
   removeFromWishList(product: Product): void {
@@ -35,8 +37,8 @@ export class WishlistComponent implements OnInit {
     this.products.splice(this.products.indexOf(product), 1);
   }
 
-  addToCart(product: Product, userId: Number): void {
-    this.productService.addCart(userId.valueOf(), product.id, 1)
-    .subscribe((cart) => console.log(cart));
+  addToCart(product: Product): void {
+    this.productService.addCart(this.userId, product.id, 1)
+    .subscribe();
   }
 }
