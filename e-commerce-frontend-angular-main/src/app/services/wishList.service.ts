@@ -15,24 +15,24 @@ export class WishListService {
 
   private wishListUrl: string = "/wishlist";
 
-  public getWishListProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(environment.baseUrl+this.wishListUrl, {headers: environment.headers, withCredentials: environment.withCredentials})
-    .pipe(
-      catchError(this.handleError<Product[]>('getWishListProduct'))
-    );
+  public getWishListProducts(userId: Number): Observable<Product[]> {
+    let userIdUrl = `/${userId}`;
+    return this.http.get<Product[]>(environment.baseUrl+this.wishListUrl + userIdUrl, {headers: environment.headers, withCredentials: environment.withCredentials});
   }
 
-  public removeFromWishList(productId: Number): Observable<Object> {
+  public removeFromWishList(productId: Number, userId: Number): Observable<Object> {
     let productIdUrl = `/${productId}`;
-    return this.http.delete(environment.baseUrl + this.wishListUrl + productIdUrl, {headers: environment.headers, withCredentials: environment.withCredentials})
+    let userIdUrl = `/${userId}`;
+    return this.http.delete(environment.baseUrl + this.wishListUrl + userIdUrl + productIdUrl, {headers: environment.headers, withCredentials: environment.withCredentials})
     .pipe(
       catchError(this.handleError<Product>('removeWishListItem'))
     );
   }
 
-  public addToWishList(productId: Number): Observable<Object> {
+  public addToWishList(productId: Number, userId: Number): Observable<Object> {
     let productIdUrl = `/${productId}`;
-    return this.http.post(environment.baseUrl + this.wishListUrl + productIdUrl, {}, {headers: environment.headers, withCredentials: environment.withCredentials})
+    let userIdUrl = `/${userId}`;
+    return this.http.post(environment.baseUrl + this.wishListUrl + userIdUrl + productIdUrl, {headers: environment.headers, withCredentials: environment.withCredentials})
     .pipe(
       catchError(this.handleError<Product>('addWishListItem'))
     );

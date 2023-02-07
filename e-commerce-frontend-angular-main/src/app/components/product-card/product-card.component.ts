@@ -46,9 +46,9 @@ export class ProductCardComponent implements OnInit{
     // this.subscription.unsubscribe();
   }
 
-  addToWishList(product: Product): void {
-    this.wishListService.addToWishList(product.id)
-    .subscribe();
+  addToWishList(product: Product, userId: Number): void {
+    this.wishListService.addToWishList(product.id, userId)
+    .subscribe(() => console.log('Product added to wishlist'));
   }
 
   addToCart(product: Product, userId: number): void{

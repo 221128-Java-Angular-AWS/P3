@@ -16,11 +16,20 @@ export class DisplayProductsComponent implements OnInit {
 
   constructor(private productService: ProductService, private profileService: ProfileService) { }
 
+  user!: User;
+
   ngOnInit(): void {
     this.productService.getProducts().subscribe(
       (resp) => this.allProducts = resp,
       (err) => console.log(err),
       () => console.log("Products Retrieved")
+    );
+    this.profileService.getUser().subscribe(
+      (resp) => {
+        this.user = resp;
+      },
+      (err) => console.log(err),
+      () => console.log("User retrieved for products")
     );
   }
 

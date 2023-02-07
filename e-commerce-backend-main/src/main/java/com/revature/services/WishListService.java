@@ -18,8 +18,6 @@ public class WishListService {
         this.wishListRepository = wishListRepository;
     }
 
-    // getWishList retrieves a list of WishList objects and converts them to Product objects before returning
-    // the list of product objects
     public List<Product> getWishList(Integer userId) {
         List<WishList> wishList = wishListRepository.findUserWishList(userId);
         List<Product> wishProducts = new ArrayList<Product>();

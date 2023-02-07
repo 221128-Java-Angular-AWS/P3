@@ -2,7 +2,6 @@ package com.revature.controllers;
 
 import com.revature.annotations.Authorized;
 import com.revature.dtos.LoginRequest;
-import com.revature.models.User;
 import com.revature.models.WishList;
 import com.revature.services.ProductService;
 import com.revature.models.Product;
@@ -17,10 +16,6 @@ import java.util.Enumeration;
 import java.util.List;
 import java.util.Optional;
 
-// NOTE: the term "WishList" is used inconsistently. "WishList" is used to refer to either a wishlisted item
-// (a row in the wish_list table) OR to a list of wishlisted products (which is returned to the front-end).
-// Check return values to see which definition is being used for a given function.
-
 @RestController
 @RequestMapping("/wishlist")
 @CrossOrigin(origins = {"http://localhost:4200", "http://localhost:3000"}, allowCredentials = "true")
@@ -34,31 +29,22 @@ public class WishListController {
         this.productService = productService;
     }
 
-    // getWishList returns a list of wishlisted products
-    @Authorized
-    @GetMapping
-    public ResponseEntity<List<Product>> getWishList(HttpSession session) {
-        User user = (User) session.getAttribute("user");
-        int userId = user.getId();
+//    @Authorized
+    @GetMapping("/{user_id}")
+    public ResponseEntity<List<Product>> getWishList(@PathVariable("user_id") int userId, HttpSession session) {
         return ResponseEntity.ok(wishListService.getWishList(userId));
     }
 
-    // addWishListItem adds a WishList item to the wish_list table
-    @Authorized
-    @PostMapping("/{product_id}")
-    public ResponseEntity<Integer> addWishListItem(@PathVariable("product_id") int productId, HttpSession session) {
-        User user = (User) session.getAttribute("user");
-        int userId = user.getId();
-        return ResponseEntity.ok(wishListService.addWishListItem(userId, productId));
+    @PostMapping("/{user_id}/{product_id}")
+    @ResponseStatus(value = HttpStatus.CREATED)
+    public void addWishListItem(@PathVariable("user_id") int userID, @PathVariable("product_id") int productID) {
+        wishListService.addWishListItem(userID, productID);
     }
 
-    @Authorized
-    @DeleteMapping("/{product_id}")
-    public ResponseEntity<WishList> deleteWishListItem(@PathVariable("product_id") int productId, HttpSession session) {
-        User user = (User) session.getAttribute("user");
-        int userId = user.getId();
-
-        Optional<WishList> optional = wishListService.findByUserAndProduct(userId, productId);
+//    @Authorized
+    @DeleteMapping("/{user_id}/{product_id}")
+    public ResponseEntity<WishList> deleteWishListItem(@PathVariable("user_id") int userID, @PathVariable("product_id") int productID) {
+        Optional<WishList> optional = wishListService.findByUserAndProduct(userID, productID);
 
         if(!optional.isPresent()) {
             return ResponseEntity.notFound().build();

@@ -22,21 +22,29 @@ export class WishlistComponent implements OnInit {
   user!: User;
 
   ngOnInit(): void {
-    this.wishListService.getWishListProducts().subscribe(
-      (resp) => this.products = resp,
+    console.log('Initializing wishlist');
+    this.profileService.getUser().subscribe(
+      (resp) => {
+        this.user = resp;
+        this.wishListService.getWishListProducts(resp.id!).subscribe(
+          (resp) => this.products = resp,
+          (err) => console.log(err),
+          () => console.log("WishList products retrieved")
+        );
+      },
       (err) => console.log(err),
-      () => {}
+      () => console.log("User retrieved")
     );
   }
 
-  removeFromWishList(product: Product): void {
-    this.wishListService.removeFromWishList(product.id)
-    .subscribe();
+  removeFromWishList(product: Product, userId: Number): void {
+    this.wishListService.removeFromWishList(product.id, userId)
+    .subscribe(() => console.log('Wishlist item deleted'));
     this.products.splice(this.products.indexOf(product), 1);
   }
 
   addToCart(product: Product, userId: Number): void {
     this.productService.addCart(userId.valueOf(), product.id, 1)
-    .subscribe();
+    .subscribe(() => console.log('Product added to cart from wishlist'));
   }
 }
