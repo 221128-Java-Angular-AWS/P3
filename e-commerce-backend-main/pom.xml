@@ -64,17 +64,6 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjrt -->
-		<!-- trying to fix the aspect advice...
-		<dependency>
-			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjrt</artifactId>
-			<version>1.9.19</version>
-			<scope>runtime</scope>
-		</dependency>
-		-->
-
-
 	</dependencies>
 
 	<build>

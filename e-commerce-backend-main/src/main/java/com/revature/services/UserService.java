@@ -1,5 +1,6 @@
 package com.revature.services;
 
+import com.revature.exceptions.EmailTakenException;
 import com.revature.models.User;
 import com.revature.repositories.UserRepository;
 
@@ -32,6 +33,15 @@ public class UserService {
     public User save(int userId, User user){
         user.setId(userId);
         User currentUser = this.findById(userId).get();
+
+        if (user.getEmail() != null) {
+            Optional<User> emailCheck = userRepository.findByEmail(user.getEmail());
+            if (emailCheck.isPresent()) {
+                if (user.getId() != emailCheck.get().getId()) {
+                    throw new EmailTakenException("That email is already in use.");
+                }
+            }
+        }
         // ensure the request is not nulling fields
         if (user.getEmail() == null) {
             user.setEmail(currentUser.getEmail());
@@ -45,8 +55,7 @@ public class UserService {
         if (user.getLastName() == null) {
             user.setLastName(currentUser.getLastName());
         }
-        // TODO: remove password before return for security reasons or do below
-        return userRepository.save(user); // TODO: maybe change this so that password changes are their own entity
+        return userRepository.save(user);
     }
 
     public Optional<User> findById(int userId) {
