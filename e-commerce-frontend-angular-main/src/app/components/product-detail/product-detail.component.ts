@@ -19,11 +19,18 @@ export class ProductDetailComponent implements OnInit {
 
   ngOnInit(): void {
     const productId = Number(this.route.snapshot.paramMap.get('id'));
+    console.log('Product id:');
+    console.log(productId);
     this.productService.getSingleProduct(productId).subscribe((product) => {
       this.product = product;
     });
     this.productService.getUserId().subscribe((id)=> this.userId = id);
-
+    console.log('Checking if wishlisted...');
+    this.wishListService.checkIfWishListed(productId)
+    .subscribe((isWishListed) => {
+      console.log(`This is wishlisted: ${isWishListed}`)
+      this.wishListed =  Boolean(isWishListed);
+    });
   }
 
   addToCart(addForm: NgForm, product: Product): void {
