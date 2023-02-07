@@ -2,6 +2,7 @@ package com.revature.services;
 
 import com.revature.models.Product;
 import com.revature.models.WishList;
+import com.revature.repositories.ProductRepository;
 import com.revature.repositories.WishListRepository;
 import org.springframework.stereotype.Service;
 
@@ -13,9 +14,11 @@ import java.util.Optional;
 public class WishListService {
 
     private final WishListRepository wishListRepository;
+    private final ProductRepository productRepository;
 
-    public WishListService(WishListRepository wishListRepository) {
+    public WishListService(WishListRepository wishListRepository, ProductRepository productRepository) {
         this.wishListRepository = wishListRepository;
+        this.productRepository = productRepository;
     }
 
     // getWishList retrieves a list of WishList objects and converts them to Product objects before returning
@@ -36,6 +39,12 @@ public class WishListService {
     }
 
     public int addWishListItem(int userId, int productId) {
+        // Check if the user's wishlist already contains the item. If not, add it.
+        List<Product> wishList = getWishList(userId);
+        Product itemToAdd = productRepository.findById(productId).get();
+        if (wishList.contains(itemToAdd)) {
+            return productId;
+        }
         return wishListRepository.addWishListItem(userId, productId);
     }
 

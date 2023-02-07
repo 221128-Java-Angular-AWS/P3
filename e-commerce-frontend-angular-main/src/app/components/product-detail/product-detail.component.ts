@@ -13,12 +13,16 @@ import { WishListService } from 'src/app/services/wishList.service';
 export class ProductDetailComponent implements OnInit {
   product!: Product;
   userId!: number;
+  wishListed: Boolean = false;
+
 
   constructor(
     private productService: ProductService,
     private wishListService: WishListService,
     private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router
+  ) {}
+
 
   ngOnInit(): void {
     const productId = Number(this.route.snapshot.paramMap.get('id'));
@@ -26,7 +30,7 @@ export class ProductDetailComponent implements OnInit {
       this.product = product;
     });
     this.productService.getUserId().subscribe((id)=> this.userId = id);
-    
+
   }
 
   addToCart(addForm: NgForm, product: Product): void {
@@ -38,6 +42,7 @@ export class ProductDetailComponent implements OnInit {
   }
 
   addToWishList(product: Product): void {
+    this.wishListed = true;
     this.wishListService.addToWishList(product.id)
     .subscribe();
   }
