@@ -35,6 +35,10 @@ export class ProductDetailComponent implements OnInit {
     this.reviewService.getAverage(productId).subscribe((rating) => {
       this.rating = rating;
     })
+    this.wishListService.checkIfWishListed(productId)
+    .subscribe((isWishListed) => {
+      this.wishListed =  Boolean(isWishListed);
+    });
   }
 
   addToCart(addForm: NgForm, product: Product): void {

@@ -43,6 +43,15 @@ public class WishListController {
         return ResponseEntity.ok(wishListService.getWishList(userId));
     }
 
+    @Authorized
+    @GetMapping("/{product_id}")
+    public ResponseEntity<Boolean> checkIfWishListed(@PathVariable("product_id") int productId, HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        int userId = user.getId();
+        return ResponseEntity.ok(wishListService.checkIfWishListed(userId, productId));
+    }
+
+
     // addWishListItem adds a WishList item to the wish_list table
     @Authorized
     @PostMapping("/{product_id}")
