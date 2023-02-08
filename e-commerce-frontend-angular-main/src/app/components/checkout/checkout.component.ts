@@ -66,7 +66,8 @@ export class CheckoutComponent implements OnInit {
     if(this.finalProducts.length > 0) {
       this.productService.purchase(this.finalProducts).subscribe(
         (resp) => console.log(resp),
-        (err) => console.log(err),
+        (err) => {console.log("purchase failed"); 
+        window.alert("Purchase failed. Please make sure your selected quantity does not exceed the stock quantity.")},
         () => {
           this.productService.emptyCart(this.userId).subscribe(()=>{});
           this.ordersService.createOrder(this.finalProducts).subscribe(()=>{});
