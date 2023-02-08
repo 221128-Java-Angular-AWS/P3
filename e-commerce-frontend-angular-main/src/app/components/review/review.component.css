@@ -1,11 +1,7 @@
-*{
-    margin: 0;
-    padding: 0;
-}
 .rate {
-    float: left;
     height: 46px;
     padding: 0 10px;
+    display: inline-block;
 }
 .rate:not(:checked) > input {
     position:absolute;
@@ -38,7 +34,7 @@
     color: #c59b08;
 }
 
-#written-input
+.written-input
 {
     height: 300px;
     width: 700px;
@@ -47,5 +43,6 @@
     padding-top:0;
     padding-bottom:0.4em;
     padding-right: 0.4em;
+    resize: none;
 }
 

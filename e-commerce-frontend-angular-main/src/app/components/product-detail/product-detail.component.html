@@ -1,5 +1,3 @@
-
-
 <app-navbar></app-navbar>
 <div class="container py-5">
     <div class="row">
@@ -18,10 +16,14 @@
         <div class="col-md-8 p-5">
             <h2>{{product.name}}</h2>
             <h6>Rating: {{rating}}&#9733;
-                <button type="button" class="btn btn-sm btn-warning mx-1" (click)="goToAllReviews()">See Reviews</button>
-                <button type="button" class="btn btn-sm btn-primary" *ngIf="!wishListed" (click)="addToWishList(product)">Add to Wishlist</button>
+
+                <button type="button" class="btn btn-sm btn-warning mx-1" (click)="goToAllReviews()">See
+                    Reviews</button>
+                <button type="button" class="btn btn-sm btn-primary" *ngIf="!wishListed"
+                    (click)="addToWishList(product)">Add to Wishlist</button>
                 <button type="button" class="btn btn-sm btn-primary" *ngIf="wishListed">Added to Wishlist!</button>
-                <button type="button" class="btn btn-sm btn-danger mx-1" *ngIf="wishListed" (click)="removeFromWishList(product)">Remove from Wishlist</button>
+                <button type="button" class="btn btn-sm btn-danger mx-1" *ngIf="wishListed"
+                    (click)="removeFromWishList(product)">Remove from Wishlist</button>
             </h6>
             <span class="fw-bold">{{product.quantity}} </span> In Stock
         </div>
@@ -29,12 +31,14 @@
         <div class="col-md-2 p-5 border-start justify-content-center">
             <h2>{{product.price | currency}}</h2>
             <form #addForm="ngForm" (ngSubmit)="addToCart(addForm, product)">
-                <div class="form-group">
+                <div class="form-group" *ngIf="product.quantity != 0">
                     <label for="quantity">Quantity</label>
                     <input class="form-control form-control-sm" type="number" min="1" id="quantity" name="quantity"
                         aria-label=".form-control-sm" ngModel="1" class="form-control">
                 </div>
-                <button type="button" class="btn btn-warning my-1" type="submit">Add to Cart</button>
+                <button type="button" class="btn btn-warning my-1" type="submit" *ngIf="product.quantity != 0">Add to
+                    Cart</button>
+                <button class="btn btn-danger my-1 disabled" *ngIf="product.quantity == 0">Out of Stock</button>
             </form>
         </div>
     </div>
@@ -102,4 +106,3 @@
         </div>
     </div>
 </div>
-
