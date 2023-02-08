@@ -15,7 +15,8 @@ export class AuthService {
 
   login(email: string, password: string): Observable<any> {
     const payload = {email:email, password:password};
-    return this.http.post<any>(`${this.authUrl}/login`, payload, {headers: environment.headers, withCredentials: environment.withCredentials});
+    console.log(payload);
+    return this.http.post<any>(`${this.authUrl}/login`, JSON.stringify(payload), {headers: environment.headers, withCredentials: environment.withCredentials});
   }
 
   logout(): void{
@@ -24,6 +25,6 @@ export class AuthService {
 
   register(firstName: string, lastName: string, email: string, password: string): Observable<any> {
     const payload = {firstName: firstName, lastName: lastName, email: email, password: password};
-    return this.http.post<any>(`${this.authUrl}/register`, payload, {headers: environment.headers});
+    return this.http.post<any>(`${this.authUrl}/register`, JSON.stringify(payload), {headers: environment.headers});
   }
 }
