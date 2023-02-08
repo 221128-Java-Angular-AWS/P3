@@ -4,6 +4,7 @@ import { Product } from 'src/app/models/product';
 import { ProductService } from 'src/app/services/product.service';
 import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { OrdersService } from 'src/app/services/orders.service';
+import { ReviewService } from 'src/app/services/review.service';
 
 @Component({
   selector: 'app-checkout',
@@ -19,6 +20,7 @@ export class CheckoutComponent implements OnInit {
   totalPrice: number = 0;
   cartProducts: Product[] = [];
   finalProducts: {id: number, quantity: number}[] = []; 
+  ping: string="";
   userId!: number;
 
   checkoutForm = new UntypedFormGroup({
@@ -34,7 +36,7 @@ export class CheckoutComponent implements OnInit {
     country: new UntypedFormControl('', Validators.required)
   });
 
-  constructor(private productService: ProductService,private ordersService: OrdersService, private router: Router) { }
+  constructor(private productService: ProductService,private ordersService: OrdersService, private router: Router, private reviewService: ReviewService) { }
 
   ngOnInit(): void {
     this.productService.getUserId().subscribe((id)=>{
