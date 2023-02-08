@@ -38,6 +38,14 @@ export class WishListService {
     );
   }
 
+  public checkIfWishListed(productId: Number): Observable<Object> {
+    let productIdUrl = `/${productId}`;
+    return this.http.get(environment.baseUrl + this.wishListUrl + productIdUrl, {headers: environment.headers, withCredentials: environment.withCredentials})
+    .pipe(
+      catchError(this.handleError<Product>('addWishListItem'))
+    );
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);
