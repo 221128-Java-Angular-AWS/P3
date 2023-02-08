@@ -17,7 +17,7 @@ export class ProductDetailComponent implements OnInit {
   rating!: number;
   wishListed: Boolean = false;
 
-  constructor(private productService: ProductService, private route: ActivatedRoute, private wishListService: WishListService, private router: Router, private reviewService: ReviewServic) { }
+  constructor(private productService: ProductService, private route: ActivatedRoute, private wishListService: WishListService, private router: Router, private reviewService: ReviewService) { }
 
   ngOnInit(): void {
     const productId = Number(this.route.snapshot.paramMap.get('id'));
