@@ -18,6 +18,9 @@ import { OrderDetailsComponent } from './components/order-details/order-details.
 import { ProfileComponent } from './components/profile/profile.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 import { RelatedProductsComponent } from './components/related-products/related-products.component';
+import { ReviewComponent } from './components/review/review.component';
+import { ReviewPageComponent } from './components/review-page/review-page.component';
+import { AllReviewsComponent } from './components/all-reviews/all-reviews.component';
 
 
 @NgModule({
@@ -36,7 +39,10 @@ import { RelatedProductsComponent } from './components/related-products/related-
     OrderDetailsComponent,
     ProfileComponent,
     ProductDetailComponent,
-    RelatedProductsComponent
+    RelatedProductsComponent,
+    ReviewComponent,
+    ReviewPageComponent,
+    AllReviewsComponent
   ],
   imports: [
     BrowserModule,
