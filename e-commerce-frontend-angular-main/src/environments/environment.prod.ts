@@ -4,6 +4,8 @@ export const environment = {
   baseUrl: "http://ec2-18-219-177-77.us-east-2.compute.amazonaws.com:7777",
   headers: {
     'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': 'http://localhost:4200',
+    'Access-Control-Allow-Origin': 'http://p3-static-hosting.s3-website.us-east-2.amazonaws.com',
+    'Origin': 'http://ec2-18-219-177-77.us-east-2.compute.amazonaws.com:7777',
+    'Access-Control-Allow-Headers': 'Content-Type, X-Requested-With'
   }
 };

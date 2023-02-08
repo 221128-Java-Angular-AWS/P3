@@ -3,6 +3,7 @@ package com.revature.services;
 import com.revature.dtos.ProductInfo;
 import com.revature.models.Product;
 import com.revature.models.User;
+import com.revature.repositories.ProductRepository;
 import com.revature.repositories.WishListRepository;
 import com.revature.models.WishList;
 import java.util.ArrayList;
@@ -42,11 +43,14 @@ public class WishListServiceTests {
   @Mock
   WishListRepository mockWishListRepository;
 
+  @Mock
+    ProductRepository mockProductRepository;
+
   private final Integer id = 1;
 
   @Test
   void getWishListTest() {
-      sut = new WishListService(mockWishListRepository);
+      sut = new WishListService(mockWishListRepository, mockProductRepository);
 
       //set up test data: fake products and user
       Product product1 = new Product(2, 50, 49.99, "test product 1", "testImage.jpg", "test1", "test");
@@ -75,7 +79,7 @@ public class WishListServiceTests {
 
   @Test
   void findByIdTest() {
-      sut = new WishListService(mockWishListRepository);
+      sut = new WishListService(mockWishListRepository, mockProductRepository);
       Mockito.when(mockWishListRepository.findById(id)).thenReturn(Optional.of(mockWishListItem));
       Optional<WishList> wishList = sut.findById(id);
       Assertions.assertEquals(Optional.of(mockWishListItem), wishList);
@@ -83,7 +87,7 @@ public class WishListServiceTests {
 
   @Test
   void findByUserAndProductTest() {
-      sut = new WishListService(mockWishListRepository);
+      sut = new WishListService(mockWishListRepository, mockProductRepository);
       Mockito.when(mockWishListRepository.findByUserAndProduct(id, id)).thenReturn(Optional.of(mockWishListItem));
       Optional<WishList> wishListItem = sut.findByUserAndProduct(id, id);
       Assertions.assertEquals(Optional.of(mockWishListItem), wishListItem);
@@ -91,7 +95,7 @@ public class WishListServiceTests {
 
   @Test
   void deleteWishListItemTest() {
-      sut = new WishListService(mockWishListRepository);
+      sut = new WishListService(mockWishListRepository, mockProductRepository);
       sut.deleteWishListItem(id);
       verify(mockWishListRepository).deleteById(id);
   }
