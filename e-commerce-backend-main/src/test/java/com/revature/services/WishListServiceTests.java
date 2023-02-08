@@ -3,6 +3,7 @@ package com.revature.services;
 import com.revature.dtos.ProductInfo;
 import com.revature.models.Product;
 import com.revature.models.User;
+import com.revature.repositories.ProductRepository;
 import com.revature.repositories.WishListRepository;
 import com.revature.repositories.ProductRepository;
 
