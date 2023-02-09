@@ -177,7 +177,7 @@ To explore the project, follow the instructions below.
 
 <br>
 <div align="center">
-</div><br><br>
+</div><br>
 
 The login/register page allows for users to create an account or log into an existing account. Usernames and passwords are validated as the user fills in the inputs, and passwords
 are hashed before being stored in the database for increased security. A cookie is generated to maintain a seamless user session experience. Users can also log out once they are
@@ -190,7 +190,7 @@ finished using the application.
 <br>
 
 <div align="center">
-</div><br><br>
+</div><br>
 
 The main home page displays a list of products available for purchase, as well as basic information about each product. Clicking on a product will open up a detailed view. Multiple
 copies of a product can be added to the cart, and items can be added to the wish list to be referenced later.
@@ -200,18 +200,18 @@ copies of a product can be added to the cart, and items can be added to the wish
 <br>
 
 <div align="center">
-</div><br><br>
+</div><br>
 
 More details about a product can be found on the Product Details page. Items can be added to the cart or wish list, and user reviews can be accessed from this page.
 
-<br><br>
+<br>
 
 > ## Navbar
 
 <br>
 
 <div align="center">
-</div><br><br>
+</div><br>
 
 A persistent navigation bar allows users to navigate the website, as well as to search for products.
 
@@ -222,7 +222,7 @@ A persistent navigation bar allows users to navigate the website, as well as to 
 <br>
 
 <div align="center">
-</div><br><br>
+</div><br>
 
 The order history page allows users to view their previous orders, as well as the ability to add reviews for any purchased products.
 
@@ -233,7 +233,7 @@ The order history page allows users to view their previous orders, as well as th
 <br>
 
 <div align="center">
-</div><br><br>
+</div><br>
 
 The cart page allows users to view, modify, or empty their cart, as well as purchase the cart's contents.
 
@@ -244,7 +244,7 @@ The cart page allows users to view, modify, or empty their cart, as well as purc
 <br>
 
 <div align="center">
-</div><br><br>
+</div><br>
 
 A user profile page displays the users information and gives the option for that information to be edited. Order history is also displayed alongside the user's wish list.
 
