@@ -4,6 +4,10 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import * as bcrypt from 'bcryptjs';
 
+/**
+ * This component allows users to create a new account. 
+ * Once a new user is registered, get taken back to the login page to log in as the new user
+ */
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -24,6 +28,10 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
   }
   
+  /**
+   * This function sends the new user information to the back-end to be persisted in the database.
+   * Navigates back to the login page on success.
+   */
   onSubmit(): void {
     this.authService.register(this.registerForm.get('fname')?.value, this.registerForm.get('lname')?.value, this.registerForm.get('email')?.value, bcrypt.hashSync(this.registerForm.get('password')?.value, 10)).subscribe(
       () => console.log("New user registered"),
