@@ -19,8 +19,7 @@ export class AllReviewsComponent implements OnInit {
   constructor(private route: ActivatedRoute, private reviewService: ReviewService, private location: Location, private productService: ProductService) { }
 
   ngOnInit(): void {
-    //this.getProduct();
-    this.getAllReviews();
+    this.getAllReviews(); //get reviews on initialization of this component
     console.log(JSON.stringify(this.reviews))
   }
 
@@ -31,6 +30,9 @@ export class AllReviewsComponent implements OnInit {
     });
   }
 
+  /**
+   * Get the productId from the URL and subscribe to review service to get list of reviews.
+   */
   getAllReviews(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.reviewService.getReviews(id).subscribe((reviews) => {
