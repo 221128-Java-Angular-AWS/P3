@@ -41,6 +41,7 @@ export class ProductDetailComponent implements OnInit {
     });
   }
 
+  // adds the item to the cart
   addToCart(addForm: NgForm, product: Product): void {
     let quantity: number = Number(addForm.value.quantity)
     this.productService.addCart(this.userId, product.id, quantity).subscribe((cart)=>{

@@ -22,6 +22,9 @@ export class CartComponent implements OnInit {
 
   constructor(private productService: ProductService, private router: Router) { }
 
+  /*
+  * retrieves all the carts associated with a user and calculates the total price
+  */
   ngOnInit(): void {
     this.productService.getUserId().subscribe((id)=> {
       this.productService.getCart2(id).subscribe((data: any)=>{
@@ -38,13 +41,19 @@ export class CartComponent implements OnInit {
     );
   }
 
+  /*
+  * deletes a cart item
+  */
   delete(product_id: number): void{
     this.productService.removeCartItem(this.userId, product_id).subscribe(()=>{
-      window.location.reload(); // moved by will, was refreshing before removing the item from the cart otherwise
+      window.location.reload(); 
     });
     
   }
 
+  /*
+  * empties the cart
+  */
   emptyCart(): void {
     this.productService.emptyCart(this.userId).subscribe(()=>{});
     this.router.navigate(['/home']);
