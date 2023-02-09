@@ -66,9 +66,9 @@ export class ProfileComponent implements OnInit {
     updateUser.firstName = firstName;
     updateUser.lastName = lastName;
     // add more security to password change
-    if (password != undefined) {
+    if (password != "" && password != undefined) {
       updateUser.password = bcrypt.hashSync(password, 10);
-    }
+    } 
 
     this.profileService.postUser(updateUser).subscribe(
       (resp) => {
