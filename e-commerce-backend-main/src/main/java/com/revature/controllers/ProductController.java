@@ -22,7 +22,7 @@ import javax.transaction.Transactional;
 
 @RestController
 @RequestMapping("/api/product")
-@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:3000"}, allowCredentials = "true")
+@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:3000", "http://p3-static-hosting.s3-website.us-east-2.amazonaws.com"}, allowCredentials = "true", exposedHeaders = "Authorization")
 @Transactional
 public class ProductController {
 
@@ -56,6 +56,9 @@ public class ProductController {
         return ResponseEntity.ok(productService.save(product));
     }
 
+    /*
+     * checkouts and purchases a list of products
+     */
     @Authorized
     @PatchMapping
     public ResponseEntity<List<Product>> purchase(@RequestBody List<ProductInfo> metadata) { 	
@@ -82,6 +85,9 @@ public class ProductController {
         return ResponseEntity.ok(productList);
     }
 
+    /*
+     * deletes a product based on the id
+     */
     @Authorized
     @DeleteMapping("/{id}")
     public ResponseEntity<Product> deleteProduct(@PathVariable("id") int id) {
@@ -95,12 +101,17 @@ public class ProductController {
         return ResponseEntity.ok(optional.get());
     }
 
+    // retrieves the list of carts for the associated userId
     @Authorized
     @GetMapping("/cart")
     public List<Cart> getCart(@RequestParam int userId) {
         return productService.getCart(userId);
     }
 
+    /*
+     * Posts a new cart if that cart is not already present. 
+     * If it is present, it simply increases the quantity of the present cart.
+     */
     @Authorized
     @PostMapping("/cart")
     public Cart addCart(@RequestParam int userId, @RequestParam int prodId, @RequestParam int quantity){
@@ -117,12 +128,18 @@ public class ProductController {
         return productService.addQuanToCart(cartId, quantity);
     }
 
+    /*
+     * Clears the cart
+     */
     @Authorized
     @DeleteMapping("/cart")
     public void clearCart(@RequestParam("userId") int userId){
         productService.clearCart(userId);
     }
 
+    /*
+     * returns the product associated with the product id
+     */
     @Authorized
     @GetMapping("/cart/{id}")
     public ResponseEntity<Product> getCartProductById(@PathVariable("id") int id) {
@@ -134,12 +151,18 @@ public class ProductController {
         return ResponseEntity.ok(optional.get());
     }
 
+    /*
+     * delets a single cart item
+     */
     @Authorized
     @DeleteMapping("/cart/{id}")
     public void deleteCartProduct(@PathVariable("id") int userId, @RequestParam("prodId") int prodId){
         productService.deleteCartProduct(userId, prodId);
     }
 
+    /*
+     * returns the user id using http session
+     */
     @Authorized
     @GetMapping("/cart/user")
     public int getUserId(HttpSession session){

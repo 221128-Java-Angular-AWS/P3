@@ -67,18 +67,22 @@ public class ProductService {
         return productRepository.findByProdId(productId);
     }
 
+    //returns the list of carts associated with a user's id
     public List<Cart> getCart(int id){
         return cartRepository.getCart(id);
     }
 
+    // adds a cart
     public Cart addCart(Cart cart){
         return cartRepository.save(cart);
     }
 
+    // removes all carts associated with a user's id
     public void clearCart(Integer id){
         cartRepository.clearCart(id);
     }
 
+    // checks to see if a cart is present
     public boolean inCart(Integer userId, Integer prodId){
         ispresent = false;
         cartRepository.findAll().forEach(element ->{
@@ -89,6 +93,7 @@ public class ProductService {
         return ispresent;
     }
 
+    // finds a cart's id
     public int findCart(Integer userId, Integer prodId){
         cartId = -1;
         cartRepository.findAll().forEach(element ->{
@@ -98,6 +103,8 @@ public class ProductService {
         });
         return cartId;
     }
+
+    // adds a quantity to a given cart's quantity
     public Cart addQuanToCart(Integer cartId, Integer quantity){
         Cart c = cartRepository.findById(cartId).get();
         int currentQuantity = c.getQuantity();
@@ -105,6 +112,7 @@ public class ProductService {
         return c;
     }
 
+    // deletes a cart
     public void deleteCartProduct(Integer userId, Integer prodId){
         cartRepository.deleteCartProduct(userId, prodId);
     }

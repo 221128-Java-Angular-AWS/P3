@@ -6,7 +6,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-
+/*
+ * Database model for the cart
+ */
 @Data
 @Entity
 @NoArgsConstructor
@@ -53,11 +55,6 @@ public class Cart {
     public Product getProduct(){
         return this.product;
     }
-    /* 
-    @Override
-    public int hashCode(){
-        return Objects.hash(id, user, product, quantity);
-    }*/
 
     @Override
     public String toString(){

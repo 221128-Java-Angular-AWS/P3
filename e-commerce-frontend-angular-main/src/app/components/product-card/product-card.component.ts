@@ -40,10 +40,11 @@ export class ProductCardComponent implements OnInit{
 
   ngOnInit(): void {
     this.productService.getUserId().subscribe((id)=> {this.userId = id})
+    this.wishListService.checkIfWishListed(this.productInfo.id)
+    .subscribe((isWishListed) => {
+      this.wishListed =  Boolean(isWishListed);
+    });
   }
-
-
-
 
   ngOnDestroy() {
     // this.subscription.unsubscribe();
@@ -55,6 +56,7 @@ export class ProductCardComponent implements OnInit{
     .subscribe();
   }
 
+  // adds the item to the cart
   addToCart(product: Product): void{
     this.productService.addCart(this.userId, product.id, 1).subscribe(()=>{});
   }

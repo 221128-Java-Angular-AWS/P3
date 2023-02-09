@@ -23,7 +23,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/wishlist")
-@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:3000"}, allowCredentials = "true")
+@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:3000", "http://p3-static-hosting.s3-website.us-east-2.amazonaws.com"}, allowCredentials = "true", exposedHeaders = "Authorization")
 public class WishListController {
 
     private final WishListService wishListService;
@@ -42,6 +42,15 @@ public class WishListController {
         int userId = user.getId();
         return ResponseEntity.ok(wishListService.getWishList(userId));
     }
+
+    @Authorized
+    @GetMapping("/{product_id}")
+    public ResponseEntity<Boolean> checkIfWishListed(@PathVariable("product_id") int productId, HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        int userId = user.getId();
+        return ResponseEntity.ok(wishListService.checkIfWishListed(userId, productId));
+    }
+
 
     // addWishListItem adds a WishList item to the wish_list table
     @Authorized
