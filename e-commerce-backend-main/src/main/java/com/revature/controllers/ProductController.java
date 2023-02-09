@@ -20,6 +20,9 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+/**
+ * This is the controller for handling requests related to products using the "/api/product" route
+ */
 @RestController
 @RequestMapping("/api/product")
 @CrossOrigin(origins = {"http://localhost:4200", "http://localhost:3000", "http://p3-static-hosting.s3-website.us-east-2.amazonaws.com"}, allowCredentials = "true", exposedHeaders = "Authorization")
@@ -33,12 +36,22 @@ public class ProductController {
         this.userService = userService;
     }
 
+    /**
+     * This method returns a completel list of all products in the database
+     * @return List of products in the database
+     */
     @Authorized
     @GetMapping
     public ResponseEntity<List<Product>> getInventory() {
         return ResponseEntity.ok(productService.findAll());
     }
 
+    /**
+     * This method returns a single product that contains the mapped
+     * variable "id" at the end of the "/api/products/{id}" route
+     * @param id
+     * @return A product that contains "id"
+     */
     @Authorized
     @GetMapping("/{id}")
     public ResponseEntity<Product> getProductById(@PathVariable("id") int id) {
@@ -87,7 +100,7 @@ public class ProductController {
 
     /*
      * deletes a product based on the id
-     */
+    */
     @Authorized
     @DeleteMapping("/{id}")
     public ResponseEntity<Product> deleteProduct(@PathVariable("id") int id) {
@@ -171,12 +184,25 @@ public class ProductController {
         return userId;
     }
 
+    /**
+     * This method returns a list of products that contain the mapped
+     * variables "genre" request param "/api/products/genre" route, the
+     * list will exclude a product with the matching "id"
+     * @param genre
+     * @param id
+     * @return List of products that share the "genre" excluding any with a matching "id"
+     */
     @Authorized
     @GetMapping(value = "/genre")
     public ResponseEntity<List<Product>> getProductByGenre(@RequestParam String genre, Integer id) {
         return ResponseEntity.ok(productService.findByGenre(genre, id));
     }
 
+    /**
+     * This method returns a list of products that contain
+     * @param name this will be what the user searched
+     * @return List of products that contain any part of the "name" variable
+     */
     @Authorized
     @GetMapping(value = "/search")
     public ResponseEntity<List<Product>> getProductByName(@RequestParam String name) {

@@ -12,6 +12,11 @@ import { User } from 'src/app/models/user';
   templateUrl: './product-card.component.html',
   styleUrls: ['./product-card.component.css']
 })
+
+/**
+ * This component is used for displaying an individual product in a card with
+ * basic information, an image, and a add to cart/ wishlist button
+ */
 export class ProductCardComponent implements OnInit{
 
   cartCount!: number;
@@ -47,9 +52,9 @@ export class ProductCardComponent implements OnInit{
   }
 
   ngOnDestroy() {
-    // this.subscription.unsubscribe();
   }
 
+  // adds an item to the wishlist
   addToWishList(product: Product): void {
     this.wishListed = true;
     this.wishListService.addToWishList(product.id)

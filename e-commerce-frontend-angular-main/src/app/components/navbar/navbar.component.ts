@@ -21,19 +21,9 @@ export class NavbarComponent implements OnInit{
   constructor(private authService: AuthService, private router: Router, private productService: ProductService) { }
   
   ngOnInit(): void {
-    /*
-    let userId: number = Number(localStorage.getItem("user"));
-    this.subscription = this.productService.getCart2(userId).subscribe((data: any)=>{
-      data.forEach(
-        (element: any)=> {
-          this.cartCount += element.quantity;
-        }
-      )
-    });*/
   }
 
   ngOnDestroy() {
-    // this.subscription.unsubscribe();
   }
 
   logout() {
@@ -41,6 +31,10 @@ export class NavbarComponent implements OnInit{
     this.router.navigate(['login']);
   }
 
+  /**
+   * This method will search for products containing the "filter" variable
+   * @param filter the search prompt
+   */
   searchForProducts(filter: string){
     this.noResults = false;
     if(filter == ""){
@@ -57,6 +51,9 @@ export class NavbarComponent implements OnInit{
     }
   }
 
+  /**
+   * This method will reset the search prompt
+   */
   resetSearch(){
     this.products = [];
     (<HTMLInputElement>document.getElementById("searchbar")).value = "";
