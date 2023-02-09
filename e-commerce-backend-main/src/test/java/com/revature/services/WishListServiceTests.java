@@ -5,6 +5,9 @@ import com.revature.models.Product;
 import com.revature.models.User;
 import com.revature.repositories.ProductRepository;
 import com.revature.repositories.WishListRepository;
+import com.revature.repositories.ProductRepository;
+
+import com.revature.services.WishListService;
 import com.revature.models.WishList;
 import java.util.ArrayList;
 
@@ -44,7 +47,7 @@ public class WishListServiceTests {
   WishListRepository mockWishListRepository;
 
   @Mock
-    ProductRepository mockProductRepository;
+  ProductRepository mockProductRepository;
 
   private final Integer id = 1;
 
