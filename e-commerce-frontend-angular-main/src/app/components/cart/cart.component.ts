@@ -43,6 +43,7 @@ export class CartComponent implements OnInit {
 
   /*
   * deletes a cart item
+  * @param productId
   */
   delete(product_id: number): void{
     this.productService.removeCartItem(this.userId, product_id).subscribe(()=>{

@@ -1,4 +1,5 @@
 <div class="page text-center">
+    <!-- Lists up to 4 of the products returned from getRelatedProduct()-->
     <div class="products" *ngFor="let product of relatedProduct | slice:0:4 let i = index;">
         <div class="singleProduct border-bottom">
             <app-product-card class="cardListItem" [productInfo]="product"></app-product-card>
