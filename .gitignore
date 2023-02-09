@@ -56,7 +56,7 @@ chrome-profiler-events*.json
 *.iws
 *.iml
 *.ipr
-d
+
 # misc
 */.angular/cache
 /.sass-cache
