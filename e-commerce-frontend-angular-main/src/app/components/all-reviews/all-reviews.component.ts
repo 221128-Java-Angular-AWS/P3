@@ -19,12 +19,8 @@ export class AllReviewsComponent implements OnInit {
   constructor(private route: ActivatedRoute, private reviewService: ReviewService, private location: Location, private productService: ProductService) { }
 
   ngOnInit(): void {
-<<<<<<< HEAD
-    this.getAllReviews(); //get reviews on initialization of this component
-=======
     this.getProduct();
     this.getAllReviews();
->>>>>>> c79d70866096159ac2bdbc45ce4adfc1f6262e07
     console.log(JSON.stringify(this.reviews))
     this.reviewService.getAverage(this.product.id).subscribe((rating) => {
       this.rating = rating;

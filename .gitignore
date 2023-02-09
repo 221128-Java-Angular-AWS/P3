@@ -67,6 +67,15 @@ npm-debug.log
 yarn-error.log
 testem.log
 /typings
+.vscode/settings.json
+e-commerce-frontend-angular-main/dist/e-commerce/3rdpartylicenses.txt
+e-commerce-frontend-angular-main/dist/e-commerce/assets/images/favicon.png
+e-commerce-frontend-angular-main/dist/e-commerce/assets/images/rev-logo.png
+e-commerce-frontend-angular-main/dist/e-commerce/polyfills.bef1a3dc49d00369.js
+e-commerce-frontend-angular-main/dist/e-commerce/favicon.ico
+e-commerce-frontend-angular-main/dist/e-commerce/main.be12fdd52a4255d6.js
+e-commerce-frontend-angular-main/dist/e-commerce/runtime.78d081a0a0542329.js
+e-commerce-frontend-angular-main/dist/e-commerce/styles.ef46db3751d8e999.css
 
 # System Files
 .DS_Store
@@ -90,6 +99,7 @@ target/
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
+/dist/
 /nbdist/
 /.nb-gradle/
 build/
