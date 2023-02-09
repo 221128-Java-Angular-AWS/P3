@@ -41,6 +41,10 @@ export class NavbarComponent implements OnInit{
     this.router.navigate(['login']);
   }
 
+  /**
+   * This method will search for products containing the "filter" variable
+   * @param filter the search prompt
+   */
   searchForProducts(filter: string){
     this.noResults = false;
     if(filter == ""){
@@ -57,6 +61,9 @@ export class NavbarComponent implements OnInit{
     }
   }
 
+  /**
+   * This method will reset the search prompt
+   */
   resetSearch(){
     this.products = [];
     (<HTMLInputElement>document.getElementById("searchbar")).value = "";
