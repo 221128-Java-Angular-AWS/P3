@@ -38,7 +38,7 @@
 
 ### Kirill Klimov - CI/CD Lead - kirill674@revature.net
 
- <img src="src\ui\src\assets\profilepic.jpg" alt="KirillPortrait" width="80" height="80">
+ <img src="https://github.com/221128-Java-Angular-AWS/P2/raw/main/src/ui/src/assets/profilepic.jpg" width="80" height="80">
 
 [![linkedin-shield]][kirill-linkedin]
 [![github-shield]][kirill-github]
@@ -48,7 +48,7 @@
 
 ### Travis Morse - Scrum Master - travis741@revature.net
 
- <img src="src\ui\src\assets\travis_morse.jpg" alt="TravisPortrait" width="80" height="80">
+ <img src="https://github.com/221128-Java-Angular-AWS/P2/raw/main/src/ui/src/assets/profilepic.jpg" alt="TravisPortrait" width="80" height="80">
 
 [![linkedin-shield]][travism-linkedin]
 [![github-shield]][travism-github]
@@ -57,7 +57,7 @@
 
 ### Audie Ni - Fronted Lead - audie520@revature.net
 
- <img src="src\ui\src\assets\profilepic.jpg" alt="Logo" width="80" height="80">
+ <img src="https://github.com/221128-Java-Angular-AWS/P2/raw/main/src/ui/src/assets/profilepic.jpg" width="80" height="80">
 
 [![linkedin-shield]][audie-linkedin]
 [![github-shield]][audie-github]
@@ -66,7 +66,7 @@
 
 ### Brayden Nordine - Backend Lead - brayden018@revature.net
 
- <img src="src\ui\src\assets\profilepic.jpg" alt="Logo" width="80" height="80">
+ <img src="https://github.com/221128-Java-Angular-AWS/P2/raw/main/src/ui/src/assets/profilepic.jpg" width="80" height="80">
 
 [![linkedin-shield]][brayden-linkedin]
 [![github-shield]][brayden-github]
@@ -75,7 +75,7 @@
 
 ### William Osborne - email@revature.net
 
- <img src="src\ui\src\assets\profilepic.jpg" alt="Logo" width="80" height="80">
+ <img src="https://github.com/221128-Java-Angular-AWS/P2/raw/main/src/ui/src/assets/profilepic.jpg" width="80" height="80">
 
 [![linkedin-shield]][william-linkedin]
 [![github-shield]][william-github]
@@ -84,7 +84,7 @@
 
 ### Travis Pomeroy - travis928@revature.net
 
- <img src="src\ui\src\assets\profilepic.jpg" alt="Logo" width="80" height="80">
+ <img src="https://github.com/221128-Java-Angular-AWS/P2/raw/main/src/ui/src/assets/profilepic.jpg" width="80" height="80">
 
 [![linkedin-shield]][travisp-linkedin]
 [![github-shield]][travisp-github]
@@ -93,7 +93,7 @@
 
 ### Matthew Shen - matthew945@revature.net
 
- <img src="src\ui\src\assets\profilepic.jpg" alt="Logo" width="80" height="80">
+ <img src="https://github.com/221128-Java-Angular-AWS/P2/raw/main/src/ui/src/assets/profilepic.jpg" width="80" height="80">
 
 [![linkedin-shield]][matthew-linkedin]
 [![github-shield]][matthew-github]
@@ -106,7 +106,7 @@
 
 <br>
 <div align="center">
-<img src="src\ui\src\assets\images/DDIcon.png" width="400" height="auto" alt="Digital Dominion Icon"/>
+<img src="e-commerce-frontend-angular-main/src/assets/images/DDIcon.png" width="400" height="auto" alt="Digital Dominion Icon"/>
 </div><br><br>
 
 Digital Dominion was a collaborative project produced by the trainees of the Revature Next Gen Java AWS Angular v3.2 training course. This project aimed to create an e-commerce website based off of a set of provided project requirements and initial repository.
