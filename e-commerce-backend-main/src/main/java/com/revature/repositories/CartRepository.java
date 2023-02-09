@@ -14,15 +14,28 @@ import javax.transaction.Transactional;
 
 public interface CartRepository extends JpaRepository<Cart, Integer> {
     
+    /*
+     * retrives the carts given a user id
+     * @param userId
+     * @return list of carts
+     */
     @Query(value = "SELECT * FROM cart WHERE user_id = :userId", nativeQuery = true)
     List<Cart> getCart(
         @Param("userId") Integer userId
     );
     
+    /*
+     * clears a cart
+     * @param userId
+     */
     @Modifying
     @Query(value = "DELETE FROM cart WHERE user_id = :userId", nativeQuery = true)
     void clearCart(@Param("userId") Integer userId);
     
+    /*
+     * deletes a specific cart
+     * @param userId, productId
+     */
     @Modifying
     @Query(value = "DELETE FROM cart WHERE user_id = :userId AND product_id = :prodId", nativeQuery = true)
     void deleteCartProduct(@Param("userId") Integer userId, @Param("prodId") Integer prodId);

@@ -17,7 +17,7 @@
         <td>{{product.product.name}}</td>
         <td>{{product.quantity}}</td>
         <td>{{product.product.description}}</td>
-        <td>${{product.product.price*product.quantity}}</td>
+        <td>{{product.product.price*product.quantity| currency}}</td>
         <td><button class="btn btn-danger" (click)="delete(product.product.id)">Delete</button></td>
       </tr>
     </tbody>

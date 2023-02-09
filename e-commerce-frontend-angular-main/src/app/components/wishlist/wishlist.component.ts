@@ -37,6 +37,7 @@ export class WishlistComponent implements OnInit {
     this.products.splice(this.products.indexOf(product), 1);
   }
 
+  // adds the product to the cart
   addToCart(product: Product): void {
     this.productService.addCart(this.userId, product.id, 1)
     .subscribe();

@@ -20,6 +20,9 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+/**
+ * This is the controller for handling requests related to products using the "/api/product" route
+ */
 @RestController
 @RequestMapping("/api/product")
 @CrossOrigin(origins = {"http://localhost:4200", "http://localhost:3000", "http://p3-static-hosting.s3-website.us-east-2.amazonaws.com"}, allowCredentials = "true", exposedHeaders = "Authorization")
@@ -33,12 +36,22 @@ public class ProductController {
         this.userService = userService;
     }
 
+    /**
+     * This method returns a completel list of all products in the database
+     * @return List of products in the database
+     */
     @Authorized
     @GetMapping
     public ResponseEntity<List<Product>> getInventory() {
         return ResponseEntity.ok(productService.findAll());
     }
 
+    /**
+     * This method returns a single product that contains the mapped
+     * variable "id" at the end of the "/api/products/{id}" route
+     * @param id
+     * @return A product that contains "id"
+     */
     @Authorized
     @GetMapping("/{id}")
     public ResponseEntity<Product> getProductById(@PathVariable("id") int id) {
@@ -56,6 +69,9 @@ public class ProductController {
         return ResponseEntity.ok(productService.save(product));
     }
 
+    /*
+     * checkouts and purchases a list of products
+     */
     @Authorized
     @PatchMapping
     public ResponseEntity<List<Product>> purchase(@RequestBody List<ProductInfo> metadata) { 	
@@ -82,6 +98,10 @@ public class ProductController {
         return ResponseEntity.ok(productList);
     }
 
+    /*
+     * deletes a product based on the id
+     * @param product id
+    */
     @Authorized
     @DeleteMapping("/{id}")
     public ResponseEntity<Product> deleteProduct(@PathVariable("id") int id) {
@@ -95,12 +115,21 @@ public class ProductController {
         return ResponseEntity.ok(optional.get());
     }
 
+    // retrieves the list of carts for the associated userId
+    // @param user id
+    // @return list of carts
     @Authorized
     @GetMapping("/cart")
     public List<Cart> getCart(@RequestParam int userId) {
         return productService.getCart(userId);
     }
 
+    /*
+     * Posts a new cart if that cart is not already present. 
+     * If it is present, it simply increases the quantity of the present cart.
+     * @param product id and quantity
+     * @return added cart
+     */
     @Authorized
     @PostMapping("/cart")
     public Cart addCart(@RequestParam int userId, @RequestParam int prodId, @RequestParam int quantity){
@@ -117,12 +146,20 @@ public class ProductController {
         return productService.addQuanToCart(cartId, quantity);
     }
 
+    /*
+     * Clears the cart
+     * @param userid
+     */
     @Authorized
     @DeleteMapping("/cart")
     public void clearCart(@RequestParam("userId") int userId){
         productService.clearCart(userId);
     }
 
+    /*
+     * returns the product associated with the product id
+     * @param productid
+     */
     @Authorized
     @GetMapping("/cart/{id}")
     public ResponseEntity<Product> getCartProductById(@PathVariable("id") int id) {
@@ -134,12 +171,21 @@ public class ProductController {
         return ResponseEntity.ok(optional.get());
     }
 
+    /*
+     * delets a single cart item
+     * @param userid and productid
+     */
     @Authorized
     @DeleteMapping("/cart/{id}")
     public void deleteCartProduct(@PathVariable("id") int userId, @RequestParam("prodId") int prodId){
         productService.deleteCartProduct(userId, prodId);
     }
 
+    /*
+     * returns the user id using http session
+     * @param http session
+     * @return userid
+     */
     @Authorized
     @GetMapping("/cart/user")
     public int getUserId(HttpSession session){
@@ -148,12 +194,25 @@ public class ProductController {
         return userId;
     }
 
+    /**
+     * This method returns a list of products that contain the mapped
+     * variables "genre" request param "/api/products/genre" route, the
+     * list will exclude a product with the matching "id"
+     * @param genre
+     * @param id
+     * @return List of products that share the "genre" excluding any with a matching "id"
+     */
     @Authorized
     @GetMapping(value = "/genre")
     public ResponseEntity<List<Product>> getProductByGenre(@RequestParam String genre, Integer id) {
         return ResponseEntity.ok(productService.findByGenre(genre, id));
     }
 
+    /**
+     * This method returns a list of products that contain
+     * @param name this will be what the user searched
+     * @return List of products that contain any part of the "name" variable
+     */
     @Authorized
     @GetMapping(value = "/search")
     public ResponseEntity<List<Product>> getProductByName(@RequestParam String name) {

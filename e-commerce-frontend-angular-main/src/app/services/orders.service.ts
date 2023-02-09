@@ -6,12 +6,19 @@ import { catchError } from 'rxjs/operators'
 import { environment } from 'src/environments/environment';
 import { Product } from '../models/product';
 
+/**
+ * This service sends HTTP requests related to orders to the back-end server
+ */
 @Injectable({
   providedIn: 'root'
 })
 export class OrdersService {
   constructor(private http: HttpClient) {}
 
+  /**
+   * Retrieves all orders belonging to the current user
+   * @returns An observable containing the list of orders
+   */
   getOrders(): Observable<Order[]>{
     return this.http.get<Order[]>(environment.baseUrl + "/order", {headers: environment.headers, withCredentials: environment.withCredentials})
     .pipe(
@@ -19,6 +26,11 @@ export class OrdersService {
     );
   }
 
+  /**
+   * Retrieves a specific order belonging to the current user
+   * @param orderId The order being requested
+   * @returns An observable containing the order
+   */
   getOrder(orderId: number): Observable<Order>{
     return this.http.get<Order>(environment.baseUrl + "/order/" + orderId, {headers: environment.headers, withCredentials: environment.withCredentials})
     .pipe(
@@ -26,7 +38,10 @@ export class OrdersService {
     );
   }
 
-  // added by Will to call down the stack for a limit of 5 most recent orders
+  /**
+   * Retrieves the 5 most recent orders belonging to the current user
+   * @returns An observable containing a list of the orders
+   */
   getOrdersForProfile() {
     return this.http.get<Order[]>(environment.baseUrl + "/order/profile", {headers: environment.headers, withCredentials: environment.withCredentials})
     .pipe(
@@ -34,6 +49,11 @@ export class OrdersService {
     );
   }
 
+  /**
+   * Sends a list of products to be persisted in the database as a new order
+   * @param products The list of products in the order
+   * @returns An observable containing just the response info
+   */
   createOrder(products: {id: number, quantity: number}[]): Observable<any>{
     const payload = JSON.stringify(products);
     console.log(payload);

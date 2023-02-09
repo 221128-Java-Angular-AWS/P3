@@ -38,7 +38,7 @@
 
 ### Kirill Klimov - CI/CD Lead - kirill674@revature.net
 
- <img src="src\ui\src\assets\profilepic.jpg" alt="KirillPortrait" width="80" height="80">
+ <img src="https://github.com/221128-Java-Angular-AWS/P2/raw/main/src/ui/src/assets/profilepic.jpg" width="80" height="80">
 
 [![linkedin-shield]][kirill-linkedin]
 [![github-shield]][kirill-github]
@@ -57,7 +57,7 @@
 
 ### Audie Ni - Fronted Lead - audie520@revature.net
 
- <img src="src\ui\src\assets\profilepic.jpg" alt="Logo" width="80" height="80">
+ <img src="https://github.com/221128-Java-Angular-AWS/P2/raw/main/src/ui/src/assets/profilepic.jpg" width="80" height="80">
 
 [![linkedin-shield]][audie-linkedin]
 [![github-shield]][audie-github]
@@ -66,7 +66,7 @@
 
 ### Brayden Nordine - Backend Lead - brayden018@revature.net
 
- <img src="src\ui\src\assets\profilepic.jpg" alt="Logo" width="80" height="80">
+ <img src="https://github.com/221128-Java-Angular-AWS/P2/raw/main/src/ui/src/assets/profilepic.jpg" width="80" height="80">
 
 [![linkedin-shield]][brayden-linkedin]
 [![github-shield]][brayden-github]
@@ -75,7 +75,7 @@
 
 ### William Osborne - email@revature.net
 
- <img src="src\ui\src\assets\profilepic.jpg" alt="Logo" width="80" height="80">
+ <img src="https://github.com/221128-Java-Angular-AWS/P2/raw/main/src/ui/src/assets/profilepic.jpg" width="80" height="80">
 
 [![linkedin-shield]][william-linkedin]
 [![github-shield]][william-github]
@@ -84,7 +84,7 @@
 
 ### Travis Pomeroy - travis928@revature.net
 
- <img src="src\ui\src\assets\profilepic.jpg" alt="Logo" width="80" height="80">
+ <img src="https://github.com/221128-Java-Angular-AWS/P2/raw/main/src/ui/src/assets/profilepic.jpg" width="80" height="80">
 
 [![linkedin-shield]][travisp-linkedin]
 [![github-shield]][travisp-github]
@@ -93,7 +93,7 @@
 
 ### Matthew Shen - matthew945@revature.net
 
- <img src="src\ui\src\assets\profilepic.jpg" alt="Logo" width="80" height="80">
+ <img src="https://github.com/221128-Java-Angular-AWS/P2/raw/main/src/ui/src/assets/profilepic.jpg" width="80" height="80">
 
 [![linkedin-shield]][matthew-linkedin]
 [![github-shield]][matthew-github]
@@ -106,7 +106,7 @@
 
 <br>
 <div align="center">
-<img src="src\ui\src\assets\images/DDIcon.png" width="400" height="auto" alt="Digital Dominion Icon"/>
+<img src="e-commerce-frontend-angular-main/src/assets/images/DDIcon.png" width="400" height="auto" alt="Digital Dominion Icon"/>
 </div><br><br>
 
 Digital Dominion was a collaborative project produced by the trainees of the Revature Next Gen Java AWS Angular v3.2 training course. This project aimed to create an e-commerce website based off of a set of provided project requirements and initial repository.
@@ -168,6 +168,16 @@ To explore the project, follow the instructions below.
 
 <br><br>
 
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## DevOps advice
+
+A t2-micro/small will likely not be capable enough for your needs, so try to go for t2-medium with an Amazon Linux image build.
+The Jenkins script that we used is inside Jenkins-script.md.
+More information about setting up the EC2 instance environment and more can be found in:
+https://github.com/221128-Java-Angular-AWS/CICD-Prototyping
+
+<br><br>
 
 <!-- USAGE EXAMPLES -->
 
