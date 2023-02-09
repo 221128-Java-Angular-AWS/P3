@@ -38,6 +38,9 @@ export class CheckoutComponent implements OnInit {
 
   constructor(private productService: ProductService,private ordersService: OrdersService, private router: Router, private reviewService: ReviewService) { }
 
+  /*
+  * calculates the total price and retrives the products the user wants to checkout
+  */
   ngOnInit(): void {
     this.productService.getUserId().subscribe((id)=>{
       this.userId = id;
@@ -55,6 +58,9 @@ export class CheckoutComponent implements OnInit {
     })
   }
 
+  /*
+  * purchases the cart
+  */
   onSubmit(): void {
     this.products.forEach(
       (element) => {
