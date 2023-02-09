@@ -5,6 +5,10 @@ import { environment } from 'src/environments/environment';
 import { User } from '../models/user';
 import { catchError } from 'rxjs/operators'
 
+/**
+ * The profile service is how the client sends http methods to the server to populate the profile component
+ */
+
 @Injectable({
   providedIn: 'root'
 })
@@ -16,7 +20,6 @@ export class ProfileService {
   constructor(private http: HttpClient) { }
 
   // this returns a user object to display the user profile
-  // user id is retrieved in the back end from the HttpSession object
   public getUser(): Observable<User> {
     const url = this.profileUrl;
     return this.http.get<User>(url, {headers: environment.headers, withCredentials: environment.withCredentials});

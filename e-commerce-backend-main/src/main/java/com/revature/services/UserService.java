@@ -29,7 +29,16 @@ public class UserService {
     public Optional<User> getUser(String email){
         return userRepository.findByEmail(email);
     }
-    
+
+
+    /**
+     * Compare a User object retrieved from the ProfileController to the user object in persistence
+     * retrieved by userId, replace any empty fields in the User object retrieved and update the record
+     * in persistence
+     * @param userId The primary key of the User record to be updated
+     * @param user The User object containing updated information to be persisted
+     * @return The updated user object
+     */
     public User save(int userId, User user){
         user.setId(userId);
         User currentUser = this.findById(userId).get();
@@ -58,6 +67,11 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    /**
+     * Find a record with the primary key userId and return the User object from the record in persistence
+     * @param userId The primary key of the user record to be retrieved
+     * @return The User object created from the user record in persistence
+     */
     public Optional<User> findById(int userId) {
         Optional<User> optional = userRepository.findById(userId);
         if (optional.isPresent()) {

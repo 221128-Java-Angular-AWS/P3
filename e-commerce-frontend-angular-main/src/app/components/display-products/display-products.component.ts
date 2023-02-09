@@ -9,6 +9,9 @@ import { ProfileService } from 'src/app/services/profile.service';
   templateUrl: './display-products.component.html',
   styleUrls: ['./display-products.component.css']
 })
+/**
+ * Used as the home page, this component displays all products in the database
+ */
 export class DisplayProductsComponent implements OnInit {
 
   allProducts: Product[] = [];

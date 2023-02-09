@@ -8,6 +8,9 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.List;
 
+/**
+ * this model represents the user for use in (brief
+ */
 @Data
 @Entity
 @NoArgsConstructor
