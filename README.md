@@ -180,7 +180,8 @@ To explore the project, follow the instructions below.
 </div><br><br>
 
 The login/register page allows for users to create an account or log into an existing account. Usernames and passwords are validated as the user fills in the inputs, and passwords
-are hashed before being stored in the database for increased security. A cookie is generated to maintain a seamless user session experience.
+are hashed before being stored in the database for increased security. A cookie is generated to maintain a seamless user session experience. Users can also log out once they are
+finished using the application.
 
 <br>
 
@@ -213,6 +214,28 @@ More details about a product can be found on the Product Details page. Items can
 </div><br><br>
 
 A persistent navigation bar allows users to navigate the website, as well as to search for products.
+
+<br><br>
+
+> ## Orders
+
+<br>
+
+<div align="center">
+</div><br><br>
+
+The order history page allows users to view their previous orders, as well as the ability to add reviews for any purchased products.
+
+<br><br>
+
+> ## Cart
+
+<br>
+
+<div align="center">
+</div><br><br>
+
+The cart page allows users to view, modify, or empty their cart, as well as purchase the cart's contents.
 
 <br><br>
 
