@@ -8,6 +8,10 @@ import { ReviewService } from 'src/app/services/review.service';
 import { Review } from 'src/app/models/review.model';
 import { Product } from 'src/app/models/product';
 
+/**
+ * This component shows all of the previous orders belonging to the current user
+ * Contains links to a detailed view of each of the orders
+ */
 @Component({
   selector: 'app-orders',
   templateUrl: './orders.component.html',
@@ -18,11 +22,19 @@ export class OrdersComponent implements OnInit {
 
   constructor(private ordersService: OrdersService, private reviewService: ReviewService, private router: Router, private route: ActivatedRoute) { }
 
+  /**
+   * This function retrieves all of the orders belonging to the current user when the component is initialized
+   */
   ngOnInit(): void {
     
     this.ordersService.getOrders().subscribe((orders) => {this.orders = orders;});
   }
 
+  /**
+   * This function finds the total number of products in the order
+   * @param order The order containing all of the products
+   * @returns The total number of products
+   */
   getItemTotal = function(order: Order): number{
     if(order.products == null){return 0}
     let count: number = 0;
@@ -32,6 +44,11 @@ export class OrdersComponent implements OnInit {
     return count;
   }
 
+  /**
+   * This function finds the total cost of all of the products in the order
+   * @param order The order containing all of the products
+   * @returns The total cost of the products
+   */
   getTotalCost = function(order: Order): number{
     if(order.products == null){return 0}
     let count: number = 0;
