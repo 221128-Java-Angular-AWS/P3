@@ -8,6 +8,11 @@ import { Order } from 'src/app/models/order';
 import { Product } from 'src/app/models/product';
 import * as bcrypt from 'bcryptjs';
 
+/**
+ * The profile component displays a user's basic information and allows the user to change this information
+ * The user profile also implements a custom view of the previous orders and the wishlist component
+ */
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -65,7 +70,7 @@ export class ProfileComponent implements OnInit {
     updateUser.email = email;
     updateUser.firstName = firstName;
     updateUser.lastName = lastName;
-    // add more security to password change
+    
     if (password != "" && password != undefined) {
       updateUser.password = bcrypt.hashSync(password, 10);
     } 
@@ -85,7 +90,6 @@ export class ProfileComponent implements OnInit {
     this.editUser
   }
 
-  // this is copied from orders.component.ts, there might be a better way for this but I am unsure
   getItemTotal = function(order: Order): number{
     if(order.products == null){return 0}
     let count: number = 0;

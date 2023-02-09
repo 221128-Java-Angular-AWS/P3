@@ -67,7 +67,12 @@ public class OrderController {
         return ResponseEntity.badRequest().build();
     }
 
-    // controller to get the order history for user profile
+    /**
+     * Custom http get method to retrieve a limit of the 5 most recent orders for a user ordered from most to
+     * least recent to be displayed in the user profile
+     * @param session The HttpSession object containing the information for the logged-in user
+     * @return An ArrayList of OrderDto objects containing the 5 most recent orders for the current user
+     */
     @GetMapping("/profile")
     @ResponseStatus(value = HttpStatus.ACCEPTED)
     @Authorized

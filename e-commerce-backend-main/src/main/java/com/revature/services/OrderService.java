@@ -42,7 +42,13 @@ public class OrderService {
         return orders;
     }
 
-    //Get 5 most recent orders to display on user profile
+
+    /**
+     * Custom service to retrieve the 5 most recent orders for a user to be displayed on the user profile
+     * facilitates communication between the OrderController and the OrderRepository
+     * @param userId The userId for the user that orders are being retrieved for
+     * @return A list of OrderDto objects to be displayed on the user profile
+     */
     public List<OrderDto> getOrdersForProfile(Integer userId){
         List<OrderDto> orders = new ArrayList<>();
         for(Order order : orderRepo.findByUserIdWithLimit(userId)){
