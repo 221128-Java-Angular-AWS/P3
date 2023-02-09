@@ -22,6 +22,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The Order controller handles http requests coming to the /order endpoint
+ * handles requests related to the creation and retrieval of orders
+ */
 @RestController
 @RequestMapping("/order")
 @CrossOrigin(origins = {"http://localhost:4200", "http://localhost:3000", "http://p3-static-hosting.s3-website.us-east-2.amazonaws.com"}, allowCredentials = "true", exposedHeaders = "Authorization")
@@ -35,7 +39,13 @@ public class OrderController {
         this.req = req;
     }
 
-    //Creating a new order
+    /**
+     * This method handles Post requests sent to the /order endpoint.
+     * It will create a new order to be saved in the database
+     * @param session contains session information about the current user
+     * @param products The list of products to be put in the order
+     * @return ResponseEntity to tell te client whether the request was accepted
+     */
     @PostMapping
     @Authorized
     public ResponseEntity createOrder(HttpSession session, @RequestBody List<ProductInfo> products){
@@ -55,7 +65,12 @@ public class OrderController {
         }
     }
 
-    //Get all orders for current user
+    /**
+     * This method handles Get requests sent to the /order endpoint.
+     * Retrieves the previous orders for the current user
+     * @param session contains session information about the current user
+     * @return ResponseEntity containing the list of orders to be returned to the client
+     */
     @GetMapping
     @ResponseStatus(value = HttpStatus.ACCEPTED)
     @Authorized
@@ -67,7 +82,12 @@ public class OrderController {
         return ResponseEntity.badRequest().build();
     }
 
-    // controller to get the order history for user profile
+    /**
+     * Custom http get method to retrieve a limit of the 5 most recent orders for a user ordered from most to
+     * least recent to be displayed in the user profile
+     * @param session The HttpSession object containing the information for the logged-in user
+     * @return An ArrayList of OrderDto objects containing the 5 most recent orders for the current user
+     */
     @GetMapping("/profile")
     @ResponseStatus(value = HttpStatus.ACCEPTED)
     @Authorized
@@ -78,7 +98,13 @@ public class OrderController {
         return new ArrayList<OrderDto>();
     }
 
-    //Get a specific order by ID
+    /**
+     * This method handles Get requests sent to the /order/{id} endpoint.
+     * Retrieves a single order, as long as it belongs to the current user
+     * @param session contains session information about the current user
+     * @param orderId The ID of the order being requested
+     * @return ResponseEntity containing either the requested order or an error message
+     */
     @GetMapping("/{id}")
     @ResponseStatus(value = HttpStatus.ACCEPTED)
     @Authorized

@@ -111,3 +111,4 @@ build/
 application.yml
 node_modules/
 dist/
+.vscode/

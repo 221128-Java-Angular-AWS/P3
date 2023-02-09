@@ -11,6 +11,8 @@ import { Location } from '@angular/common';
   templateUrl: './review-page.component.html',
   styleUrls: ['./review-page.component.css']
 })
+
+//Separate test for review page
 export class ReviewPageComponent implements OnInit {
   product!: Product;
   rating?: number;
@@ -30,24 +32,9 @@ export class ReviewPageComponent implements OnInit {
   backToOrders(): void {
     this.location.back();
   }
-  
-  test() {
-    let productId=5;
-    this.reviewService.getAverage(productId).subscribe((rating) => {
-      this.rating = rating;
-      console.log("rating=" + rating);
-      console.log("Oo")
-    })
-}
 
 assignReview(n: number): void {
   this.reviewInt = n;
 }
-/*
-getAllReviews(): void {
-  this.reviewService.getReviews(this.product.id).subscribe((reviews) => {
-    this.reviews = reviews;
-  })
-}*/
 
 }

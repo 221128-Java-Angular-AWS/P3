@@ -38,6 +38,9 @@ export class CheckoutComponent implements OnInit {
 
   constructor(private productService: ProductService,private ordersService: OrdersService, private router: Router, private reviewService: ReviewService) { }
 
+  /*
+  * calculates the total price and retrives the products the user wants to checkout
+  */
   ngOnInit(): void {
     this.productService.getUserId().subscribe((id)=>{
       this.userId = id;
@@ -55,6 +58,9 @@ export class CheckoutComponent implements OnInit {
     })
   }
 
+  /*
+  * purchases the cart
+  */
   onSubmit(): void {
     this.products.forEach(
       (element) => {
@@ -66,7 +72,8 @@ export class CheckoutComponent implements OnInit {
     if(this.finalProducts.length > 0) {
       this.productService.purchase(this.finalProducts).subscribe(
         (resp) => console.log(resp),
-        (err) => console.log(err),
+        (err) => {console.log("purchase failed"); 
+        window.alert("Purchase failed. Please make sure your selected quantity does not exceed the stock quantity.")},
         () => {
           this.productService.emptyCart(this.userId).subscribe(()=>{});
           this.ordersService.createOrder(this.finalProducts).subscribe(()=>{});

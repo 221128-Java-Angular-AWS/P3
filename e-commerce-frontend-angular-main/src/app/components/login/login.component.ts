@@ -3,6 +3,9 @@ import { FormBuilder, UntypedFormControl, UntypedFormGroup } from '@angular/form
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
+/**
+ * This component handles Login functionality. Verifies a user's information before allowing them into the site.
+ */
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -23,6 +26,10 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
   
+  /**
+   * Sends the submitted login information to the back-end server.
+   * Navigates to the home page if login was successful, displayes an error if not.
+   */
   onSubmit(): void {
     this.error = false;
     this.authService.login(this.loginForm.get('email')?.value, this.loginForm.get('password')?.value).subscribe(
@@ -34,6 +41,9 @@ export class LoginComponent implements OnInit {
     );
   }
 
+  /**
+   * navigates to the register page
+   */
   register(): void {
     this.router.navigate(['register']);
   }
