@@ -100,6 +100,7 @@ public class ProductController {
 
     /*
      * deletes a product based on the id
+     * @param product id
     */
     @Authorized
     @DeleteMapping("/{id}")
@@ -115,6 +116,8 @@ public class ProductController {
     }
 
     // retrieves the list of carts for the associated userId
+    // @param user id
+    // @return list of carts
     @Authorized
     @GetMapping("/cart")
     public List<Cart> getCart(@RequestParam int userId) {
@@ -124,6 +127,8 @@ public class ProductController {
     /*
      * Posts a new cart if that cart is not already present. 
      * If it is present, it simply increases the quantity of the present cart.
+     * @param product id and quantity
+     * @return added cart
      */
     @Authorized
     @PostMapping("/cart")
@@ -143,6 +148,7 @@ public class ProductController {
 
     /*
      * Clears the cart
+     * @param userid
      */
     @Authorized
     @DeleteMapping("/cart")
@@ -152,6 +158,7 @@ public class ProductController {
 
     /*
      * returns the product associated with the product id
+     * @param productid
      */
     @Authorized
     @GetMapping("/cart/{id}")
@@ -166,6 +173,7 @@ public class ProductController {
 
     /*
      * delets a single cart item
+     * @param userid and productid
      */
     @Authorized
     @DeleteMapping("/cart/{id}")
@@ -175,6 +183,8 @@ public class ProductController {
 
     /*
      * returns the user id using http session
+     * @param http session
+     * @return userid
      */
     @Authorized
     @GetMapping("/cart/user")
