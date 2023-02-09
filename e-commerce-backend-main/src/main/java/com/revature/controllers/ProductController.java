@@ -86,7 +86,7 @@ public class ProductController {
     }
 
     /*
-     * delets a product based on the id
+     * deletes a product based on the id
      */
     @Authorized
     @DeleteMapping("/{id}")
