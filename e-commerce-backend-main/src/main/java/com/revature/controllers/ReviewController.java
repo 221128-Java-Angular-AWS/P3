@@ -32,6 +32,12 @@ public class ReviewController {
     private final ReviewService reviewService;
     private final ProductService productService;
 
+    /**
+     * Dependencies
+     * Controllers call service and pass in relevant user and product information to methods.
+     * @param reviewService
+     * @param productService
+     */
     @Autowired
     public ReviewController(ReviewService reviewService, ProductService productService) {
         this.reviewService = reviewService;
@@ -49,8 +55,6 @@ public class ReviewController {
     @Authorized
     public List<Review> hasReviewed(HttpSession session, @PathVariable("productId") int productId) {
         User user = (User)session.getAttribute("user");
-        // Product product = productService.findByProdId(productId);
-        //System.out.println("In hasReviewed method of review controller: " + user.toString() + " and " + product.toString());
         List<Review> temporary = reviewService.getReview(user.getId(), productId);
         return temporary;
     }
