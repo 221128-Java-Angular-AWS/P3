@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/models/product';
 import { ProductService } from 'src/app/services/product.service';
 import { ProfileService } from 'src/app/services/profile.service';
-import { User } from 'src/app/models/user';
 
 
 @Component({
@@ -16,6 +15,7 @@ export class DisplayProductsComponent implements OnInit {
 
   constructor(private productService: ProductService, private profileService: ProfileService) { }
 
+  // retrieves all products in database
   ngOnInit(): void {
     this.productService.getProducts().subscribe(
       (resp) => this.allProducts = resp,

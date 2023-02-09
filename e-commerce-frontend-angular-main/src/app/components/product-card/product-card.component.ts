@@ -37,7 +37,8 @@ export class ProductCardComponent implements OnInit{
     }
   }
 
-
+  // retrieve whether user has interacted with individual product
+  // view changes accordingly
   ngOnInit(): void {
     this.productService.getUserId().subscribe((id)=> {this.userId = id})
     this.wishListService.checkIfWishListed(this.productInfo.id)
@@ -46,10 +47,7 @@ export class ProductCardComponent implements OnInit{
     });
   }
 
-  ngOnDestroy() {
-    // this.subscription.unsubscribe();
-  }
-
+  // adds product to wishlist
   addToWishList(product: Product): void {
     this.wishListed = true;
     this.wishListService.addToWishList(product.id)
