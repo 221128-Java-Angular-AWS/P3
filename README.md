@@ -1,29 +1,255 @@
-# P3
+# Revature Full Stack Java Project 3 Demo
 
-# ECommerce
+<br />
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.3.
+## Digital Dominion
 
-## Development server
+[Project Repo](https://github.com/221128-Java-Angular-AWS/P3)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+<br>
 
-## Code scaffolding
+<!-- TABLE OF CONTENTS -->
+<details open="open">
+  <summary>Table of Contents</summary>
+  <ol>
+    <li><a href="#contributors">Contributors</a></li>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#tech-stack">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#module-break-down">Module Break Down</a></li>
+    <li><a href="#acknowledgements">Acknowledgements</a></li>
+  </ol>
+</details>
+<br>
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+<!-- CONTACT -->
 
-## Build
+# Contributors
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Kirill Klimov - CI/CD Lead - kirill674@revature.net
 
-## Running unit tests
+ <img src="src\ui\src\assets\profilepic.jpg" alt="KirillPortrait" width="80" height="80">
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+[![linkedin-shield]][kirill-linkedin]
+[![github-shield]][kirill-github]
 
-## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+<br>
 
-## Further help
+### Travis Morse - Scrum Master - travis741@revature.net
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+ <img src="src\ui\src\assets\travis_morse.jpg" alt="TravisPortrait" width="80" height="80">
+
+[![linkedin-shield]][travism-linkedin]
+[![github-shield]][travism-github]
+
+<br>
+
+### Audie Ni - Fronted Lead - audie520@revature.net
+
+ <img src="src\ui\src\assets\profilepic.jpg" alt="Logo" width="80" height="80">
+
+[![linkedin-shield]][audie-linkedin]
+[![github-shield]][audie-github]
+
+<br>
+
+### Brayden Nordine - Backend Lead - brayden018@revature.net
+
+ <img src="src\ui\src\assets\profilepic.jpg" alt="Logo" width="80" height="80">
+
+[![linkedin-shield]][brayden-linkedin]
+[![github-shield]][brayden-github]
+
+<br>
+
+### William Osborne - email@revature.net
+
+ <img src="src\ui\src\assets\profilepic.jpg" alt="Logo" width="80" height="80">
+
+[![linkedin-shield]][william-linkedin]
+[![github-shield]][william-github]
+
+<br>
+
+### Travis Pomeroy - travis928@revature.net
+
+ <img src="src\ui\src\assets\profilepic.jpg" alt="Logo" width="80" height="80">
+
+[![linkedin-shield]][travisp-linkedin]
+[![github-shield]][travisp-github]
+
+<br>
+
+### Matthew Shen - matthew945@revature.net
+
+ <img src="src\ui\src\assets\profilepic.jpg" alt="Logo" width="80" height="80">
+
+[![linkedin-shield]][matthew-linkedin]
+[![github-shield]][matthew-github]
+
+<br>
+
+<!-- ABOUT THE PROJECT -->
+
+# About The Project
+
+<br>
+<div align="center">
+<img src="src\ui\src\assets\images/DDIcon.png" width="400" height="auto" alt="Digital Dominion Icon"/>
+</div><br><br>
+
+Digital Dominion was a collaborative project produced by the trainees of the Revature Next Gen Java AWS Angular v3.2 training course. This project aimed to create an e-commerce website based off of a set of provided project requirements and initial repository.
+
+<br>
+
+# Overview
+
+<br>
+
+Our team built out this project from an existing repo over the course of 3 weeks. We were expected to build off of the existing repo, develop new features, and deploy our application using Amazon Web Services.
+
+Team Member Expectations and Workflow:
+
+- Independently developed project components while maintaining communication with other team members
+- Participated in daily standups to communicate progress, plans, and blockers
+- Maintained a ticketing system to track progress
+- Exceed expectations by implementing stretch goals on top of the baseline expectations
+
+### Tech Stack
+
+- [Angular](https://angular.io/)
+- [Spring](https://spring.io/)
+- [RxJS](https://rxjs.dev/)
+- [PostGreSQL](https://www.postgresql.org/)
+
+<br>
+
+<!-- GETTING STARTED -->
+
+# Getting Started
+
+To explore the project, follow the instructions below.
+
+### Installation
+
+1. Clone the repo
+   ```sh
+   git clone https://github.com/221128-Java-Angular-AWS/P3.git
+   ```
+
+2. Navigate to the frontend folder
+   ```
+   cd e-commerce-frontend-main
+   ```
+
+3. Install NPM packages
+   ```sh
+   npm install
+   ```
+
+4. Navigate to e-commerce-backend-main/src/java/com/revature, and run ECommerceApplication.java to run the TomCat server
+
+5. Serve the Angular application from the frontend folder
+   ```sh
+    ng serve --open
+   ```
+6. Navigate to `localhost:4200` in your browser
+
+<br><br>
+
+
+<!-- USAGE EXAMPLES -->
+
+# Page Overviews
+
+> ## Login/Register
+
+<br>
+<div align="center">
+</div><br><br>
+
+The login/register page allows for users to create an account or log into an existing account. Usernames and passwords are validated as the user fills in the inputs, and passwords
+are hashed before being stored in the database for increased security. A cookie is generated to maintain a seamless user session experience.
+
+<br>
+
+> ## Home
+
+<br>
+
+<div align="center">
+</div><br><br>
+
+The main home page displays a list of products available for purchase, as well as basic information about each product. Clicking on a product will open up a detailed view. Multiple
+copies of a product can be added to the cart, and items can be added to the wish list to be referenced later.
+
+> ## Product Details
+
+<br>
+
+<div align="center">
+</div><br><br>
+
+More details about a product can be found on the Product Details page. Items can be added to the cart or wish list, and user reviews can be accessed from this page.
+
+<br><br>
+
+> ## Navbar
+
+<br>
+
+<div align="center">
+</div><br><br>
+
+A persistent navigation bar allows users to navigate the website, as well as to search for products.
+
+<br><br>
+
+> ## Profile
+
+<br>
+
+<div align="center">
+</div><br><br>
+
+A user profile page displays the users information and gives the option for that information to be edited. Order history is also displayed alongside the user's wish list.
+
+<br><br>
+
+## Acknowledgements
+
+- [npm](https://www.npmjs.com/)
+- [Img Shields](https://shields.io)
+- [bcrypt](https://www.npmjs.com/package/bcrypt)
+- [Figma](https://www.figma.com/)
+- Special thanks to our amazing trainer, Kyle!
+
+<!-- Contributor Links -->
+
+[kirill-linkedin]: https://www.linkedin.com/in/kirill-klimov-001/
+[kirill-github]: https://github.com/kklimov1
+[travism-linkedin]: https://www.linkedin.com/in/travis-morse-7574107a/
+[travism-github]: https://github.com/travis503
+[audie-linkedin]: https://www.linkedin.com/in/audie-ni-116283126/
+[audie-github]: https://github.com/tasukaru
+[brayden-linkedin]: https://www.linkedin.com/
+[brayden-github]: https://github.com/braydensn
+[william-linkedin]: https://www.linkedin.com/
+[william-github]: https://github.com/
+[travisp-linkedin]: https://www.linkedin.com/in/travis-pomeroy-2a949b163/
+[travisp-github]: https://github.com/TPomerz
+[matthew-linkedin]: https://www.linkedin.com/
+[matthew-github]: https://github.com/
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-grey?style=for-the-badge&logo=linkedin
+[github-shield]: https://img.shields.io/badge/-GitHub-grey?style=for-the-badge&logo=github
