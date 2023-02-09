@@ -42,7 +42,8 @@ export class ProductCardComponent implements OnInit{
     }
   }
 
-
+  // retrieve whether user has interacted with individual product
+  // view changes accordingly
   ngOnInit(): void {
     this.productService.getUserId().subscribe((id)=> {this.userId = id})
     this.wishListService.checkIfWishListed(this.productInfo.id)

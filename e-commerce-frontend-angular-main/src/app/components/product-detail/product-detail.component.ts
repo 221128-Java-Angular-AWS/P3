@@ -25,6 +25,7 @@ export class ProductDetailComponent implements OnInit {
     private reviewService: ReviewService
   ) {}
 
+  // retrieves detailed data pertaining to specific product
   ngOnInit(): void {
     const productId = Number(this.route.snapshot.paramMap.get('id'));
     this.productService.getSingleProduct(productId).subscribe((product) => {
@@ -50,10 +51,12 @@ export class ProductDetailComponent implements OnInit {
     });
   }
 
+  // displays all reviews of specific product
   goToAllReviews() {
   this.router.navigate([`reviews/${this.product.id}`])
   }
 
+  // adds product to wishlist
   addToWishList(product: Product): void {
     this.wishListed = true;
     this.wishListService.addToWishList(product.id)

@@ -34,6 +34,9 @@ export class AllReviewsComponent implements OnInit {
     });
   }
 
+  /**
+   * Get the productId from the URL and subscribe to review service to get list of reviews.
+   */
   getAllReviews(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.reviewService.getReviews(id).subscribe((reviews) => {

@@ -30,8 +30,10 @@ export class ReviewComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private productService: ProductService, private reviewService: ReviewService, private profileService: ProfileService) { }
 
+  /**
+   * To perform intialization asynchronously, run it in nested subscription manner, or asynchronous function
+   */
   ngOnInit(): void {
-    
     this.profileService.getUser().subscribe( 
       (response) => 
         {
@@ -46,11 +48,12 @@ export class ReviewComponent implements OnInit {
     );
   }
   
-
+ //For the star rating to be set by user
   assignReview(n: number): void {
     this.reviewInt = n;
   }
 
+  //On click of submit, create a review and send it to review service to post
   onSubmit(): void {
     if (this.reviewInt) {
       this.submitted=true;
@@ -62,6 +65,7 @@ export class ReviewComponent implements OnInit {
     }
   }
 
+  //On initializaion, check if the product has already been reviewed by current user. If it has been reviewed, the page will not allow a second review.
   checkReviewed(): void{
     let booleanReview = false;
     if(this.product){
@@ -74,10 +78,6 @@ export class ReviewComponent implements OnInit {
           this.reviewed = booleanReview;
       })
     } 
-  }
-
-  getAverage(): void {
-
   }
 
 }
