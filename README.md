@@ -48,7 +48,7 @@
 
 ### Travis Morse - Scrum Master - travis741@revature.net
 
- <img src="src\ui\src\assets\travis_morse.jpg" alt="TravisPortrait" width="80" height="80">
+ <img src="e-commerce-frontend-angular-main\src\assets\images\travis_morse.jpg" alt="TravisPortrait" width="80" height="80">
 
 [![linkedin-shield]][travism-linkedin]
 [![github-shield]][travism-github]
