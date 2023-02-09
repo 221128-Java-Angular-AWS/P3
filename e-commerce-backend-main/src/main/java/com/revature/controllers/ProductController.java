@@ -117,6 +117,7 @@ public class ProductController {
 
     // retrieves the list of carts for the associated userId
     // @param user id
+    // @return list of carts
     @Authorized
     @GetMapping("/cart")
     public List<Cart> getCart(@RequestParam int userId) {
