@@ -13,7 +13,11 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
     //find all orders belonging to a user
     public List<Order> findByUserId(Integer userId);
 
-    //find 5 most recent orders belonging to a user
+    /**
+     * Retrieve the 5 most recent orders for a user ordered from most recent
+     * @param userId the userId that the orders are being retrieved for
+     * @return List of Order objects containing the 5 most recent orders for a user
+     */
     @Query(value = "SELECT * FROM orders WHERE user_id = :userId ORDER BY date_ordered DESC LIMIT 5;", nativeQuery = true)
     public List<Order> findByUserIdWithLimit(@Param("userId") Integer userId);
 
