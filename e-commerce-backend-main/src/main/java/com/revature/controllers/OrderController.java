@@ -83,10 +83,10 @@ public class OrderController {
     }
 
     /**
-     * This method handles Get requests sent to the /order/profile endpoint.
-     * Retrieves the 5 most recent orders for the current user
-     * @param session contains session information about the current user
-     * @return ResponseEntity containing the list of orders to be returned to the client
+     * Custom http get method to retrieve a limit of the 5 most recent orders for a user ordered from most to
+     * least recent to be displayed in the user profile
+     * @param session The HttpSession object containing the information for the logged-in user
+     * @return An ArrayList of OrderDto objects containing the 5 most recent orders for the current user
      */
     @GetMapping("/profile")
     @ResponseStatus(value = HttpStatus.ACCEPTED)

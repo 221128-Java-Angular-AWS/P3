@@ -3,6 +3,7 @@
         <img src="../../../assets/images/DDIconSmall.png" class="mx-1" width="6%" height="6%" alt="Digital Dominion Logo">
         Digital Dominion
     </h4>
+    <!-- This contains the entirety of the search bar and function html -->
     <table>
         <tr>
             <th><label>Search For Products: </label></th>
@@ -13,10 +14,12 @@
             <td></td>
             <td>
                 <div id="searchResults" *ngIf="products.length > 0 || noResults">
+                    <!-- Displays up to 5 results -->
                     <div *ngFor="let product of products | slice:0:5 let i = index;">
                         <!--These will link to the product eventually-->
                         <div class="searchResult" [routerLink]="['/product', product.id]" (click)="resetSearch()"><div>{{product.name}}</div></div>
                     </div>
+                    <!-- Gives the user a message if an empty list is returned -->
                     <div *ngIf="noResults" id="noSearchResults">No Products Found</div>
                 </div>
             </td>
