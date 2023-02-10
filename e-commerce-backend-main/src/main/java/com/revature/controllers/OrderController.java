@@ -5,7 +5,6 @@ import com.revature.dtos.OrderDto;
 import com.revature.dtos.OrderProductDto;
 import com.revature.dtos.ProductInfo;
 import com.revature.exceptions.InvalidOrderException;
-import com.revature.models.Order;
 import com.revature.models.Product;
 import com.revature.models.User;
 import com.revature.services.OrderService;
@@ -13,14 +12,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * The Order controller handles http requests coming to the /order endpoint

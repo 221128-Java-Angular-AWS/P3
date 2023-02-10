@@ -1,7 +1,6 @@
 package com.revature.controllers;
 
 import com.revature.annotations.Authorized;
-import com.revature.dtos.LoginRequest;
 import com.revature.models.User;
 import com.revature.models.WishList;
 import com.revature.services.ProductService;
@@ -9,11 +8,8 @@ import com.revature.models.Product;
 import com.revature.services.WishListService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 
 import javax.servlet.http.HttpSession;
-import java.util.Enumeration;
 import java.util.List;
 import java.util.Optional;
 

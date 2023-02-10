@@ -1,8 +1,6 @@
 package com.revature.controllers;
 
 import com.revature.annotations.Authorized;
-import com.revature.dtos.OrderDto;
-import com.revature.models.Product;
 import com.revature.models.Review;
 import com.revature.models.User;
 import com.revature.services.ProductService;
@@ -18,11 +16,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
-import com.revature.annotations.Authorized;
 
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/review")
