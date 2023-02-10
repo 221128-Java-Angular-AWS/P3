@@ -33,6 +33,10 @@ export class ProfileComponent implements OnInit {
 
   ) { }
 
+
+  /**
+   * Retrieve the active user, get the wishlist for the active user, get the most recent orders for the user
+   */
   ngOnInit(): void {
     this.profileService.getUser().subscribe(
       (resp) => {
@@ -53,14 +57,30 @@ export class ProfileComponent implements OnInit {
       );
   }
 
+  /**
+   * Used for the ngIf directive in the template, used to switch between viewing and editing profile
+   */
   editMode(): void {
     this.editUser = true;
   }
 
+
+  /**
+   * used to exit edit without posting user update
+   */
   cancelEdit(): void {
     this.editUser = false;
   }
 
+
+  /**
+   * Sends a user object to be posted to the server via method in profile.service.ts
+   * also checks if password is blank before hashing to prevent posting a hashed null password.
+   * @param email string, the user email
+   * @param firstName string, the user first name
+   * @param lastName string, the user lastname
+   * @param password string, the users password, optional, only used if updating password
+   */
   save(email: string, firstName: string, lastName: string, password?: string) {
     let updateUser = new User()
     if (this.user != undefined) {
@@ -90,6 +110,12 @@ export class ProfileComponent implements OnInit {
     this.editUser
   }
 
+ 
+  /**
+   * Get the total quantity of items in an order
+   * @param order the order containing the products
+   * @returns the total number of items in the order
+   */
   getItemTotal = function(order: Order): number{
     if(order.products == null){return 0}
     let count: number = 0;
@@ -99,6 +125,12 @@ export class ProfileComponent implements OnInit {
     return count;
   }
 
+
+/**
+ * Get the total cost of the products for the order total
+ * @param order the order conataining the products
+ * @returns the total cost of the products
+ */
   getTotalCost = function(order: Order): number{
     if(order.products == null){return 0}
     let count: number = 0;
