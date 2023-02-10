@@ -2,13 +2,12 @@ package com.revature.dtos;
 
 import com.revature.models.Product;
 import com.revature.models.User;
-import com.revature.repositories.UserRepository;
 import com.revature.services.ProductService;
 import com.revature.services.UserService;
 /*
  * This is a Cart DTO which was used to help the controller retrieve the necessary cart.
- * The front end only passed back the user and product id's so this dto was used to retrieve the 
- * users and products respectively. 
+ * The front end only passed back the user and product id's so this dto was used to retrieve the
+ * users and products respectively.
  */
 public class CartDto {
 

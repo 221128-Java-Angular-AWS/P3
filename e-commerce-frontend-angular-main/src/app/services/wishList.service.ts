@@ -15,6 +15,7 @@ export class WishListService {
 
   private wishListUrl: string = "/wishlist";
 
+  // Gets current user's wishlist. Note that this returns a collection of Product objects, not WishList objects
   public getWishListProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(environment.baseUrl+this.wishListUrl, {headers: environment.headers, withCredentials: environment.withCredentials})
     .pipe(
@@ -22,6 +23,7 @@ export class WishListService {
     );
   }
 
+  // Removes item from current user's wishlist
   public removeFromWishList(productId: Number): Observable<Object> {
     let productIdUrl = `/${productId}`;
     return this.http.delete(environment.baseUrl + this.wishListUrl + productIdUrl, {headers: environment.headers, withCredentials: environment.withCredentials})
@@ -30,6 +32,7 @@ export class WishListService {
     );
   }
 
+  // Adds item to current user's wishlist
   public addToWishList(productId: Number): Observable<Object> {
     let productIdUrl = `/${productId}`;
     return this.http.post(environment.baseUrl + this.wishListUrl + productIdUrl, {}, {headers: environment.headers, withCredentials: environment.withCredentials})
@@ -38,6 +41,8 @@ export class WishListService {
     );
   }
 
+  // Checks to see if item is present on current user's wishlist to determine
+  // which buttons should be rendered
   public checkIfWishListed(productId: Number): Observable<Object> {
     let productIdUrl = `/${productId}`;
     return this.http.get(environment.baseUrl + this.wishListUrl + productIdUrl, {headers: environment.headers, withCredentials: environment.withCredentials})

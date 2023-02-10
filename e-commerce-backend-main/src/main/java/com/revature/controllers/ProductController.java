@@ -9,7 +9,6 @@ import com.revature.models.User;
 import com.revature.services.ProductService;
 import com.revature.services.UserService;
 
-import org.springframework.boot.context.config.UnsupportedConfigDataLocationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
@@ -74,9 +73,9 @@ public class ProductController {
      */
     @Authorized
     @PatchMapping
-    public ResponseEntity<List<Product>> purchase(@RequestBody List<ProductInfo> metadata) { 	
+    public ResponseEntity<List<Product>> purchase(@RequestBody List<ProductInfo> metadata) {
     	List<Product> productList = new ArrayList<Product>();
-    	
+
     	for (int i = 0; i < metadata.size(); i++) {
     		Optional<Product> optional = productService.findById(metadata.get(i).getId());
 
@@ -89,11 +88,11 @@ public class ProductController {
     		if(product.getQuantity() - metadata.get(i).getQuantity() < 0) {
     			return ResponseEntity.badRequest().build();
     		}
-    		
+
     		product.setQuantity(product.getQuantity() - metadata.get(i).getQuantity());
     		productList.add(product);
     	}
-        
+
         productService.saveAll(productList, metadata);
         return ResponseEntity.ok(productList);
     }
@@ -125,7 +124,7 @@ public class ProductController {
     }
 
     /*
-     * Posts a new cart if that cart is not already present. 
+     * Posts a new cart if that cart is not already present.
      * If it is present, it simply increases the quantity of the present cart.
      * @param product id and quantity
      * @return added cart
