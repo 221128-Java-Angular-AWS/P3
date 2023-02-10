@@ -4,7 +4,6 @@ import com.revature.exceptions.EmailTakenException;
 import com.revature.models.User;
 import com.revature.repositories.UserRepository;
 
-import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;

@@ -2,7 +2,6 @@ package com.revature.dtos;
 
 import com.revature.models.Order;
 import com.revature.models.OrderProduct;
-import com.revature.models.Product;
 import com.revature.models.User;
 
 import java.time.LocalDateTime;

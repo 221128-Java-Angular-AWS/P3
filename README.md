@@ -172,9 +172,9 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ## DevOps advice
 
-A t2-micro/small will likely not be capable enough for your needs, so try to go for t2-medium with an Amazon Linux image build.   
-The Jenkins script that we used is inside Jenkins-script.md.  
-More information about setting up the EC2 instance environment and more can be found in:  
+A t2-micro/small will likely not be capable enough for your needs, so try to go for t2-medium with an Amazon Linux image build.
+The Jenkins script that we used is inside Jenkins-script.md.
+More information about setting up the EC2 instance environment and more can be found in:
 https://github.com/221128-Java-Angular-AWS/CICD-Prototyping
 
 <br><br>

@@ -4,7 +4,6 @@ import com.revature.models.User;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
-import java.net.URI;
 import java.util.Optional;
 
 /**
