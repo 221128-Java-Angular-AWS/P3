@@ -18,6 +18,7 @@ export class AllReviewsComponent implements OnInit {
   reviews?: Review[];
   constructor(private route: ActivatedRoute, private reviewService: ReviewService, private location: Location, private productService: ProductService) { }
 
+  // retrieve info about product, its reviews and rating
   ngOnInit(): void {
     this.getProduct();
     this.getAllReviews();
@@ -27,6 +28,7 @@ export class AllReviewsComponent implements OnInit {
     })
   }
 
+  // get info about a single product by id
   getProduct(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.productService.getSingleProduct(id).subscribe( product => {
@@ -44,6 +46,7 @@ export class AllReviewsComponent implements OnInit {
     })
   }
 
+  // returns to previous view
   backToProd(): void {
     this.location.back();
   }

@@ -20,21 +20,24 @@ export class ReviewPageComponent implements OnInit {
   reviews?: Review[];
   constructor(private route: ActivatedRoute, private reviewService: ReviewService, private location: Location, private productService: ProductService) { }
 
+  // retrieves specific product
   ngOnInit(): void {
     this.getProduct();
   }
 
+  // method to retrieve product by id
   getProduct(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.productService.getSingleProduct(id).subscribe( product => this.product = product);
+    this.productService.getSingleProduct(id).subscribe(product => this.product = product);
   }
 
+  // return to previous view
   backToOrders(): void {
     this.location.back();
   }
 
-assignReview(n: number): void {
-  this.reviewInt = n;
-}
-
+  // displays rating value selected in view
+  assignReview(n: number): void {
+    this.reviewInt = n;
+  }
 }

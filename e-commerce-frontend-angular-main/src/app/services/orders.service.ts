@@ -1,10 +1,9 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Order } from '../models/order';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators'
 import { environment } from 'src/environments/environment';
-import { Product } from '../models/product';
 
 /**
  * This service sends HTTP requests related to orders to the back-end server
