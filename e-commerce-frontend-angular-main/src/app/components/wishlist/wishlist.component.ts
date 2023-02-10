@@ -23,6 +23,7 @@ export class WishlistComponent implements OnInit {
   userId!: number;
 
   ngOnInit(): void {
+    //Retrieve wishlist products and userID
     this.wishListService.getWishListProducts().subscribe(
       (resp) => this.products = resp,
       (err) => console.log(err),
@@ -31,6 +32,7 @@ export class WishlistComponent implements OnInit {
     this.productService.getUserId().subscribe((id)=> {this.userId = id});
   }
 
+  //Removes item from wishlist, and also splices it out of the frontend product array
   removeFromWishList(product: Product): void {
     this.wishListService.removeFromWishList(product.id)
     .subscribe();
