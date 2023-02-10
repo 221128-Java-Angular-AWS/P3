@@ -73,7 +73,7 @@
 
 <br>
 
-### William Osborne - email@revature.net
+### William Osborne - william185@revature.net
 
  <img src="https://github.com/221128-Java-Angular-AWS/P2/raw/main/src/ui/src/assets/profilepic.jpg" width="80" height="80">
 
@@ -131,7 +131,7 @@ Team Member Expectations and Workflow:
 - [Angular](https://angular.io/)
 - [Spring](https://spring.io/)
 - [RxJS](https://rxjs.dev/)
-- [PostGreSQL](https://www.postgresql.org/)
+- [PostgreSQL](https://www.postgresql.org/)
 
 <br>
 
@@ -170,7 +170,9 @@ To explore the project, follow the instructions below.
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
 
-## DevOps advice
+### DevOps Advice
+
+<br>
 
 A t2-micro/small will likely not be capable enough for your needs, so try to go for t2-medium with an Amazon Linux image build.
 The Jenkins script that we used is inside Jenkins-script.md.
@@ -278,8 +280,8 @@ A user profile page displays the users information and gives the option for that
 [audie-github]: https://github.com/tasukaru
 [brayden-linkedin]: https://www.linkedin.com/
 [brayden-github]: https://github.com/braydensn
-[william-linkedin]: https://www.linkedin.com/
-[william-github]: https://github.com/
+[william-linkedin]: https://www.linkedin.com/in/william-osborne-b62910b0/
+[william-github]: https://github.com/WEOzzy
 [travisp-linkedin]: https://www.linkedin.com/in/travis-pomeroy-2a949b163/
 [travisp-github]: https://github.com/TPomerz
 [matthew-linkedin]: https://www.linkedin.com/

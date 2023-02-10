@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Order } from 'src/app/models/order';
-import { OrderProduct } from 'src/app/models/order-product';
 import { OrdersService } from 'src/app/services/orders.service';
-import { ReviewComponent } from '../review/review.component';
 import { ReviewService } from 'src/app/services/review.service';
 import { Review } from 'src/app/models/review.model';
 import { Product } from 'src/app/models/product';
@@ -58,16 +56,17 @@ export class OrdersComponent implements OnInit {
     return count;
   }
 
+  // redirects to review by product id
   goToReviewProduct(product: Product) {
     this.router.navigate([`/review/${product.id}`])
   }
 
+  // check if review has already been made by user
   checkReviewed(product: Product): boolean{
     let booleanReview = false;
     let reviewedList = null;
     console.log(product?.id);
     if(product){
-      //console.log("product: "+this.product.id);
       this.reviewService.getReview(product?.id).subscribe((hasBeenReviewed: Review[]) => {
         reviewedList = hasBeenReviewed;
         console.log("Response happens now, hasBeenReviewed Object");

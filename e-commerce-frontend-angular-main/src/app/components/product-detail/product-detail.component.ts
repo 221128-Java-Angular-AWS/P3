@@ -11,6 +11,11 @@ import { WishListService } from 'src/app/services/wishList.service';
   templateUrl: './product-detail.component.html',
   styleUrls: ['./product-detail.component.css']
 })
+
+/**
+ * This component is used for displaying all information on a page about 
+ * a specific product
+ */
 export class ProductDetailComponent implements OnInit {
   product!: Product;
   userId!: number;
@@ -65,6 +70,7 @@ export class ProductDetailComponent implements OnInit {
     .subscribe();
   }
 
+  // removes product from wishlist
   removeFromWishList(product: Product): void {
     this.wishListed = false;
     this.wishListService.removeFromWishList(product.id)

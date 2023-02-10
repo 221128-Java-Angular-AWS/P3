@@ -1,14 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
 import { Product } from 'src/app/models/product';
 import { Review } from 'src/app/models/review.model';
 import { User } from 'src/app/models/user';
 import { ProductService } from 'src/app/services/product.service';
 import { ProfileService } from 'src/app/services/profile.service';
 import { ReviewService } from 'src/app/services/review.service';
-import { of } from 'rxjs';
 
 @Component({
   selector: 'app-review',
