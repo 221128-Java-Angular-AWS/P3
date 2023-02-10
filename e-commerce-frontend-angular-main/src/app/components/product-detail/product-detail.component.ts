@@ -36,6 +36,8 @@ export class ProductDetailComponent implements OnInit {
       this.rating = rating;
     })
 
+  // Checks to see if item is present on current user's wishlist to determine
+  // which buttons should be rendered
     this.wishListService.checkIfWishListed(productId)
     .subscribe((isWishListed) => {
       this.wishListed =  Boolean(isWishListed);
